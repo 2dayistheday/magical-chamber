@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="page-header">
+    <h1 class="main_font">
+        <a href="/">
+            Chamber
+        </a>
+    </h1>
+    <h3>
+        create, share and discuss your everythings
+    </h3>
+    <textarea class="authToken"></textarea>
+    <h4 id="userEmail"></h4>
+    <button id="signoutBtn">Sign Out</button>
+</div>
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-sm-2 sidenav">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#section1">All</a></li>
+                <li><a href="#section2">Work</a></li>
+                <li><a href="#section3">Study</a></li>
+                <li><a href="#section3">Friends</a></li>
+            </ul><br>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Chamber..">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+                </button>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-sm-8 sidenav">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">공지사항</a>
+                        <a href="#" class="list-group-item">그룹 내 욕설 금지</a>
+                        <a href="#" class="list-group-item">매주 수요일 저녁 10시 화상회의 진행</a>
+                    </div>
+
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">2017/09/23</a>
+                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/23 23:00 김민경 update document v3. "페이지 뷰 수정"</a>
+                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/23 17:23 김민경, 이지윤, 임현지 그룹화상통화 ~30분간 진행"</a>
+                    </div>
+
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">2017/09/21</a>
+                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/21 19:00 김민경 update document v3. "페이지 뷰 수정"</a>
+                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/21 17:23 김민경, 이지윤, 임현지 그룹화상통화 ~30분간 진행"</a>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 sidenav" style="float: right;">
+
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#section1">바로가기</a></li>
+                        <li><a href="../content/getusermedia/gum"><span class="glyphicon glyphicon-facetime-video"></span> Group Live Call </a></li>
+                        <li><a href="../content/getusermedia/gum"><span class="glyphicon glyphicon-facetime-video"></span> Direct Live Call </a></li>
+                        <li><a href="../drive"><span class="glyphicon glyphicon-file"></span> Documents </a></li>
+                    </ul><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/vendor/jquery-3.1.0.js"></script>
+<script src="/javascripts/vendor/bootstrap.min.js"></script>
+<script src="/javascripts/vendor/aws-cognito-sdk.min.js"></script>
+<script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
+<script src="/javascripts/config.js"></script>
+<script src="/javascripts/cognito-auth.js"></script>
+<script src="/javascripts/check-authToken.js"></script>
+
+</body>
+</html>

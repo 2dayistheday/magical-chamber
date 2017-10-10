@@ -34,6 +34,10 @@ var Chamber = window.Chamber || {};
 
         if (cognitoUser) {
             cognitoUser.getSession(function sessionCallback(err, session) {
+                console.log(cognitoUser.username);
+                //TODO: 확인용 나중에 삭제할 것
+                $('#userEmail').text(cognitoUser.username);
+
                 if (err) {
                     reject(err);
                 } else if (!session.isValid()) {
@@ -112,8 +116,14 @@ var Chamber = window.Chamber || {};
         $('#signinForm').submit(handleSignin);
         $('#registrationForm').submit(handleRegister);
         $('#verifyForm').submit(handleVerify);
+        $('#signoutBtn').click(handleSignout);
     });
 
+    function handleSignout(event) {
+        console.log('signout');
+        Chamber.signOut();
+        window.location.href = "../";
+    }
     function handleSignin(event) {
         var email = $('#emailInputSignin').val();
         var password = $('#passwordInputSignin').val();
@@ -121,7 +131,7 @@ var Chamber = window.Chamber || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Logged In');
-                window.location.href = '../';
+                window.location.href = '../chamber';
                 //로그인 후 이동페이지
             },
             function signinError(err) {
