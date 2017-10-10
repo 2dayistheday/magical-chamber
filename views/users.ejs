@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body class = "page-home">
+<header class="site-header">
+    <nav class="site-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">What is Chamber?</a></li>
+            <li><a href="/">Go to Magical Place Chamber</a></li>
+            <li><a href="/">About Us</a></li>
+        </ul>
+    </nav>
+    <button type="button" class="btn-menu"><span>Menu</span></button>
+</header>
+
+<section class="form-wrap">
+    <h1>Register</h1>
+    <form id="registrationForm">
+        <input type="email" id="emailInputRegister" placeholder="Email" pattern=".*" required>
+        <input type="password" id="passwordInputRegister" placeholder="Password" pattern=".*" required>
+        <input type="password" id="password2InputRegister" placeholder="Confirm Password" pattern=".*" required>
+
+        <input type="submit" value="Register">
+    </form>
+</section>
+
+<section class="form-wrap">
+    <h1>Sign In</h1>
+    <form id="signinForm">
+        <input type="email" id="emailInputSignin" placeholder="Email" required>
+        <input type="password" id="passwordInputSignin" placeholder="Password" pattern=".*" required>
+
+        <input type="submit" value="Sign in">
+    </form>
+</section>
+
+<script src="/javascripts/vendor/jquery-3.1.0.js"></script>
+<script src="/javascripts/vendor/aws-cognito-sdk.min.js"></script>
+<script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
+<script src="/javascripts/config.js"></script>
+<script src="/javascripts/cognito-auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body class = "page-home">
+<header class="site-header">
+    <nav class="site-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">What is Chamber?</a></li>
+            <li><a href="/">Go to Magical Place Chamber</a></li>
+            <li><a href="/">About Us</a></li>
+        </ul>
+    </nav>
+    <button type="button" class="btn-menu"><span>Menu</span></button>
+</header>
+
+<section class="form-wrap">
+    <h1>Verify Email</h1>
+    <form id="verifyForm">
+        <input type="email" id="emailInputVerify" placeholder="Email" required>
+        <input type="text" id="codeInputVerify" placeholder="Verification Code" pattern=".*" required>
+
+        <input type="submit" value="Verify">
+    </form>
+</section>
+
+<script src="/javascripts/vendor/jquery-3.1.0.js"></script>
+<script src="/javascripts/vendor/aws-cognito-sdk.min.js"></script>
+<script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
+<script src="/javascripts/config.js"></script>
+<script src="/javascripts/cognito-auth.js"></script>
+
+</body>
+</html>
