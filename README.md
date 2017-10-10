@@ -1,7 +1,7 @@
 # magical-chamber
 SW Maestro 8th.
 Team Redpoint
-~민경, 지윤, 현지~
+:smile:민경, 지윤, 현지:smile:
 
 
 1. Clone the project:
