@@ -1,2 +1,3 @@
 node_modules/
 public/javascripts/config.js
+.DS_Store

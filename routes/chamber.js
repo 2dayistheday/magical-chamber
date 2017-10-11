@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
     res.render('chamber_list', { title: 'Magical Chamber' });
 });
 
-router.get('/:chamberId', function(req, res, next) {
+router.get('/chamberId', function(req, res, next) {
     res.render('chamber', { title: 'Magical Chamber' });
 });
 

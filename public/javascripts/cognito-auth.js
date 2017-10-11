@@ -34,7 +34,7 @@ var Chamber = window.Chamber || {};
 
         if (cognitoUser) {
             cognitoUser.getSession(function sessionCallback(err, session) {
-                console.log(cognitoUser.username);
+                console.log(cognitoUser);
                 //TODO: 확인용 나중에 삭제할 것
                 $('#userEmail').text(cognitoUser.username);
 
