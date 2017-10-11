@@ -34,7 +34,7 @@ var Chamber = window.Chamber || {};
 
         if (cognitoUser) {
             cognitoUser.getSession(function sessionCallback(err, session) {
-                console.log(cognitoUser);
+                console.log(userPool);
                 //TODO: 확인용 나중에 삭제할 것
                 $('#userEmail').text(cognitoUser.username);
 
@@ -56,14 +56,24 @@ var Chamber = window.Chamber || {};
      * Cognito User Pool functions
      */
 
-    function register(email, password, onSuccess, onFailure) {
+    function register(email, nickName, password, onSuccess, onFailure) {
+        var attributeList = [];
         var dataEmail = {
             Name: 'email',
             Value: email
         };
-        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+        var dataNickName = {
+            Name: 'nickname',
+            Value: nickName
+        };
 
-        userPool.signUp(toUsername(email), password, [attributeEmail], null,
+        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+        var attributeNickname = new AmazonCognitoIdentity.CognitoUserAttribute(dataNickName);
+
+        attributeList.push(attributeEmail);
+        attributeList.push(attributeNickname);
+
+        userPool.signUp(toUsername(email), password, attributeList, null,
             function signUpCallback(err, result) {
                 if (!err) {
                     onSuccess(result);
@@ -142,6 +152,7 @@ var Chamber = window.Chamber || {};
 
     function handleRegister(event) {
         var email = $('#emailInputRegister').val();
+        var nickName = $('#nickNameInputRegister').val();
         var password = $('#passwordInputRegister').val();
         var password2 = $('#password2InputRegister').val();
 
@@ -157,7 +168,7 @@ var Chamber = window.Chamber || {};
         event.preventDefault();
 
         if (password === password2) {
-            register(email, password, onSuccess, onFailure);
+            register(email, nickName, password, onSuccess, onFailure);
         } else {
             alert('Passwords do not match');
         }
