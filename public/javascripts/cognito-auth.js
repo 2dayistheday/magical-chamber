@@ -95,6 +95,20 @@ var Chamber = window.Chamber || {};
             onSuccess: onSuccess,
             onFailure: onFailure
         });
+
+    }
+//Error :user is not authorized
+    function getUser(email) {
+        console.log("getUser");
+        createCognitoUser(email).getUserAttributes(function(err, result) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            for (i = 0; i < result.length; i++) {
+                console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
+            }
+        });
     }
 
     function verify(email, code, onSuccess, onFailure) {
