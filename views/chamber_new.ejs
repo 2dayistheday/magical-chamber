@@ -42,11 +42,11 @@
         </div>
 
         <div class="col-md-8">
-            <form id="newChamberForm">
-                Chamber ID : <input type="text" id="ChamberId" placeholder="Chamber ID" required>
-                Description Chamber : <input type="text" id="ChamberDes" placeholder="Description Chamber">
+            <form action="/chamber/new" method="post" id="newChamberForm">
+                Chamber Name : <input type="text" name="chamber_name" placeholder="Chamber Name" required>
+                Description Chamber : <input type="text" name="chamber_des" placeholder="Description Chamber">
 
-                <input type="submit" value="Create Chamber">
+                <input type="submit" value="CreateChamber">
             </form>
         </div>
     </div>

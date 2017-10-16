@@ -96,6 +96,8 @@ var Chamber = window.Chamber || {};
             onFailure: onFailure
         });
 
+
+        //getUser(email);
     }
 //Error :user is not authorized
     function getUser(email) {
@@ -109,7 +111,9 @@ var Chamber = window.Chamber || {};
                 console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
             }
         });
+
     }
+
 
     function verify(email, code, onSuccess, onFailure) {
         createCognitoUser(email).confirmRegistration(code, true, function confirmCallback(err, result) {

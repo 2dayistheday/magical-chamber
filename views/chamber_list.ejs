@@ -45,23 +45,17 @@
 
         <div class="col-md-8">
             <div>
+                <%
+                    for(var i=0;i<rows.length;i++){
+                %>
                 <div class="panel panel-default">
                     <a href="#">
-                        <div class="panel-heading">Chamber One</div></a>
-                    <div class="panel-body">Panel Content</div>
+                        <div class="panel-heading"><%=rows[i].chamber_name%></div></a>
+                    <div class="panel-body"><%=rows[i].chamber_des%></div>
                 </div>
-
-                <div class="panel panel-default">
-                    <a href="#">
-                        <div class="panel-heading">Chamber Two</div></a>
-                    <div class="panel-body">Panel Content</div>
-                </div>
-
-                <div class="panel panel-default">
-                    <a href="#">
-                        <div class="panel-heading">Chamber Three</div></a>
-                    <div class="panel-body">Panel Content</div>
-                </div>
+                <%
+                }
+                %>
             </div>
         </div>
     </div>
