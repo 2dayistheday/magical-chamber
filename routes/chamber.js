@@ -9,7 +9,7 @@ var sub;
 
 /* GET chamber listing. */
 router.get('/list', function(req, res, next) {
-    var user_id = 2//req.session.user_id;
+    var user_id = req.user.id;
 
 
     if(user_id != "undefined"){
@@ -25,29 +25,6 @@ router.get('/list', function(req, res, next) {
 
 });
 
-router.post('/', function (req, res, next) {
-    sub = req.body.sub;
-    nickname = req.body.nickname;
-    email = req.body.email;
-
-    console.log(sub);
-    console.log(nickname);
-    console.log(email);
-    var datas = [sub, email, nickname];
-
-    var selectUsersql = "select user_id from USERS where user_sub = ?";
-    connection.query(selectUsersql, sub, function (err, rows) {
-        if (typeof rows[0] != "undefined") {
-            rows = JSON.stringify(rows);
-            rows = JSON.parse(rows);
-            user_id = rows[0].user_id;
-            console.log('user_id : ' +user_id);
-        }else{
-            console.log("row 없음");
-        }
-    });
-
-});
 
 router.get('/chamberId', function(req, res, next) {
     res.render('chamber', { title: 'Magical Chamber', chamber_name: 'Chamber_name' });
@@ -68,7 +45,7 @@ router.post('/new', function (req, res, next) {
 
     var data = [chamber_name, chamber_des];
     console.log(data);
-    var user_id = 2;
+    var user_id = req.user.id;
 
     // Use the connection
     var insertChambersql = "insert into chambers(chamber_name, chamber_des) values(?,?); ";

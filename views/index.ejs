@@ -37,49 +37,12 @@
         <h2>아직 가입 안하셨어요?</h2>
         <br />
       </header>
-      <form id="registrationForm" class="container 50%">
-        <div class="uniform 50%">
-          <div class="6u 12u$(xsmall)">
-            <input type="email" id="emailInputRegister" placeholder="Your Email Address" pattern=".*" required><br />
-          </div>
-          <div class="6u 12u$(xsmall)">
-            <input type="text" id="nickNameInputRegister" placeholder="Your Nickname" pattern=".*" required><br />
-          </div>
-          <div class="6u 12u$(xsmall)">
-            <input type="password" id="passwordInputRegister" placeholder="Password" pattern=".*" required><br />
-          </div>
-          <div class="6u 12u$(xsmall)">
-            <input type="password" id="password2InputRegister" placeholder="Confirm Password" pattern=".*" required><br />
-          </div>
-          <div class="4u$ 12u$(xsmall)">
-            <input type="submit" value="Get Started" class="fit special">
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="content">
-      <header>
-        <h2>Sign in</h2>
-        <p>Magical Chamgber<br />
-          Just Create, Share, History,...</p>
-      </header>
 
-      <form id="signinForm" class="container 50%">
-        <div class="uniform 50%">
-          <div class="6u 12u$(xsmall)">
-            <input type="email" id="emailInputSignin" placeholder="Email" required><br />
-          </div>
-          <div class="6u 12u$(xsmall)">
-            <input type="password" id="passwordInputSignin" placeholder="Password" pattern=".*" required><br />
-          </div>
-          <div class="4u$ 12u$(xsmall)"><input type="submit" value="Sign In" class="fit special" /></div>
-        </div>
-      </form>
-      <div id="top" class="top text-right">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
-      </div>
+      <img src = "images/sign-in-with-google.png" onclick="location.href='/auth/google'" alt = "Google login" style="width: 250px; height: 60px;"/>
+      <img src = "images/facebook-login.png" onclick="location.href='/auth/facebook'" alt = "Facebook login" style="width: 250px; height: 60px;"/>
+
     </div>
+
     <a href="#one" class="goto-next scrolly">Next</a>
   </section>
 
@@ -221,121 +184,5 @@
 <!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
 <script src="/javascripts/js/main.js"></script>
 
-<script src="/javascripts/vendor/jquery-3.1.0.js"></script>
-<script src="/javascripts/vendor/bootstrap.min.js"></script>
-<script src="/javascripts/vendor/aws-cognito-sdk.min.js"></script>
-<script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
-<script src="/javascripts/config.js"></script>
-<script src="/javascripts/cognito-auth.js"></script>
-
-<script>
-    var Chamber = window.Chamber || {};
-
-    // This is called with the results from from FB.getLoginStatus().
-    function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        // The response object is returned with a status field that lets the
-        // app know the current login status of the person.
-        // Full docs on the response object can be found in the documentation
-        // for FB.getLoginStatus().
-        if (response.status === 'connected') {
-            // Logged into your app and Facebook.
-            testAPI();
-        } else {
-            // The person is not logged into your app or we are unable to tell.
-            document.getElementById('status').innerHTML = 'Please log ' +
-                'into this app.';
-        }
-    }
-
-    // This function is called when someone finishes with the Login
-    // Button.  See the onlogin handler attached to it in the sample
-    // code below.
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-    }
-
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : _config.facebook.app_id,
-            cookie     : true,  // enable cookies to allow the server to access
-                                // the session
-            xfbml      : true,  // parse social plugins on this page
-            version    : 'v2.8' // use graph api version 2.8
-        });
-
-        // Now that we've initialized the JavaScript SDK, we call
-        // FB.getLoginStatus().  This function gets the state of the
-        // person visiting this page and can return one of three states to
-        // the callback you provide.  They can be:
-        //
-        // 1. Logged into your app ('connected')
-        // 2. Logged into Facebook, but not your app ('not_authorized')
-        // 3. Not logged into Facebook and can't tell if they are logged into
-        //    your app or not.
-        //
-        // These three cases are handled in the callback function.
-
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-
-    };
-
-    // Load the SDK asynchronously
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    // Here we run a very simple test of the Graph API after login is
-    // successful.  See statusChangeCallback() for when this call is made.
-    function testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-            console.log('Successful login for: ' + response.name);
-            document.getElementById('status').innerHTML =
-                'Thanks for logging in, ' + response.name + '!';
-        });
-    }
-
-    function loginByThirdparty(info, done) {
-        console.log('process : ' + info.auth_type);
-        var stmt_duplicated = 'select *from `USERS` where `user_id` = ?';
-        connection.query(stmt_duplicated, info.auth_id, function (err, result) {
-            if (err) {
-                return done(err);
-            } else {
-                if (result.length === 0) {
-                    // 신규 유저는 회원 가입 이후 로그인 처리
-                    var stmt_thridparty_signup = 'insert into `USERS` set `user_id`= ?, `user_nickname`= ?';
-                    connection.query(stmt_thridparty_signup, [info.auth_id, info.auth_name], function (err, result) {
-                        if(err){
-                            return done(err);
-                        }else{
-                            done(null, {
-                                'user_id': info.auth_id,
-                                'nickname': info.auth_name
-                            });
-                        }
-                    });
-                } else {
-                    //기존유저 로그인 처리
-                    console.log('Old User');
-                    done(null, {
-                        'user_id': result[0].user_id,
-                        'nickname': result[0].nickname
-                    });
-                }
-            }
-        });
-    }
-</script>
 </body>
 </html>

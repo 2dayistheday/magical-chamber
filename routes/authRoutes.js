@@ -8,17 +8,18 @@ module.exports = function (app) {
     );
 
     app.get('/auth/google/callback',
-        passport.authenticate('google'));
+        passport.authenticate('google'), function (req, res) {
+            res.redirect('/chamber/list');
+        });
 
     app.get('/auth/facebook',
         passport.authenticate('facebook',
             { scope: 'public_profile' }));
 
     app.get('/auth/facebook/callback',
-        passport.authenticate('facebook',{
-            sucessRedirect: '/api/current_user',
-            failureRedirect: '/'
-        }));
+        passport.authenticate('facebook'),function (req, res) {
+            res.redirect('/chamber/list');
+        });
 
     app.get('/api/logout', function (req, res) {
         req.logout();//easy~~~~~~
