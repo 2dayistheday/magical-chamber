@@ -19,9 +19,6 @@ router.post('/', function (req, res, next) {
     nickname = req.body.nickname;
     email = req.body.email;
 
-    console.log(sub);
-    console.log(nickname);
-    console.log(email);
     var datas = [sub, email, nickname];
 
     var selectUsersql = "select * from USERS where user_sub = ?";
