@@ -23,8 +23,7 @@
         <nav id="nav">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/#one">What is Chamber?</a></li>
-                <li><a href="/#">About Us</a></li>
+                <li><a href="/#one">My Chambers</a></li>
                 <li><button id="signoutBtn" class="button">Sign Out</button></li>
             </ul>
         </nav>
@@ -34,57 +33,55 @@
     <div id="main" class="wrapper style1">
         <div class="container">
             <header class="major">
-                <h2>Chamber List</h2>
-                <p>나의 체임버를 보고, 생성하고, 입장하고</p>
+                <h2><%chamber_name%></h2>
+                <p>화상 대화 진행중</p>
             </header>
             <div class="row 150%">
                 <div class="3u 12u$(medium)">
                     <!-- Sidebar -->
                     <section id="sidebar">
                         <section>
-                            <h3>My Profile</h3>
-                            <a href="#" class="image fit"><img src="/images/pic01.jpg" alt="프로필 사진누락" /></a>
-                            <p>안녕하세요. 저는 이런 사람입니다.</p>
-                            <textarea class="authToken"></textarea>
-                            <h4 id="userEmail"></h4>
-
-                        </section>
-                        <hr />
-                        <section>
-                            <a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a>
-                            <h3>My News</h3>
-                            <p>내 소식?</p>
-                            <footer>
-                                <ul class="actions">
-                                    <li><a href="#" class="button">Learn More</a></li>
-                                </ul>
-                            </footer>
+                            <h3>VIDEO</h3>
+                            <a href="#" class="image fit"><img src="/images/img_rtc_1.png" alt="프로필 사진누락" /></a>
+                            <a href="#" class="image fit"><img src="/images/img_rtc_2.png" alt="프로필 사진누락" /></a>
+                            <a href="#" class="image fit"><img src="/images/img_rtc_3.png" alt="프로필 사진누락" /></a>
                         </section>
                     </section>
                 </div>
 
-                <div class="8u$ 12u$(medium) important(medium)">
+                <div class="1u$ 12u$(medium)">
                     <!-- Content -->
-                    <section id="content">
-                        <div class="col-md-8">
-                            <div class="panel panel-default">
-                                <a href="/chamber/new">
-                                    <div class="panel-heading">New Chamber</div></a>
-                                <div class="panel-body">만들기</div>
-                            </div>
-
-                            <%
-                                for(var i=0;i<rows.length;i++){
-                            %>
-                            <div class="panel panel-default">
-                                <a href="#">
-                                    <div class="panel-heading"><%=rows[i].chamber_name%></div></a>
-                                <div class="panel-body"><%=rows[i].chamber_des%></div>
-                            </div>
-                            <%
-                                }
-                            %>
+                    <section id="">
+                        <div class="col-md-3">
+                            <p>
+                            </p>
                         </div>
+                    </section>
+                </div>
+                <div class="1u$ 12u$(medium)">
+                    <!-- Content -->
+                    <section id="">
+                        <div class="col-md-3">
+                            <p>
+                            </p>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="3u 12u$(medium)">
+                    <!-- Right Sidebar -->
+                    <section id="content">
+                        <section>
+                            <h3>CHAT</h3>
+                            <div class="12u$">
+                                <textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
+                            </div>
+                            <div class="12u$">
+                                <ul class="actions">
+                                    <li><input type="submit" value="Send Message" class="special" /></li>
+                                </ul>
+                            </div>
+                        </section>
                     </section>
                 </div>
             </div>
@@ -123,7 +120,7 @@
 <script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
 <script src="/javascripts/config.js"></script>
 <script src="/javascripts/cognito-auth.js"></script>
-<script src="/javascripts/cognito-getUserSess.js"></script>
+<script src="/javascripts/check-authToken.js"></script>
 
 </body>
 </html>

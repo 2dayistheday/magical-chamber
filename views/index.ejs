@@ -1,79 +1,341 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-  <head>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body class="page-home">
-  <header class="site-header">
-    <h1 class="title">Magical Chamber</h1>
-    <nav class="site-nav">
-         <ul>
-           <li><a href="/">Home</a></li>
-           <li><a href="/">What is Chamber?</a></li>
-           <li><a href="/chamber">Go to Magical Place Chamber</a></li>
-           <li><a href="/">About Us</a></li>
-         </ul>
-    </nav>
-    <button type="button" class="btn-menu"><span>Menu</span></button>
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+  <title><%title%></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--[if lte IE 8]><script src="/javascripts/ie/html5shiv.js"></script><![endif]-->
+  <link rel="stylesheet" href="/stylesheets/main.css" />
+  <!--[if lte IE 9]><link rel="stylesheet" href="/stylesheets/ie9.css" /><![endif]-->
+  <!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/ie8.css" /><![endif]-->
+</head>
+<body class="landing">
+<div id="page-wrapper">
 
-  <div class="home-button">
-    <a href="/users">register/signin</a>
-  </div>
+  <!-- Header -->
+  <header id="header">
+    <h1 id="logo"><a href="/">Chamber</a></h1>
+    <nav id="nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#one">What is Chamber?</a></li>
+        <li><a href="/#">About Us</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <section class="kraken-callout">
-    <div class="row">
-      <div class="columns medium-6 xxlarge-4 xxlarge-offset-2">
-        <img src="images/commingsoon.jpg">
-      </div>
 
-      <div class="columns medium-6 xlarge-5 xxlarge-4">
-        <h4 class="title">Coming Soon</h4>
-        <p class="content">
-          기다려주세요. 계속 바뀔 예정이니까요,...
-        </p>
+  <!-- Banner -->
+  <section id="banner">
+    <div class="content">
+      <header>
+        <h2>아직 가입 안하셨어요?</h2>
+        <br />
+      </header>
+      <form id="registrationForm" class="container 50%">
+        <div class="uniform 50%">
+          <div class="6u 12u$(xsmall)">
+            <input type="email" id="emailInputRegister" placeholder="Your Email Address" pattern=".*" required><br />
+          </div>
+          <div class="6u 12u$(xsmall)">
+            <input type="text" id="nickNameInputRegister" placeholder="Your Nickname" pattern=".*" required><br />
+          </div>
+          <div class="6u 12u$(xsmall)">
+            <input type="password" id="passwordInputRegister" placeholder="Password" pattern=".*" required><br />
+          </div>
+          <div class="6u 12u$(xsmall)">
+            <input type="password" id="password2InputRegister" placeholder="Confirm Password" pattern=".*" required><br />
+          </div>
+          <div class="4u$ 12u$(xsmall)">
+            <input type="submit" value="Get Started" class="fit special">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="content">
+      <header>
+        <h2>Sign in</h2>
+        <p>Magical Chamgber<br />
+          Just Create, Share, History,...</p>
+      </header>
+
+      <form id="signinForm" class="container 50%">
+        <div class="uniform 50%">
+          <div class="6u 12u$(xsmall)">
+            <input type="email" id="emailInputSignin" placeholder="Email" required><br />
+          </div>
+          <div class="6u 12u$(xsmall)">
+            <input type="password" id="passwordInputSignin" placeholder="Password" pattern=".*" required><br />
+          </div>
+          <div class="4u$ 12u$(xsmall)"><input type="submit" value="Sign In" class="fit special" /></div>
+        </div>
+      </form>
+      <div id="top" class="top text-right">
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
       </div>
+    </div>
+    <a href="#one" class="goto-next scrolly">Next</a>
+  </section>
+
+  <!-- One -->
+  <section id="one" class="spotlight style1 bottom">
+    <span class="image fit main"><img src="images/pic02.jpg" alt="" /></span>
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div class="4u 12u$(medium)">
+            <header>
+              <h2>What is Chamber?</h2>
+              <p>관계를 지배하는 마법의 공간, 체임버</p>
+            </header>
+          </div>
+          <div class="4u 12u$(medium)">
+            <p><b>실시간 커뮤니케이션</b> 도구 체임버는 혼자, 둘이서, 함께 하는 공간입니다. N:M 화상대화를 지원하며
+              동시에 페어 에디팅 도큐먼트도 작성합니다.<br />
+              가능하냐구요?<br />
+              <b>마법의 공간 체임버</b>에서는 가능합니다.</p>
+          </div>
+          <div class="4u$ 12u$(medium)">
+            <p><b>언제 어디에 있어도,</b> 당장 눈앞에서 얘기하는 것처럼 이야기를 시작하세요!
+              <b>모든게 과거로 지나가버렸어도,</b> 우리가 대신 기록해둘게요!
+              <b>이게그냥뭐라딱말할순없어도 너무좋은데 '말'로만은 설명이 안되어도,</b> 유용한 도구들을 활용해보세요!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#two" class="goto-next scrolly">Next</a>
+  </section>
+
+  <!-- Two -->
+  <section id="two" class="spotlight style2 right">
+    <span class="image fit main"><img src="images/pic03.jpg" alt="" /></span>
+    <div class="content">
+      <header>
+        <h2>WebRTC로 화상 대화를 </h2>
+        <p>설치? 필요도 없습니다.<br/>당장 시작하기만 해요. </p>
+      </header>
+      <p>Feugiat accumsan lorem eu ac lorem amet ac arcu phasellus tortor enim mi mi nisi praesent adipiscing. Integer mi sed nascetur cep aliquet augue varius tempus lobortis porttitor lorem et accumsan consequat adipiscing lorem.</p>
+      <ul class="actions">
+        <li><a href="#" class="button">Learn More</a></li>
+      </ul>
+    </div>
+    <a href="#three" class="goto-next scrolly">Next</a>
+  </section>
+
+  <!-- Three -->
+  <section id="three" class="spotlight style3 left">
+    <span class="image fit main bottom"><img src="images/pic04.jpg" alt="" /></span>
+    <div class="content">
+      <header>
+        <h2>페어 에디팅</h2>
+        <p>어느세월에 합치나요?<br/>
+          같이 작업하세요.</p>
+      </header>
+      <p>Feugiat accumsan lorem eu ac lorem amet ac arcu phasellus tortor enim mi mi nisi praesent adipiscing. Integer mi sed nascetur cep aliquet augue varius tempus lobortis porttitor lorem et accumsan consequat adipiscing lorem.</p>
+      <ul class="actions">
+        <li><a href="#" class="button">Learn More</a></li>
+      </ul>
+    </div>
+    <a href="#four" class="goto-next scrolly">Next</a>
+  </section>
+
+  <!-- Four -->
+  <section id="four" class="wrapper style1 special fade-up">
+    <div class="container">
+      <header class="major">
+        <h2>In Magical Chamber</h2>
+        <p>Everythings (you want) is here.</p>
+      </header>
+      <div class="box alt">
+        <div class="row uniform">
+          <section class="4u 6u(medium) 12u$(xsmall)">
+            <span class="icon alt major fa-area-chart"></span>
+            <h3>Make</h3>
+            <p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+          </section>
+          <section class="4u 6u$(medium) 12u$(xsmall)">
+            <span class="icon alt major fa-comment"></span>
+            <h3>Talk</h3>
+            <p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+          </section>
+          <section class="4u$ 6u(medium) 12u$(xsmall)">
+            <span class="icon alt major fa-flask"></span>
+            <h3>Create</h3>
+            <p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+          </section>
+          <section class="4u 6u$(medium) 12u$(xsmall)">
+            <span class="icon alt major fa-paper-plane"></span>
+            <h3>Ship</h3>
+            <p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+          </section>
+          <section class="4u 6u(medium) 12u$(xsmall)">
+            <span class="icon alt major fa-file"></span>
+            <h3>History</h3>
+            <p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+          </section>
+          <section class="4u$ 6u$(medium) 12u$(xsmall)">
+            <span class="icon alt major fa-lock"></span>
+            <h3>Anything</h3>
+            <p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+          </section>
+        </div>
+      </div>
+      <footer class="major">
+        <ul class="actions">
+          <li><a href="#" class="button">Get Started</a></li>
+        </ul>
+      </footer>
     </div>
   </section>
 
-  <footer class="site-footer">
-    <div class="row column">
-      <nav class="footer-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="chamber.html">What is Chamber?</a></li>
-          <li><a href="mypage.html">Go to Magical Place Chamber</a></li>
-          <li><a href="investors.html">About Us</a></li>
-          <li><a href="unicorns.html">Something Crazy</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="row column">
-      <div class="footer-legal">
-        &copy;REDPOINT in SWMaestro<br>
-      </div>
-    </div>
+  <!-- Footer -->
+  <footer id="footer">
+    <ul class="icons">
+      <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+      <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+      <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+      <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+      <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+      <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+    </ul>
+    <ul class="copyright">
+      <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+    </ul>
   </footer>
 
-  <script src="/javascripts/vendor/jquery-3.1.0.js"></script>
-  <script src="/javascripts/vendor/bootstrap.min.js"></script>
-  <script>
-      "use strict";
-      ! function() {
-          var n = $("html"),
-              t = function() {
-                  $(".btn-menu").on("click", function(t) {
-                      t.preventDefault(), n.toggleClass("menu-opened")
-                  })
-              },
-              e = function() {
-                  t()
-              };
-          e()
-      }();
-  </script>
-  </body>
+</div>
+
+<!-- Scripts -->
+<script src="/javascripts/js/jquery.min.js"></script>
+<script src="/javascripts/js/jquery.scrolly.min.js"></script>
+<script src="/javascripts/js/jquery.dropotron.min.js"></script>
+<script src="/javascripts/js/jquery.scrollex.min.js"></script>
+<script src="/javascripts/js/skel.min.js"></script>
+<script src="/javascripts/js/util.js"></script>
+<!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
+<script src="/javascripts/js/main.js"></script>
+
+<script src="/javascripts/vendor/jquery-3.1.0.js"></script>
+<script src="/javascripts/vendor/bootstrap.min.js"></script>
+<script src="/javascripts/vendor/aws-cognito-sdk.min.js"></script>
+<script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
+<script src="/javascripts/config.js"></script>
+<script src="/javascripts/cognito-auth.js"></script>
+
+<script>
+    var Chamber = window.Chamber || {};
+
+    // This is called with the results from from FB.getLoginStatus().
+    function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        // The response object is returned with a status field that lets the
+        // app know the current login status of the person.
+        // Full docs on the response object can be found in the documentation
+        // for FB.getLoginStatus().
+        if (response.status === 'connected') {
+            // Logged into your app and Facebook.
+            testAPI();
+        } else {
+            // The person is not logged into your app or we are unable to tell.
+            document.getElementById('status').innerHTML = 'Please log ' +
+                'into this app.';
+        }
+    }
+
+    // This function is called when someone finishes with the Login
+    // Button.  See the onlogin handler attached to it in the sample
+    // code below.
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+    }
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : _config.facebook.app_id,
+            cookie     : true,  // enable cookies to allow the server to access
+                                // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v2.8' // use graph api version 2.8
+        });
+
+        // Now that we've initialized the JavaScript SDK, we call
+        // FB.getLoginStatus().  This function gets the state of the
+        // person visiting this page and can return one of three states to
+        // the callback you provide.  They can be:
+        //
+        // 1. Logged into your app ('connected')
+        // 2. Logged into Facebook, but not your app ('not_authorized')
+        // 3. Not logged into Facebook and can't tell if they are logged into
+        //    your app or not.
+        //
+        // These three cases are handled in the callback function.
+
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // Here we run a very simple test of the Graph API after login is
+    // successful.  See statusChangeCallback() for when this call is made.
+    function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+            console.log('Successful login for: ' + response.name);
+            document.getElementById('status').innerHTML =
+                'Thanks for logging in, ' + response.name + '!';
+        });
+    }
+
+    function loginByThirdparty(info, done) {
+        console.log('process : ' + info.auth_type);
+        var stmt_duplicated = 'select *from `USERS` where `user_id` = ?';
+        connection.query(stmt_duplicated, info.auth_id, function (err, result) {
+            if (err) {
+                return done(err);
+            } else {
+                if (result.length === 0) {
+                    // 신규 유저는 회원 가입 이후 로그인 처리
+                    var stmt_thridparty_signup = 'insert into `USERS` set `user_id`= ?, `user_nickname`= ?';
+                    connection.query(stmt_thridparty_signup, [info.auth_id, info.auth_name], function (err, result) {
+                        if(err){
+                            return done(err);
+                        }else{
+                            done(null, {
+                                'user_id': info.auth_id,
+                                'nickname': info.auth_name
+                            });
+                        }
+                    });
+                } else {
+                    //기존유저 로그인 처리
+                    console.log('Old User');
+                    done(null, {
+                        'user_id': result[0].user_id,
+                        'nickname': result[0].nickname
+                    });
+                }
+            }
+        });
+    }
+</script>
+</body>
 </html>

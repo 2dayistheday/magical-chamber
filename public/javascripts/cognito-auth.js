@@ -3,7 +3,7 @@
 var Chamber = window.Chamber || {};
 
 (function scopeWrapper($) {
-    var signinUrl = '/users';
+    var signinUrl = '/';
 
     var poolData = {
         UserPoolId: _config.cognito.userPoolId,
@@ -85,6 +85,7 @@ var Chamber = window.Chamber || {};
     }
 
     function signin(email, password, onSuccess, onFailure) {
+
         var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
             Username: toUsername(email),
             Password: password
@@ -96,24 +97,7 @@ var Chamber = window.Chamber || {};
             onFailure: onFailure
         });
 
-
-        //getUser(email);
     }
-//Error :user is not authorized
-    function getUser(email) {
-        console.log("getUser");
-        createCognitoUser(email).getUserAttributes(function(err, result) {
-            if (err) {
-                alert(err);
-                return;
-            }
-            for (i = 0; i < result.length; i++) {
-                console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
-            }
-        });
-
-    }
-
 
     function verify(email, code, onSuccess, onFailure) {
         createCognitoUser(email).confirmRegistration(code, true, function confirmCallback(err, result) {
@@ -159,7 +143,7 @@ var Chamber = window.Chamber || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Logged In');
-                window.location.href = '../chamber';
+                window.location.href = '../chamber/list';
                 //로그인 후 이동페이지
             },
             function signinError(err) {
@@ -178,7 +162,7 @@ var Chamber = window.Chamber || {};
             var cognitoUser = result.user;
             console.log('user name is ' + cognitoUser.getUsername());
             alert('Registration successful. Please check your email for your verification code');
-            window.location.href = '../users/verify';
+            window.location.href = '../verify';
         };
         var onFailure = function registerFailure(err) {
             alert(err);

@@ -6,11 +6,11 @@ var Chamber = window.Chamber || {};
         if(token){
             authToken = token;
         }else{
-            window.location.href = "/users";
+            window.location.href = "/";
         }
     }).catch(function handleTokenError(error) {
             alert(error);
-            window.location.href = "/users";
+            window.location.href = "/";
     });
 
     $(function onDocReady() {
@@ -19,6 +19,7 @@ var Chamber = window.Chamber || {};
                 $('.authToken').text(token);
             }
         })
+
     })
 }(jQuery));
 

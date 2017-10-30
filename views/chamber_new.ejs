@@ -1,56 +1,116 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <title><%title%></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="/javascripts/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="/stylesheets/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/ie8.css" /><![endif]-->
 </head>
-<body>
+<body class="landing">
 
-<div class="page-header">
-    <h1 class="main_font">
-        <a href="/">
-            Chamber
-        </a>
-    </h1>
-    <h3>
-        create, share and discuss your everythings
-    </h3>
-    <textarea class="authToken"></textarea>
-    <h4 id="userEmail"></h4>
-    <button id="signoutBtn">Sign Out</button>
-    <a href="/chamber/new">new Chamber Create</a>
-</div>
-<div class="content container-fluid">
-    <div class="row">
-        <div class="col-sm-2 sidenav">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#section1">All</a></li>
-                <li><a href="#section2">Work</a></li>
-                <li><a href="#section3">Study</a></li>
-                <li><a href="#section3">Friends</a></li>
-            </ul><br>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Chamber..">
-                <span class="input-group-btn">
-                <button class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-search"></span>
-                </button>
-                </span>
+<div id="page-wrapper">
+    <!-- Header -->
+    <header id="header">
+        <h1 id="logo"><a href="/">Chamber</a></h1>
+        <nav id="nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#one">What is Chamber?</a></li>
+                <li><a href="/#">About Us</a></li>
+                <li><button id="signoutBtn" class="button">Sign Out</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <div id="main" class="wrapper style1">
+        <div class="container">
+            <header class="major">
+                <h2>Chamber New</h2>
+                <p>나의 체임버를 생성</p>
+            </header>
+            <div class="row 150%">
+                <div class="3u 12u$(medium)">
+                    <!-- Sidebar -->
+                    <section id="sidebar">
+                        <section>
+                            <h3>My Profile</h3>
+                            <a href="#" class="image fit"><img src="/images/pic01.jpg" alt="프로필 사진누락" /></a>
+                            <p>안녕하세요. 저는 이런 사람입니다.</p>
+                            <textarea class="authToken"></textarea>
+                            <h4 id="userEmail"></h4>
+
+                        </section>
+                        <hr />
+                        <section>
+                            <a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a>
+                            <h3>My News</h3>
+                            <p>내 소식?</p>
+                            <footer>
+                                <ul class="actions">
+                                    <li><a href="#" class="button">Learn More</a></li>
+                                </ul>
+                            </footer>
+                        </section>
+                    </section>
+                </div>
+
+                <div class="8u$ 12u$(medium) important(medium)">
+                    <!-- Content -->
+                    <section id="content">
+                        <div class="col-md-8">
+                            <hr />
+                            <form action="/chamber/new" method="post" id="newChamberForm" class="container 50%">
+                                <div class="6u 12u$(xsmall)">
+                                    체임버명: <input type="text" name="chamber_name" placeholder="Chamber Name" required><br />
+                                </div>
+                                <div class="6u 12u$(xsmall)">
+                                    체임버소개: <input type="text" name="chamber_des" placeholder="Chamber Description"><br />
+                                </div>
+                                <div class="4u$ 12u$(xsmall)">
+                                    <input type="submit" value="나만의 체임버 만들기">
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
-
-        <div class="col-md-8">
-            <form action="/chamber/new" method="post" id="newChamberForm">
-                Chamber Name : <input type="text" name="chamber_name" placeholder="Chamber Name" required>
-                Description Chamber : <input type="text" name="chamber_des" placeholder="Description Chamber">
-
-                <input type="submit" value="CreateChamber">
-            </form>
-        </div>
     </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="icons">
+            <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        <ul class="copyright">
+            <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </footer>
 </div>
+
+<!-- Scripts -->
+<script src="/javascripts/js/jquery.min.js"></script>
+<script src="/javascripts/js/jquery.scrolly.min.js"></script>
+<script src="/javascripts/js/jquery.dropotron.min.js"></script>
+<script src="/javascripts/js/jquery.scrollex.min.js"></script>
+<script src="/javascripts/js/skel.min.js"></script>
+<script src="/javascripts/js/util.js"></script>
+<!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
+<script src="/javascripts/js/main.js"></script>
 
 <script src="/javascripts/vendor/jquery-3.1.0.js"></script>
 <script src="/javascripts/vendor/bootstrap.min.js"></script>
@@ -58,7 +118,7 @@
 <script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
 <script src="/javascripts/config.js"></script>
 <script src="/javascripts/cognito-auth.js"></script>
-<script src="/javascripts/check-authToken.js"></script>
+<script src="/javascripts/cognito-getUserSess.js"></script>
 
 </body>
 </html>

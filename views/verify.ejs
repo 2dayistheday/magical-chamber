@@ -1,32 +1,89 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title><%title%></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="/javascripts/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="/stylesheets/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/ie8.css" /><![endif]-->
 </head>
-<body class = "page-home">
-<header class="site-header">
-    <nav class="site-nav">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/">What is Chamber?</a></li>
-            <li><a href="/">Go to Magical Place Chamber</a></li>
-            <li><a href="/">About Us</a></li>
+<body class="landing">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <h1 id="logo"><a href="/">Chamber</a></h1>
+        <nav id="nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#one">What is Chamber?</a></li>
+                <li><a href="/#">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <div id="main" class="wrapper style1">
+        <div class="container">
+            <header class="major">
+                <h2>Verify Email</h2>
+                <p>아래에 이메일과 전송된 인증코드를 입력하세요.</p>
+            </header>
+
+            <!-- Content -->
+            <section id="content">
+                <form id="verifyForm" class="container 50%">
+                    <div class="row uniform 50%">
+                        <div class="8u 12u$(xsmall)">
+                            <input type="email" id="emailInputVerify" placeholder="Email" required><br />
+                        </div>
+                        <div class="4u 12u$(xsmall)">
+                            <input type="text" id="codeInputVerify" placeholder="Verification Code" pattern=".*" required><br />
+                        </div>
+                    </div>
+                        <div class="12u$ 12u$(xsmall)">
+                            <input type="submit" value="Verify" class="fit special">
+                        </div>
+                </form>
+
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="icons">
+            <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
         </ul>
-    </nav>
-    <button type="button" class="btn-menu"><span>Menu</span></button>
-</header>
+        <ul class="copyright">
+            <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </footer>
 
-<section class="form-wrap">
-    <h1>Verify Email</h1>
-    <form id="verifyForm">
-        <input type="email" id="emailInputVerify" placeholder="Email" required>
-        <input type="text" id="codeInputVerify" placeholder="Verification Code" pattern=".*" required>
+</div>
 
-        <input type="submit" value="Verify">
-    </form>
-</section>
+<!-- Scripts -->
+<script src="/javascripts/js/jquery.min.js"></script>
+<script src="/javascripts/js/jquery.scrolly.min.js"></script>
+<script src="/javascripts/js/jquery.dropotron.min.js"></script>
+<script src="/javascripts/js/jquery.scrollex.min.js"></script>
+<script src="/javascripts/js/skel.min.js"></script>
+<script src="/javascripts/js/util.js"></script>
+<!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
+<script src="/javascripts/js/main.js"></script>
 
 <script src="/javascripts/vendor/jquery-3.1.0.js"></script>
 <script src="/javascripts/vendor/bootstrap.min.js"></script>
