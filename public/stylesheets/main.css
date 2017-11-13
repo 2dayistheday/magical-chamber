@@ -3999,3 +3999,10 @@
 					}
 
 	}
+
+.vertical{
+
+}
+	.vertical .content{
+		background-color: #00bbd3;
+	}

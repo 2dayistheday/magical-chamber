@@ -25,7 +25,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/#one">What is Chamber?</a></li>
                 <li><a href="/#">About Us</a></li>
-                <li><button id="signoutBtn" class="button">Sign Out</button></li>
+                <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
             </ul>
         </nav>
     </header>
@@ -41,19 +41,10 @@
                 <div class="3u 12u$(medium)">
                     <!-- Sidebar -->
                     <section id="sidebar">
-                        <section>
-                            <h3>My Profile</h3>
-                            <a href="#" class="image fit"><img src="/images/pic01.jpg" alt="프로필 사진누락" /></a>
-                            <p>안녕하세요. 저는 이런 사람입니다.</p>
-                            <textarea class="authToken"></textarea>
-                            <h4 id="userEmail"></h4>
-
-                        </section>
                         <hr />
                         <section>
-                            <a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a>
                             <h3>My News</h3>
-                            <p>내 소식?</p>
+                            <p>내 초대</p>
                             <footer>
                                 <ul class="actions">
                                     <li><a href="#" class="button">Learn More</a></li>
@@ -74,12 +65,12 @@
                             </div>
 
                             <%
-                                for(var i=0;i<rows.length;i++){
+                                for(var i=0;i<chambers.length;i++){
                             %>
                             <div class="panel panel-default">
-                                <a href="#">
-                                    <div class="panel-heading"><%=rows[i].chamber_name%></div></a>
-                                <div class="panel-body"><%=rows[i].chamber_des%></div>
+                                <a href="/chamber/room/<%=chambers[i].chamber_id%>" >
+                                    <div class="panel-heading"><%=chambers[i].chamber_name%></div></a>
+                                <div class="panel-body"><%=chambers[i].chamber_des%></div>
                             </div>
                             <%
                                 }

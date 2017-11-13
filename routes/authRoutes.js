@@ -14,7 +14,7 @@ module.exports = function (app) {
 
     app.get('/auth/facebook',
         passport.authenticate('facebook',
-            { scope: 'public_profile' }));
+            { scope: 'email' }));
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook'),function (req, res) {
@@ -23,7 +23,7 @@ module.exports = function (app) {
 
     app.get('/api/logout', function (req, res) {
         req.logout();//easy~~~~~~
-        res.send(req.user);
+        res.redirect('/');
     });
 
     app.get('/api/current_user', function (req, res) {

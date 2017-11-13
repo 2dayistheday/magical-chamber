@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
     <!--[if lte IE 9]><link rel="stylesheet" href="/stylesheets/ie9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/ie8.css" /><![endif]-->
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body class="landing">
 
@@ -24,7 +25,7 @@
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/#one">My Chambers</a></li>
-                <li><button id="signoutBtn" class="button">Sign Out</button></li>
+                <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
             </ul>
         </nav>
     </header>
@@ -33,50 +34,30 @@
     <div id="main" class="wrapper style1">
         <div class="container">
             <header class="major">
-                <h2><%chamber_name%></h2>
+                <h2><%=chamber[0].chamber_name%></h2>
                 <p>화상 대화 진행중</p>
             </header>
-            <div class="row 150%">
-                <div class="3u 12u$(medium)">
-                    <!-- Sidebar -->
-                    <section id="sidebar">
+            <div class="vertical">
+                <div class="">
+                    <!-- Video -->
+                    <section class="content">
                         <section>
                             <h3>VIDEO</h3>
-                            <a href="#" class="image fit"><img src="/images/img_rtc_1.png" alt="프로필 사진누락" /></a>
-                            <a href="#" class="image fit"><img src="/images/img_rtc_2.png" alt="프로필 사진누락" /></a>
-                            <a href="#" class="image fit"><img src="/images/img_rtc_3.png" alt="프로필 사진누락" /></a>
                         </section>
                     </section>
                 </div>
-
-                <div class="1u$ 12u$(medium)">
-                    <!-- Content -->
-                    <section id="">
-                        <div class="col-md-3">
-                            <p>
-                            </p>
-                        </div>
-                    </section>
-                </div>
-                <div class="1u$ 12u$(medium)">
-                    <!-- Content -->
-                    <section id="">
-                        <div class="col-md-3">
-                            <p>
-                            </p>
-                        </div>
-                    </section>
-                </div>
-
-                <div class="3u 12u$(medium)">
-                    <!-- Right Sidebar -->
-                    <section id="content">
+                <div class="">
+                    <!-- Chat -->
+                    <section class="content">
                         <section>
                             <h3>CHAT</h3>
-                            <div class="12u$">
-                                <textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
+                            <div class="msg">
+
                             </div>
-                            <div class="12u$">
+                            <div>
+                                <textarea name="message" id="message" placeholder="Enter your message"></textarea>
+                            </div>
+                            <div>
                                 <ul class="actions">
                                     <li><input type="submit" value="Send Message" class="special" /></li>
                                 </ul>
@@ -113,14 +94,12 @@
 <script src="/javascripts/js/util.js"></script>
 <!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
 <script src="/javascripts/js/main.js"></script>
+<script>
+    var socket = io.connect();
+    var ROOM = "<%=chamber[0].chamber_id%>";
+    socket.emit('ready', {"chat_room": ROOM});
 
-<script src="/javascripts/vendor/jquery-3.1.0.js"></script>
-<script src="/javascripts/vendor/bootstrap.min.js"></script>
-<script src="/javascripts/vendor/aws-cognito-sdk.min.js"></script>
-<script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
-<script src="/javascripts/config.js"></script>
-<script src="/javascripts/cognito-auth.js"></script>
-<script src="/javascripts/check-authToken.js"></script>
+</script>
 
 </body>
 </html>

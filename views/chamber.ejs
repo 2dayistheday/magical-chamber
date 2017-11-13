@@ -23,9 +23,8 @@
         <nav id="nav">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/#one">What is Chamber?</a></li>
-                <li><a href="/#">About Us</a></li>
-                <li><button id="signoutBtn" class="button">Sign Out</button></li>
+                <li><a href="/chamber/list">Chamber List</a></li>
+                <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
             </ul>
         </nav>
     </header>
@@ -34,7 +33,7 @@
     <div id="main" class="wrapper style1">
         <div class="container">
             <header class="major">
-                <h2><%chamber_name%></h2>
+                <h2><%=chamber[0].chamber_name%></h2>
                 <p>여기는 채임버 개별 페이지</p>
             </header>
             <div class="row 150%">
@@ -42,24 +41,14 @@
                     <!-- Sidebar -->
                     <section id="sidebar">
                         <section>
-                            <h3>My Profile</h3>
+                            <h3><%=chamber[0].chamber_name%></h3>
                             <a href="#" class="image fit"><img src="/images/pic01.jpg" alt="프로필 사진누락" /></a>
-                            <p>안녕하세요. 저는 이런 사람입니다.</p>
+                            <p><%=chamber[0].chamber_des%></p>
                             <textarea class="authToken"></textarea>
                             <h4 id="userEmail"></h4>
 
                         </section>
                         <hr />
-                        <section>
-                            <a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a>
-                            <h3>My News</h3>
-                            <p>내 소식?</p>
-                            <footer>
-                                <ul class="actions">
-                                    <li><a href="#" class="button">Learn More</a></li>
-                                </ul>
-                            </footer>
-                        </section>
                     </section>
                 </div>
 
@@ -92,10 +81,9 @@
                 <div class="col-sm-3 sidenav" style="float: right;">
 
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="#section1">바로가기</a></li>
-                        <li><a href="../content/getusermedia/gum"><span class="glyphicon glyphicon-facetime-video"></span> Group Live Call </a></li>
-                        <li><a href="../content/getusermedia/gum"><span class="glyphicon glyphicon-facetime-video"></span> Direct Live Call </a></li>
-                        <li><a href="../drive"><span class="glyphicon glyphicon-file"></span> Documents </a></li>
+                        <li class="active"><a href="/chamber/room/<%=chamber[0].chamber_id%>/member">초대</a></li>
+                        <li><a href="/chamber/rtc/<%=chamber[0].chamber_id%>"><span class="glyphicon glyphicon-facetime-video"></span> Group Live Call </a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-file"></span> Documents </a></li>
                     </ul><br>
                 </div>
             </div>
@@ -132,13 +120,6 @@
 <!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
 <script src="/javascripts/js/main.js"></script>
 
-<script src="/javascripts/vendor/jquery-3.1.0.js"></script>
-<script src="/javascripts/vendor/bootstrap.min.js"></script>
-<script src="/javascripts/vendor/aws-cognito-sdk.min.js"></script>
-<script src="/javascripts/vendor/amazon-cognito-identity.min.js"></script>
-<script src="/javascripts/config.js"></script>
-<script src="/javascripts/cognito-auth.js"></script>
-<script src="/javascripts/check-authToken.js"></script>
 
 </body>
 </html>

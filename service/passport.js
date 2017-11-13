@@ -1,15 +1,16 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const FacebookStrategt = require('passport-facebook').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('../config/keys');
 var mysql_dbc = require('../service/db_con')();
 var connection = mysql_dbc.init();
 
+//로그인 후 세션에 저장
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
 
-//mongoDB의 id를 통해 user를 찾아가져옴?..
+//id로 DB에
 passport.deserializeUser(function(id, done) {
     var selectUsersql = 'select * from USERS where user_id = ?';
     connection.query(selectUsersql, id, function (err, existingUser) {
@@ -35,7 +36,7 @@ passport.use(
         var selectUsersql = "select * from USERS where user_sub = ?";
         connection.query(selectUsersql, profile.id, function (err, existingUser) {
 
-            if (typeof existingUser[0] != "undefined") {
+            if (typeof existingUser[0] != "undefined" && existingUser[0].user_type == 'g') {
                 console.log("already inserted");
                 existingUser = JSON.stringify(existingUser);
                 existingUser = JSON.parse(existingUser);
@@ -43,11 +44,21 @@ passport.use(
                     id: existingUser[0].user_id,
                     sub: existingUser[0].user_sub
                 };
-
                 console.log('existingUser', existingUser);
+                console.log(profile);
                 done(null, user);
+
+                var email = profile.emails[0].value;
+                var selectInvitationsql = "select * from CHAMBER_INVITATION where user_invitation = ?";
+                connection.query(selectInvitationsql, email, function (err, invitation) {
+                    if(err)
+                        console.log(err);
+                    else{
+                        console.log(invitation);
+                    }
+                });
             }else{
-                var addUsersql = "INSERT into USERS(user_sub) values(?)";
+                var addUsersql = "INSERT into USERS(user_sub, user_type) values(?, 'g')";
                 connection.query(addUsersql, profile.id, function (err, rows) {
                     if(err)
                         console.log("err : " + err);
@@ -59,24 +70,34 @@ passport.use(
                             sub: profile.id
                         };
                         done(null, user);
+
+                        //profile add
+                        var addUserProfilesql = "INSERT into USER_PROFILE(user_id, user_nickname) values(?,?)";
+                        connection.query(addUserProfilesql, [rows.insertId, profile.displayName], function (err) {
+                            if(err)
+                                console.log("err : " + err);
+                        });
+
                     }
                 });
+
             }
         });
     })
 );
 
 passport.use(
-    new FacebookStrategt({
+    new FacebookStrategy({
         clientID: keys.facebookClientID,
         clientSecret: keys.facebookClientSecret,
-        callbackURL: '/auth/facebook/callback'
+        callbackURL: '/auth/facebook/callback',
+            profileFields: ['id', 'emails', 'name']
     },
         function (accessToken, refreshToken, profile, done) {
             var selectUsersql = "select * from USERS where user_sub = ?";
             connection.query(selectUsersql, profile.id, function (err, existingUser) {
 
-                if (typeof existingUser[0] != "undefined") {
+                if (typeof existingUser[0] != "undefined" && existingUser[0].user_type == 'f') {
                     console.log("already inserted");
                     existingUser = JSON.stringify(existingUser);
                     existingUser = JSON.parse(existingUser);
@@ -86,9 +107,20 @@ passport.use(
                     };
 
                     console.log('existingUser', existingUser);
+                    console.log(profile);
                     done(null, user);
+
+                    var email = profile.emails[0].value;
+                    var selectInvitationsql = "select * from CHAMBER_INVITATION where user_invitation = ? and Allowed = false";
+                    connection.query(selectInvitationsql, email, function (err, invitation) {
+                        if(err)
+                            console.log(err);
+                        else{
+                            console.log(invitation);
+                        }
+                    });
                 }else{
-                    var addUsersql = "INSERT into USERS(user_sub) values(?)";
+                    var addUsersql = "INSERT into USERS(user_sub, user_type) values(?, 'f')";
                     connection.query(addUsersql, profile.id, function (err, rows) {
                         if(err)
                             console.log("err : " + err);
@@ -100,6 +132,14 @@ passport.use(
                                 sub: profile.id
                             };
                             done(null, user);
+
+
+                            //profile add
+                            var addUserProfilesql = "INSERT into USER_PROFILE(user_id, user_nickname) values(?,?)";
+                            connection.query(addUserProfilesql, [rows.insertId, profile.displayName], function (err) {
+                                if(err)
+                                    console.log("err : " + err);
+                            });
                         }
                     });
                 }

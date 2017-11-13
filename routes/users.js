@@ -30,8 +30,34 @@ router.post('/', function (req, res, next) {
             console.log("already inserted");
         }
     });
-
 });
+
+router.get('/profile', function(req, res, next) {
+    var user_id = req.user.id;
+
+    var selectUserProfilesql = "select * from USER_PROFILE where user_id = ?";
+    connection.query(selectUserProfilesql, user_id, function (err, profile) {
+        if(err)
+            console.log("err : " + err);
+        else
+            res.render('user_profile', { title: 'Magical Chamber', profile: profile });
+    });
+});
+
+router.post('/profile/update', function(req, res, next) {
+    var user_id = req.user.id;
+    var nickname = req.body.user_nickname;
+    var des = req.body.user_des;
+
+    var updateUserProfilesql = "update USER_PROFILE set user_nickname = ?, user_des = ? where user_id = ?";
+    connection.query(updateUserProfilesql, [nickname, des, user_id], function (err, profile) {
+        if(err)
+            console.log("err : " + err);
+        else
+            res.redirect('/chamber/list');
+    });
+});
+
 
 router.get('/verify', function(req, res, next) {
     res.render('verify', { title: 'Magical Chamber' });

@@ -15,8 +15,8 @@
     <!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/ie8.css" /><![endif]-->
 </head>
 <body class="landing">
-<div id="page-wrapper">
 
+<div id="page-wrapper">
     <!-- Header -->
     <header id="header">
         <h1 id="logo"><a href="/">Chamber</a></h1>
@@ -25,6 +25,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/#one">What is Chamber?</a></li>
                 <li><a href="/#">About Us</a></li>
+                <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
             </ul>
         </nav>
     </header>
@@ -33,28 +34,34 @@
     <div id="main" class="wrapper style1">
         <div class="container">
             <header class="major">
-                <h2>Verify Email</h2>
-                <p>아래에 이메일과 전송된 인증코드를 입력하세요.</p>
+                <h2>My Profile</h2>
+                <p>프로필 수정</p>
             </header>
+            <div class="row 150%">
+                <div class="3u 12u$(medium)">
 
-            <!-- Content -->
-            <section id="content">
-                <form id="verifyForm" class="container 50%">
-                    <div class="row uniform 50%">
-                        <div class="8u 12u$(xsmall)">
-                            <input type="email" id="emailInputVerify" placeholder="Email" required><br />
-                        </div>
-                        <div class="4u 12u$(xsmall)">
-                            <input type="text" id="codeInputVerify" placeholder="Verification Code" pattern=".*" required><br />
-                        </div>
-                    </div>
-                        <div class="12u$ 12u$(xsmall)">
-                            <input type="submit" value="Verify" class="fit special">
-                        </div>
-                </form>
+                </div>
 
-            </section>
-
+                <div class="8u$ 12u$(medium) important(medium)">
+                    <!-- Content -->
+                    <section id="content">
+                        <div class="col-md-8">
+                            <hr />
+                            <form action="/users/profile/update" method="post" id="updateProfileForm" class="container 50%">
+                                <div class="6u 12u$(xsmall)">
+                                    닉네임: <input type="text" name="user_nickname" placeholder="<%=profile[0].user_nickname%>" required><br />
+                                </div>
+                                <div class="6u 12u$(xsmall)">
+                                    자기소개: <input type="text" name="user_des" placeholder="<%=profile[0].user_des%>"><br />
+                                </div>
+                                <div class="4u$ 12u$(xsmall)">
+                                    <input type="submit" value="닉네임 수정">
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -72,7 +79,6 @@
             <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
         </ul>
     </footer>
-
 </div>
 
 <!-- Scripts -->
@@ -84,6 +90,7 @@
 <script src="/javascripts/js/util.js"></script>
 <!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
 <script src="/javascripts/js/main.js"></script>
+
 
 </body>
 </html>

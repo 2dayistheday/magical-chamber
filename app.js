@@ -8,6 +8,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
 
+
 require('./service/passport');
 
 var index = require('./routes/index');
@@ -15,12 +16,15 @@ var users = require('./routes/users');
 var chamber = require('./routes/chamber');
 
 var app = express();
+app.io = require('socket.io')();
+
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000,
         keys: [keys.cookieKey]
     })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -29,7 +33,7 @@ require('./routes/authRoutes')(app);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set('trust proxy', 1)
+app.set('trust proxy', 1);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -61,5 +65,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;
