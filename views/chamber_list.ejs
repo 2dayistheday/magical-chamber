@@ -41,10 +41,21 @@
                 <div class="3u 12u$(medium)">
                     <!-- Sidebar -->
                     <section id="sidebar">
+                        <section>
+                            <h3>My Profile</h3>
+                            <a href="#" class="image fit"><img src="/images/pic01.jpg" alt="프로필 사진누락" /></a>
+                            <p><%=profile[0].user_nickname%></p>
+                            <p><%=profile[0].user_des%></p>
+                            <a href="/users/profile">프로필 설정</a>
+                            <textarea class="authToken"></textarea>
+                            <h4 id="userEmail"></h4>
+
+                        </section>
                         <hr />
                         <section>
+                            <a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a>
                             <h3>My News</h3>
-                            <p>내 초대</p>
+                            <p>내 소식?</p>
                             <footer>
                                 <ul class="actions">
                                     <li><a href="#" class="button">Learn More</a></li>

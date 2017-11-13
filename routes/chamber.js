@@ -84,7 +84,7 @@ router.post('/new', function (req, res, next) {
     var user_id = req.user.id;
 
     // Use the connection
-    var insertChambersql = "insert into chambers(chamber_name, chamber_des) values(?,?); ";
+    var insertChambersql = "insert into CHAMBERS(chamber_name, chamber_des) values(?,?); ";
     connection.query(insertChambersql, data, function (err, rows) {
         if (err) console.error("err : " + err);
         console.log("rows : " + JSON.stringify(rows));

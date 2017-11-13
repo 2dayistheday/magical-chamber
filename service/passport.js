@@ -91,9 +91,10 @@ passport.use(
         clientID: keys.facebookClientID,
         clientSecret: keys.facebookClientSecret,
         callbackURL: '/auth/facebook/callback',
-            profileFields: ['id', 'emails', 'name']
+            profileFields: ['id','emails', 'name', 'displayName', 'link', 'photos']
     },
         function (accessToken, refreshToken, profile, done) {
+
             var selectUsersql = "select * from USERS where user_sub = ?";
             connection.query(selectUsersql, profile.id, function (err, existingUser) {
 
