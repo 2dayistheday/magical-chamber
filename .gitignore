@@ -1,4 +1,5 @@
 node_modules/
 public/javascripts/config.js
 config/
+cert/
 .DS_Store
