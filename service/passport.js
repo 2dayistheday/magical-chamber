@@ -47,19 +47,9 @@ passport.use(
                 console.log('existingUser', existingUser);
                 console.log(profile);
                 done(null, user);
-
-                var email = profile.emails[0].value;
-                var selectInvitationsql = "select * from CHAMBER_INVITATION where user_invitation = ?";
-                connection.query(selectInvitationsql, email, function (err, invitation) {
-                    if(err)
-                        console.log(err);
-                    else{
-                        console.log(invitation);
-                    }
-                });
             }else{
-                var addUsersql = "INSERT into USERS(user_sub, user_type) values(?, 'g')";
-                connection.query(addUsersql, profile.id, function (err, rows) {
+                var addUsersql = "INSERT into USERS(user_sub, user_type, user_email) values(?, 'g' , ?)";
+                connection.query(addUsersql, [profile.id, profile.emails[0].value], function (err, rows) {
                     if(err)
                         console.log("err : " + err);
                     else{
@@ -110,19 +100,9 @@ passport.use(
                     console.log('existingUser', existingUser);
                     console.log(profile);
                     done(null, user);
-
-                    var email = profile.emails[0].value;
-                    var selectInvitationsql = "select * from CHAMBER_INVITATION where user_invitation = ? and Allowed = false";
-                    connection.query(selectInvitationsql, email, function (err, invitation) {
-                        if(err)
-                            console.log(err);
-                        else{
-                            console.log(invitation);
-                        }
-                    });
                 }else{
-                    var addUsersql = "INSERT into USERS(user_sub, user_type) values(?, 'f')";
-                    connection.query(addUsersql, profile.id, function (err, rows) {
+                    var addUsersql = "INSERT into USERS(user_sub, user_type, user_email) values(?, 'f', ?)";
+                    connection.query(addUsersql, [profile.id, profile.emails[0].value], function (err, rows) {
                         if(err)
                             console.log("err : " + err);
                         else{

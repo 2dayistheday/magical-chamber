@@ -47,19 +47,24 @@
                             <p><%=profile[0].user_nickname%></p>
                             <p><%=profile[0].user_des%></p>
                             <a href="/users/profile">프로필 설정</a>
-                            <textarea class="authToken"></textarea>
-                            <h4 id="userEmail"></h4>
-
                         </section>
                         <hr />
                         <section>
-                            <a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a>
                             <h3>My News</h3>
                             <p>내 소식?</p>
                             <footer>
+
+                                <%
+                                for(var i=0;i<invitations.length;i++){
+                                %>
                                 <ul class="actions">
-                                    <li><a href="#" class="button">Learn More</a></li>
+                                    <li><a href="#" >
+                                        <%=invitations[i].chamber_name%>
+                                    </a></li>
                                 </ul>
+                                <%
+                                }
+                                %>
                             </footer>
                         </section>
                     </section>
@@ -74,7 +79,23 @@
                                     <div class="panel-heading">New Chamber</div></a>
                                 <div class="panel-body">만들기</div>
                             </div>
-
+                            <b>초대 챔버</b>
+                            <%
+                            for(var i=0;i<invitations.length;i++){
+                            %>
+                            <ul class="actions">
+                                <li><a href="#" >
+                                        <%=invitations[i].chamber_name%>
+                                    </a>
+                                    <form action = "/chamber/room/<%=invitations[i].chamber_id%>/allow" method = "post">
+                                        <input type="submit" value="수락하기">
+                                    </form>
+                                </li>
+                            </ul>
+                            <%
+                            }
+                            %>
+                            <b>현재 챔버</b>
                             <%
                                 for(var i=0;i<chambers.length;i++){
                             %>

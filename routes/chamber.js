@@ -17,7 +17,11 @@ router.get('/list', function(req, res, next) {
 
             var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?";
             connection.query(selectMyProfileSql, user_id, function (err, profile) {
-                res.render('chamber_list', { title: 'Magical Chamber', chambers: chambers, profile: profile});
+
+                var selectMyInvitationSql = "select * from CHAMBERS where chamber_id IN (select chamber_id from CHAMBER_INVITATION where Allowed = '0' and user_invitation = (select user_email from USERS where user_id = ?))";
+                connection.query(selectMyInvitationSql, user_id, function (err, invitations) {
+                    res.render('chamber_list', { title: 'Magical Chamber', chambers: chambers, profile: profile, invitations: invitations});
+                });
             });
         });
 
@@ -111,11 +115,45 @@ router.post('/room/:chamberID/new', function (req, res, next) {
 
     var user_id = req.user.id;
     // Use the connection
-    var insertChambersql = "insert into CHAMBER_INVITATION(chamber_id, user_invitation) values(?,?); ";
-    connection.query(insertChambersql, [chamberID, newMember], function (err, rows) {
-        if (err) console.error("err : " + err);
-        console.log("rows : " + JSON.stringify(rows));
-        res.redirect('/room/'+chamberID+'/member');
+
+    var selectChamberSql = "select * from CHAMBER_INVITATION where chamber_id = ? and user_invitation = ?";
+    connection.query(selectChamberSql, [chamberID, newMember], function (err, chambers) {
+       if(chambers === "undefined"){
+            console.log('이미 초대함');
+            res.redirect('/chamber/room/'+chamberID+'/member');
+       }else{
+           var insertChambersql = "insert into CHAMBER_INVITATION(chamber_id, user_invitation) values(?,?); ";
+           connection.query(insertChambersql, [chamberID, newMember], function (err, rows) {
+               if (err) console.error("err : " + err);
+               console.log("rows : " + JSON.stringify(rows));
+               console.log('chamberID' + chamberID);
+               res.redirect('/chamber/room/'+chamberID+'/member');
+           });
+       }
+    });
+});
+
+router.post('/room/:chamberID/allow', function (req, res, next) {
+    var chamberID = req.params.chamberID;
+    var user_id = req.user.id;
+
+    var selectMyEmailSql = "select user_email from USERS where user_id = ?";
+    connection.query(selectMyEmailSql, user_id, function (err, email) {
+        var updateChamberInvitationesql = "update CHAMBER_INVITATION set Allowed = '1' where user_invitation = ? and chamber_id = ?";
+        connection.query(updateChamberInvitationesql, [email, chamberID], function (err, rows) {
+            if(err)
+                console.log("err : " + err);
+            else{
+                var addRelationsql = "INSERT into CHAMBER_USER(chamber_id, user_id) values(?, ?)";
+                connection.query(addRelationsql, [chamberID, user_id], function (err, rows) {
+                    if(err)
+                        console.log("err : " + err);
+                    else
+                        console.log("rows : " + JSON.stringify(rows));
+                });
+                res.redirect('/chamber/room/'+chamberID);
+            }
+        });
     });
 });
 
