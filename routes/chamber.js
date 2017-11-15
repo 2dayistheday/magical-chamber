@@ -137,13 +137,15 @@ router.post('/room/:chamberID/allow', function (req, res, next) {
     var chamberID = req.params.chamberID;
     var user_id = req.user.id;
 
-    var selectMyEmailSql = "select user_email from USERS where user_id = ?";
-    connection.query(selectMyEmailSql, user_id, function (err, email) {
-        var updateChamberInvitationesql = "update CHAMBER_INVITATION set Allowed = '1' where user_invitation = ? and chamber_id = ?";
-        connection.query(updateChamberInvitationesql, [email, chamberID], function (err, rows) {
+    var selectMyEmailSql = "select * from USERS where user_id = ?";
+    connection.query(selectMyEmailSql, user_id, function (err, user) {
+        var updateChamberInvitationesql = "update CHAMBER_INVITATION set allowed = TRUE where user_invitation = ? and chamber_id = ?";
+        connection.query(updateChamberInvitationesql, [user[0].user_email, chamberID], function (err, rows) {
             if(err)
                 console.log("err : " + err);
             else{
+                console.log('email'+user[0].user_email);
+                console.log('chamberID'+chamberID);
                 var addRelationsql = "INSERT into CHAMBER_USER(chamber_id, user_id) values(?, ?)";
                 connection.query(addRelationsql, [chamberID, user_id], function (err, rows) {
                     if(err)

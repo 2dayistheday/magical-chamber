@@ -84,11 +84,12 @@
                             for(var i=0;i<invitations.length;i++){
                             %>
                             <ul class="actions">
-                                <li><a href="#" >
-                                        <%=invitations[i].chamber_name%>
-                                    </a>
+                                <li>
                                     <form action = "/chamber/room/<%=invitations[i].chamber_id%>/allow" method = "post">
-                                        <input type="submit" value="수락하기">
+                                        <%=invitations[i].chamber_name%>
+                                        /
+                                        <%=invitations[i].chamber_des%>
+                                        <button type="submit">수락하기</button>
                                     </form>
                                 </li>
                             </ul>

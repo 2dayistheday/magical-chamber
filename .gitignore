@@ -3,3 +3,4 @@ public/javascripts/config.js
 config/
 .DS_Store
 .idea/
+cert/
