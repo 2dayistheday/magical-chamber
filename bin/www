@@ -36,7 +36,23 @@ server = server.listen(port, function () {
     console.log('Go to: https://localhost:3000')
 });
 
-require('../service/socket')(server);
+/**
+ * Signaling-Server
+ */
+require('../public/javascripts/dev/Signaling-Server.js')(server, function (socket) {
+    var params = socket.handshake.query;
+
+    if (!params.socketCustomEvent) {
+        params.socketCustomEvent = 'custom-message';
+    }
+
+    socket.on(params.socketCustomEvent, function(message) {
+        try {
+            socket.broadcast.emit(params.socketCustomEvent, message);
+        } catch (e) {}
+    });
+});
+//require('../service/socket')(server);
 server.on('error', onError);
 server.on('listening', onListening);
 
