@@ -4191,7 +4191,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
                 }
 
                 if (isRoomExists) {
-                    connection.sessionid = roomid;
+                    connection.sessionid = 'test';
 
                     var localPeerSdpConstraints = false;
                     var remotePeerSdpConstraints = false;

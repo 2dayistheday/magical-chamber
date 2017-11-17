@@ -40,14 +40,11 @@
                 <div class="3u 12u$(medium)">
                     <!-- Sidebar -->
                     <section id="sidebar">
-                        <section>
-                            <h3><%=chamber[0].chamber_name%></h3>
-                            <a href="#" class="image fit"><img src="/images/pic01.jpg" alt="프로필 사진누락" /></a>
-                            <p><%=chamber[0].chamber_des%></p>
-                            <textarea class="authToken"></textarea>
-                            <h4 id="userEmail"></h4>
-
-                        </section>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active"><a href="/chamber/room/<%=chamber[0].chamber_id%>/member">새멤버 초대</a></li>
+                            <li><a href="/chamber/rtc/<%=chamber[0].chamber_id%>"><span class="glyphicon glyphicon-facetime-video"></span> Group Live Call </a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-file"></span> Documents </a></li>
+                        </ul><br>
                         <hr />
                     </section>
                 </div>
@@ -76,15 +73,6 @@
                         <a href="#" class="list-group-item">활동로그 예시 - 2017/09/21 19:00 김민경 update document v3. "페이지 뷰 수정"</a>
                         <a href="#" class="list-group-item">활동로그 예시 - 2017/09/21 17:23 김민경, 이지윤, 임현지 그룹화상통화 ~30분간 진행"</a>
                     </div>
-                </div>
-
-                <div class="col-sm-3 sidenav" style="float: right;">
-
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="/chamber/room/<%=chamber[0].chamber_id%>/member">초대</a></li>
-                        <li><a href="/chamber/rtc/<%=chamber[0].chamber_id%>"><span class="glyphicon glyphicon-facetime-video"></span> Group Live Call </a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-file"></span> Documents </a></li>
-                    </ul><br>
                 </div>
             </div>
         </div>

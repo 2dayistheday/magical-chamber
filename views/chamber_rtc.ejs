@@ -220,7 +220,7 @@
         roomid = localStorage.getItem(connection.socketMessageEvent);
     } else {
         // roomid = connection.token();
-        roomid = '<%= chamber[0].chamber_name %>';
+        roomid = '<%=chamber[0].chamber_name%>';
     }
     // 방 코드 화면에 보여주는 부분
     document.getElementById('room-id').value = roomid;
@@ -255,14 +255,6 @@
     /* Room ID Handling Code End */
 </script>
 <!-- Client JavaScript Code End -->
-
-
-<script>
-    var socket = io.connect();
-    var ROOM = "<%=chamber[0].chamber_id%>";
-    socket.emit('ready', {"chat_room": ROOM});
-
-</script>
 
 </body>
 </html>

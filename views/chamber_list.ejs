@@ -23,8 +23,6 @@
         <nav id="nav">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/#one">What is Chamber?</a></li>
-                <li><a href="/#">About Us</a></li>
                 <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
             </ul>
         </nav>
@@ -49,24 +47,6 @@
                             <a href="/users/profile">프로필 설정</a>
                         </section>
                         <hr />
-                        <section>
-                            <h3>My News</h3>
-                            <p>내 소식?</p>
-                            <footer>
-
-                                <%
-                                for(var i=0;i<invitations.length;i++){
-                                %>
-                                <ul class="actions">
-                                    <li><a href="#" >
-                                        <%=invitations[i].chamber_name%>
-                                    </a></li>
-                                </ul>
-                                <%
-                                }
-                                %>
-                            </footer>
-                        </section>
                     </section>
                 </div>
 
@@ -77,8 +57,9 @@
                             <div class="panel panel-default">
                                 <a href="/chamber/new">
                                     <div class="panel-heading">New Chamber</div></a>
-                                <div class="panel-body">만들기</div>
+                                <div class="panel-body">새로운 체임버 만들기</div>
                             </div>
+                            <p></p>
                             <b>초대 챔버</b>
                             <%
                             for(var i=0;i<invitations.length;i++){
@@ -86,8 +67,7 @@
                             <ul class="actions">
                                 <li>
                                     <form action = "/chamber/room/<%=invitations[i].chamber_id%>/allow" method = "post">
-                                        <%=invitations[i].chamber_name%>
-                                        /
+                                        <%=invitations[i].chamber_name%> |
                                         <%=invitations[i].chamber_des%>
                                         <button type="submit">수락하기</button>
                                     </form>
@@ -96,13 +76,15 @@
                             <%
                             }
                             %>
+                            <p></p>
                             <b>현재 챔버</b>
                             <%
                                 for(var i=0;i<chambers.length;i++){
                             %>
                             <div class="panel panel-default">
-                                <a href="/chamber/room/<%=chambers[i].chamber_id%>" >
-                                    <div class="panel-heading"><%=chambers[i].chamber_name%></div></a>
+                                <a href="/chamber/room/<%=chambers[i].chamber_id%>">
+                                    <div class="panel-heading"><%=chambers[i].chamber_name%></div>
+                                </a>
                                 <div class="panel-body"><%=chambers[i].chamber_des%></div>
                             </div>
                             <%
@@ -118,12 +100,7 @@
     <!-- Footer -->
     <footer id="footer">
         <ul class="icons">
-            <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+            <li><a href="https://github.com/2dayistheday/magical-chamber" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
         </ul>
         <ul class="copyright">
             <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>

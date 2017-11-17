@@ -23,8 +23,6 @@
         <nav id="nav">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/#one">What is Chamber?</a></li>
-                <li><a href="/#">About Us</a></li>
                 <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
             </ul>
         </nav>
@@ -42,15 +40,30 @@
                     <!-- Sidebar -->
                     <section id="sidebar">
                         <section>
-                            <h3>Chamber Profile</h3>
-                            <a href="#" class="image fit"><img src="/images/pic01.jpg" alt="프로필 사진누락" /></a>
-                            <p>Chamber Des</p>
-                            <textarea class="authToken"></textarea>
-                            <h4 id="userEmail"></h4>
-
+                            <h3><%=chamber[0].chamber_name%></h3>
+                            <p><%=chamber[0].chamber_des%></p>
                         </section>
                         <hr />
-
+                        <b>현재 유저들</b>
+                        <%
+                        for(var i=0;i<users.length;i++){
+                        %>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><%=users[i].user_nickname%></div></a>
+                        </div>
+                        <%
+                        }
+                        %>
+                        <b>초대 유저</b>
+                        <%
+                        for(var i=0;i<invitations.length;i++){
+                        %>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><%=invitations[i].user_invitation%></div></a>
+                        </div>
+                        <%
+                        }
+                        %>
                     </section>
                 </div>
 
@@ -58,29 +71,17 @@
                     <!-- Content -->
                     <section id="content">
                         <div class="col-md-8">
-                            <hr />
-                            <form action="/chamber/room/<%=chamber%>/new" method="post" id="newChamberMemForm" class="container 50%">
+                            <form action="/chamber/room/<%=chamber[0].chamber_id%>/new" method="post" id="newChamberMemForm" class="container 50%">
                                 초대할 유저
                                 <div class="6u 12u$(xsmall)">
-                                    페이스북 로그인 ID or 구글 로그인 ID:
-                                    <input type="text" name="newMember" placeholder="Email or PhoneNum" required><br />
+                                    페이스북 or 구글 로그인 이메일:
+                                    <input type="text" name="newMember" placeholder="Email" id="email" required><br />
                                 </div>
                                 <div class="4u$ 12u$(xsmall)">
-                                    <input type="submit" value="초대하기">
+                                    <input type="submit" value="초대하기" onclick="checkEmail()">
                                 </div>
                             </form>
 
-                            <hr>
-                            <b>현재 유저들</b>
-                            <%
-                            for(var i=0;i<users.length;i++){
-                            %>
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><%=users[i].user_nickname%></div></a>
-                            </div>
-                            <%
-                            }
-                            %>
                         </div>
                     </section>
                 </div>
@@ -91,12 +92,7 @@
     <!-- Footer -->
     <footer id="footer">
         <ul class="icons">
-            <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+            <li><a href="https://github.com/2dayistheday/magical-chamber" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
         </ul>
         <ul class="copyright">
             <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
@@ -105,6 +101,18 @@
 </div>
 
 <!-- Scripts -->
+<script type="text/javascript">
+    function checkEmail() {
+        var email = document.getElementById("email").value;
+        var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+        if(exptext.test(email)==false){
+            //이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우
+            alert("이 메일형식이 올바르지 않습니다.");
+            document.addjoin.email.focus();
+            return false;
+        }
+    }
+</script>
 <script src="/javascripts/js/jquery.min.js"></script>
 <script src="/javascripts/js/jquery.scrolly.min.js"></script>
 <script src="/javascripts/js/jquery.dropotron.min.js"></script>

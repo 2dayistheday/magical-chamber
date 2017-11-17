@@ -23,8 +23,6 @@
         <nav id="nav">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/#one">What is Chamber?</a></li>
-                <li><a href="/#">About Us</a></li>
                 <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
             </ul>
         </nav>
@@ -34,8 +32,8 @@
     <div id="main" class="wrapper style1">
         <div class="container">
             <header class="major">
-                <h2>Chamber New</h2>
-                <p>나의 체임버를 생성</p>
+                <h2>New Chamber</h2>
+                <p>나의 체임버를 생성하기</p>
             </header>
             <div class="row 150%">
                 <div class="3u 12u$(medium)">
@@ -44,22 +42,12 @@
                         <section>
                             <h3>My Profile</h3>
                             <a href="#" class="image fit"><img src="/images/pic01.jpg" alt="프로필 사진누락" /></a>
-                            <p>안녕하세요. 저는 이런 사람입니다.</p>
-                            <textarea class="authToken"></textarea>
-                            <h4 id="userEmail"></h4>
+                            <p><%=profile[0].user_nickname%></p>
+                            <p><%=profile[0].user_des%></p>
+                            <a href="/users/profile">프로필 설정</a>
 
                         </section>
                         <hr />
-                        <section>
-                            <a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a>
-                            <h3>My News</h3>
-                            <p>내 소식?</p>
-                            <footer>
-                                <ul class="actions">
-                                    <li><a href="#" class="button">Learn More</a></li>
-                                </ul>
-                            </footer>
-                        </section>
                     </section>
                 </div>
 
@@ -89,12 +77,7 @@
     <!-- Footer -->
     <footer id="footer">
         <ul class="icons">
-            <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+            <li><a href="https://github.com/2dayistheday/magical-chamber" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
         </ul>
         <ul class="copyright">
             <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>

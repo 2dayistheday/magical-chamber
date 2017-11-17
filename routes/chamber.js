@@ -50,7 +50,13 @@ router.get('/room/:chamberID/member', function(req, res, next) {
     if(chamberID != "undefined"){
         var selectMyUserSql = "select * from USER_PROFILE where user_id IN (select user_id from CHAMBER_USER where chamber_id = ?)";
         connection.query(selectMyUserSql, chamberID, function (err, users) {
-            res.render('chamber_invitation', { title: 'Magical Chamber', users: users, chamber: chamberID});
+            var selectInvitationSql = "select * from CHAMBER_INVITATION where chamber_id = ? and allowed = FALSE";
+            connection.query(selectInvitationSql, chamberID, function (err, invitation) {
+                var selectChamberSql = "select * from CHAMBERS where chamber_id = ?";
+                connection.query(selectChamberSql, chamberID, function (err, chamber) {
+                    res.render('chamber_invitation', { title: 'Magical Chamber', users: users, chamber: chamber, invitations: invitation});
+                });
+            });
         });
     }else{
         res.redirect('/');
@@ -72,7 +78,10 @@ router.get('/rtc/:chamberID', function(req, res, next) {
 
 router.get('/new', function(req, res, next) {
     if(req.user.id != 'undefined'){
-        res.render('chamber_new', { title: 'Magical Chamber' });
+        var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?";
+        connection.query(selectMyProfileSql, req.user.id, function (err, profile) {
+            res.render('chamber_new', { title: 'Magical Chamber', profile: profile});
+        });
     }else{
         res.redirect('/');
     }
