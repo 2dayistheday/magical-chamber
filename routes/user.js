@@ -39,7 +39,7 @@ router.get('/newchamber', function (req, res, next) {
     if (req.user.id != 'undefined') {
         var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?";
         connection.query(selectMyProfileSql, req.user.id, function (err, profile) {
-            res.render('./user/createChamber', {title: 'Magical Chamber', profile: profile});
+            res.render('./user/newChamber', {title: 'Magical Chamber', profile: profile});
         });
     } else {
         res.redirect('/');

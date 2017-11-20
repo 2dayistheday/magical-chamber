@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <% include header.ejs %>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>Create Chamber
+        <small>나의 체임버를 생성하기</small>
+    </h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <form action="/user/newchamber" method="post" id="newChamberForm" >
+                <div>
+                    체임버명: <input type="text" name="chamber_name" placeholder="Chamber Name" required><br/>
+                    체임버소개: <input type="text" name="chamber_des" placeholder="Chamber Description"><br/>
+                    <input type="submit" value="만들기">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<% include ../footer.ejs %>
+</body>
+</html>

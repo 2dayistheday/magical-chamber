@@ -1,127 +1,63 @@
 <!DOCTYPE HTML>
-<!--
-	Landed by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 <head>
-    <title><%title%></title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--[if lte IE 8]><script src="/javascripts/ie/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" href="/stylesheets/main.css" />
-    <!--[if lte IE 9]><link rel="stylesheet" href="/stylesheets/ie9.css" /><![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/ie8.css" /><![endif]-->
+    <% include header.ejs %>
 </head>
-<body class="landing">
-
-<div id="page-wrapper">
-    <!-- Header -->
-    <header id="header">
-        <h1 id="logo"><a href="/">Chamber</a></h1>
-        <nav id="nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Main -->
-    <div id="main" class="wrapper style1">
-        <div class="container">
-            <header class="major">
-                <h2>Chamber Member</h2>
-                <p>체임버에 초대</p>
-            </header>
-            <div class="row 150%">
-                <div class="3u 12u$(medium)">
-                    <!-- Sidebar -->
-                    <section id="sidebar">
-                        <section>
-                            <h3><%=chamber[0].chamber_name%></h3>
-                            <p><%=chamber[0].chamber_des%></p>
-                        </section>
-                        <hr />
-                        <b>현재 유저들</b>
-                        <%
-                        for(var i=0;i<users.length;i++){
-                        %>
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><%=users[i].user_nickname%></div></a>
-                        </div>
-                        <%
-                        }
-                        %>
-                        <b>초대 유저</b>
-                        <%
-                        for(var i=0;i<invitations.length;i++){
-                        %>
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><%=invitations[i].user_invitation%></div></a>
-                        </div>
-                        <%
-                        }
-                        %>
-                    </section>
+<body>
+<div class="page-header">
+    <h1>Chamber newMember
+        <small>체임버에 초대할 사람의 이메일 입력</small>
+    </h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div id="sidebar">
+                <div>
+                    <h3><%= chamber[0].chamber_name %></h3>
+                    <p><%= chamber[0].chamber_des %></p>
                 </div>
-
-                <div class="8u$ 12u$(medium) important(medium)">
-                    <!-- Content -->
-                    <section id="content">
-                        <div class="col-md-8">
-                            <form action="/chamber/room/<%=chamber[0].chamber_id%>/new" method="post" id="newChamberMemForm" class="container 50%">
-                                초대할 유저
-                                <div class="6u 12u$(xsmall)">
-                                    페이스북 or 구글 로그인 이메일:
-                                    <input type="text" name="newMember" placeholder="Email" id="email" required><br />
-                                </div>
-                                <div class="4u$ 12u$(xsmall)">
-                                    <input type="submit" value="초대하기" onclick="checkEmail()">
-                                </div>
-                            </form>
-
-                        </div>
-                    </section>
-                </div>
+                <hr/>
+                <p><b>현재 유저들</b>
+                    <%
+                    for(var i = 0;i < users.length;i++){
+                    %>
+                    <br>
+                    <%= users[i].user_nickname %>
+                    <%
+                    }
+                    %>
+                </p>
+                <p><b>초대 유저</b>
+                    <%
+                    for(var i = 0;i < invitations.length;i++){
+                    %>
+                    <br>
+                    <%= invitations[i].user_invitation %>
+                    <%
+                    }
+                    %>
+                </p>
             </div>
         </div>
+
+        <div class="col-md-8">
+            <form action="/chamber/room/<%= chamber[0].chamber_id %>/new" method="post" id="newChamberMemForm"
+                  class="container 50%">
+                초대할 유저
+                <div class="6u 12u$(xsmall)">
+                    페이스북 or 구글 로그인 이메일:
+                    <input type="email" name="newMember" placeholder="Email" id="email" required><br/>
+                </div>
+                <div class="4u$ 12u$(xsmall)">
+                    <input type="submit" value="초대하기">
+                </div>
+            </form>
+        </div>
     </div>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <ul class="icons">
-            <li><a href="https://github.com/2dayistheday/magical-chamber" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-        </ul>
-        <ul class="copyright">
-            <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-        </ul>
-    </footer>
 </div>
-
-<!-- Scripts -->
-<script type="text/javascript">
-    function checkEmail() {
-        var email = document.getElementById("email").value;
-        var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-        if(exptext.test(email)==false){
-            //이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우
-            alert("이 메일형식이 올바르지 않습니다.");
-            document.addjoin.email.focus();
-            return false;
-        }
-    }
-</script>
-<script src="/javascripts/js/jquery.min.js"></script>
-<script src="/javascripts/js/jquery.scrolly.min.js"></script>
-<script src="/javascripts/js/jquery.dropotron.min.js"></script>
-<script src="/javascripts/js/jquery.scrollex.min.js"></script>
-<script src="/javascripts/js/skel.min.js"></script>
-<script src="/javascripts/js/util.js"></script>
-<!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
-<script src="/javascripts/js/main.js"></script>
-
+<hr>
+<% include ../footer.ejs %>
 
 </body>
 </html>
