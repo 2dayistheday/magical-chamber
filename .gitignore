@@ -1,6 +1,6 @@
-node_modules/
+node_modules
 public/javascripts/config.js
-config/
+config
 .DS_Store
-.idea/
-cert/
+.idea
+cert

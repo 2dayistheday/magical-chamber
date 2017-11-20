@@ -6,7 +6,6 @@
 
 var app = require('../app');
 var debug = require('debug')('chamber:server');
-var http = require('http');
 var https = require('https');
 var fs = require('fs');
 
