@@ -42,16 +42,14 @@
         </div>
 
         <div class="col-md-8">
-            <form action="/chamber/<%= chamber[0].chamber_id %>/new" method="post" id="newChamberMemForm"
-                  class="container 50%">
-                초대할 유저
-                <div class="6u 12u$(xsmall)">
-                    페이스북 or 구글 로그인 이메일:
-                    <input type="email" name="newMember" placeholder="Email" id="email" required><br/>
-                </div>
-                <div class="4u$ 12u$(xsmall)">
-                    <input type="submit" value="초대하기">
-                </div>
+            <form action="/chamber/<%= chamber[0].chamber_id %>/newmember" method="post" id="newChamberMemForm">
+                <p><b>초대할 유저</b></p>
+
+                페이스북 or 구글 로그인 이메일:
+                <input type="email" name="newMember" placeholder="Email" id="email" required><br/>
+
+                <input type="submit" value="초대하기">
+
             </form>
         </div>
     </div>

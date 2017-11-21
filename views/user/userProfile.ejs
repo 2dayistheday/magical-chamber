@@ -46,6 +46,10 @@
                     <!-- Content -->
                     <section id="content">
                         <div class="col-md-8">
+                            <form  action="/user/profile/imgupload" enctype="multipart/form-data"  method="post">
+                                <input  type="file" name="img_files[]" accept="image/*">
+                                <button type="submit">Submit</button>
+                            </form>
                             <hr />
                             <form action="/users/profile/update" method="post" id="updateProfileForm" class="container 50%">
                                 <div class="6u 12u$(xsmall)">

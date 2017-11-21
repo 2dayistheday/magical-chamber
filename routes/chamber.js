@@ -73,7 +73,7 @@ router.get('/:chamberID/rtc', function (req, res, next) {
     }
 });
 
-router.post('/:chamberID/newMember', function (req, res, next) {
+router.post('/:chamberID/newmember', function (req, res, next) {
     var newMember = req.body.newMember;
     var chamberID = req.params.chamberID;
 

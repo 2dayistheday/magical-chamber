@@ -100,6 +100,30 @@ router.post('/profile/update', function (req, res, next) {
     });
 });
 
+upload = require('../service/awsS3Upload'),
+    async = require('async'),
+router.post('/profile/imgupload', function (req, res, next) {
+    var tasks = [
+        function (callback) {
+            upload.formidable(req, function (err, files, field) {
+                callback(err, files);
+            })
+        },
+        function (files, callback) {
+            upload.profile(files,'user/'+req.user.id+'/profile/', function (err, result) {
+                callback(err, files);
+            });
+        }
+    ];
+    async.waterfall(tasks, function (err, result) {
+        if(err){
+           res.json({sucess: false, msg: '실패', err: err})
+        }else{
+            res.json({sucess: true, msg: '업로드 성공'})
+        }
+    });
+});
+
 router.get('/verify', function (req, res, next) {
     res.render('verify', {title: 'Magical Chamber'});
 });
