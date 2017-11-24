@@ -33,11 +33,11 @@ s3Conn.formidable = function (req, callback) {
         callback('form.on(aborted)', null);
     });
 };
-s3Conn.upload = function (files, path, callback) {
+s3Conn.upload = function (files, path) {
     params.Key = path + files[0].name;
     params.Body = require('fs').createReadStream(files[0].path);
     s3.upload(params, function (err, result) {
-        callback(err, result);
+        //callback(err, result);
     });
 };
 
@@ -51,13 +51,10 @@ s3Conn.profile = function (files, path, callback) {
 
 s3Conn.getlist = function (path, callback) {
     s3.listObjects({Bucket: key.awsBucketName}).on('success', function handlePage(response) {
-        for(var name in response.data.Contents){
-            console.log(response.data.Contents[name].Key);
-            console.log(response.data.Contents[name].LastModified);
-            console.log(response.data.Contents[name].Owner);
-            console.log(response.data.Contents[name].Size);
-            console.log(response.data.Contents[name].ETag);
-        }
+        /*for(var name in response.data.Contents){
+            //console.log(response.data.Contents[name].Key);
+        }*/
+        callback(JSON.stringify(response.data.Contents));
         if (response.hasNextPage()) {
             response.nextPage().on('success', handlePage).send();
         }

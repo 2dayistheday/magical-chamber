@@ -36,30 +36,23 @@
                 <thead>
                 <tr>
                     <th>이름</th>
-                    <th>올린이</th>
                     <th>날짜</th>
                     <th>파일크기</th>
                 </tr>
                 </thead>
                 <tbody>
+                <%
+                    console.log('----:'+filelist.length);
+                for(var i = 0;i < filelist.length;i++){
+                %>
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
+                    <td><%= filelist[i].Key %> </td>
+                    <td><%= filelist[i].LastModified %></td>
+                    <td><%= filelist[i].Size %></td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
+                <%
+                }
+                %>
                 </tbody>
             </table>
         </div>

@@ -100,17 +100,17 @@ router.post('/profile/update', function (req, res, next) {
     });
 });
 
-upload = require('../service/awsS3'),
+awsS3Conn = require('../service/awsS3'),
     async = require('async'),
 router.post('/profile/imgupload', function (req, res, next) {
     var tasks = [
         function (callback) {
-            upload.formidable(req, function (err, files, field) {
+            awsS3Conn.formidable(req, function (err, files, field) {
                 callback(err, files);
             });
         },
         function (files, callback) {
-            upload.profile(files,'user/'+req.user.id+'/profile/', function (err, result) {
+            awsS3Conn.profile(files,'user/'+req.user.id+'/profile/', function (err, result) {
                 callback(err, files);
             });
         }

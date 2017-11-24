@@ -119,36 +119,37 @@ router.post('/:chamberID/allow', function (req, res, next) {
     });
 });
 
-list = require('../service/awsS3'),
+awsS3Conn = require('../service/awsS3'),
     async = require('async'),
     router.get('/:chamberID/documents', function (req, res, next) {
-    var chamberID = req.params.chamberID;
-    var user_id = req.user.id;
+        var chamberID = req.params.chamberID;
+        var user_id = req.user.id;
 
-        list.getlist('/', function (err, result) {
-            console.log('result : '+result);
-        });
+        if (chamberID != 'undefined' && user_id != 'undefined') {
+            var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
+            var selectChamberSql = "select * from CHAMBERS where chamber_id = ?;";
+            var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
 
-    if (chamberID != 'undefined' && user_id != 'undefined') {
-        var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
-        var selectChamberSql = "select * from CHAMBERS where chamber_id = ?;";
-        var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
+            connection.query(selectMyUserSql + selectChamberSql + selectMyProfileSql, [chamberID, chamberID, user_id], function (err, results) {
+                if (err) {
+                    console.log('err : ' + err);
+                } else {
+                    awsS3Conn.getlist('/', function (filelist) {
+                        filelist = JSON.parse(filelist);
 
-        connection.query(selectMyUserSql + selectChamberSql + selectMyProfileSql, [chamberID, chamberID, user_id], function (err, results) {
-            if (err) {
-                console.log('err : ' + err);
-            } else {
-                res.render('./chamber/documents', {
-                    title: 'Magical Chamber',
-                    users: results[0],
-                    chamber: results[1],
-                    profile: results[2]
-                });
-            }
-        });
-    } else {
-        res.redirect('/');
-    }
-});
+                        res.render('./chamber/documents', {
+                            title: 'Magical Chamber',
+                            users: results[0],
+                            chamber: results[1],
+                            profile: results[2],
+                            filelist: filelist
+                        });
+                    });
+                }
+            });
+        } else {
+            res.redirect('/');
+        }
+    });
 
 module.exports = router;
