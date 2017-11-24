@@ -1,100 +1,46 @@
 <!DOCTYPE HTML>
-<!--
-	Landed by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 <head>
-    <title><%title%></title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--[if lte IE 8]><script src="/javascripts/ie/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" href="/stylesheets/main.css" />
-    <!--[if lte IE 9]><link rel="stylesheet" href="/stylesheets/ie9.css" /><![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/ie8.css" /><![endif]-->
+    <% include header.ejs %>
 </head>
-<body class="landing">
-
-<div id="page-wrapper">
-    <!-- Header -->
-    <header id="header">
-        <h1 id="logo"><a href="/">Chamber</a></h1>
-        <nav id="nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/#one">What is Chamber?</a></li>
-                <li><a href="/#">About Us</a></li>
-                <li><button id="signoutBtn" class="button" onclick="location.href='/api/logout'">Sign Out</button></li>
-            </ul>
-        </nav>
+<body>
+<div class="container">
+    <header class="major">
+        <h2>My Profile</h2>
+        <p>프로필 수정</p>
     </header>
+    <div class="row 150%">
+        <div class="3u 12u$(medium)">
 
-    <!-- Main -->
-    <div id="main" class="wrapper style1">
-        <div class="container">
-            <header class="major">
-                <h2>My Profile</h2>
-                <p>프로필 수정</p>
-            </header>
-            <div class="row 150%">
-                <div class="3u 12u$(medium)">
+        </div>
 
-                </div>
-
-                <div class="8u$ 12u$(medium) important(medium)">
-                    <!-- Content -->
-                    <section id="content">
-                        <div class="col-md-8">
-                            <form  action="/user/profile/imgupload" enctype="multipart/form-data"  method="post">
-                                <input  type="file" name="img_files[]" accept="image/*">
-                                <button type="submit">Submit</button>
-                            </form>
-                            <hr />
-                            <form action="/users/profile/update" method="post" id="updateProfileForm" class="container 50%">
-                                <div class="6u 12u$(xsmall)">
-                                    닉네임: <input type="text" name="user_nickname" placeholder="<%=profile[0].user_nickname%>" required><br />
-                                </div>
-                                <div class="6u 12u$(xsmall)">
-                                    자기소개: <input type="text" name="user_des" placeholder="<%=profile[0].user_des%>"><br />
-                                </div>
-                                <div class="4u$ 12u$(xsmall)">
-                                    <input type="submit" value="닉네임 수정">
-                                </div>
-                            </form>
+        <div class="8u$ 12u$(medium) important(medium)">
+            <!-- Content -->
+            <section id="content">
+                <div class="col-md-8">
+                    <form action="/user/profile/imgupload" enctype="multipart/form-data" method="post">
+                        <input type="file" name="img_files[]" accept="image/*">
+                        <button type="submit">Submit</button>
+                    </form>
+                    <hr/>
+                    <form action="/user/profile/update" method="post" id="updateProfileForm" class="container 50%">
+                        <div class="6u 12u$(xsmall)">
+                            닉네임: <input type="text" name="user_nickname" placeholder="<%= profile[0].user_nickname %>"
+                                        required><br/>
                         </div>
-                    </section>
+                        <div class="6u 12u$(xsmall)">
+                            자기소개: <input type="text" name="user_des" placeholder="<%= profile[0].user_des %>"><br/>
+                        </div>
+                        <div class="4u$ 12u$(xsmall)">
+                            <input type="submit" value="닉네임 수정">
+                        </div>
+                    </form>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <ul class="icons">
-            <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
-        </ul>
-        <ul class="copyright">
-            <li>&copy; Redpoint. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-        </ul>
-    </footer>
 </div>
-
-<!-- Scripts -->
-<script src="/javascripts/js/jquery.min.js"></script>
-<script src="/javascripts/js/jquery.scrolly.min.js"></script>
-<script src="/javascripts/js/jquery.dropotron.min.js"></script>
-<script src="/javascripts/js/jquery.scrollex.min.js"></script>
-<script src="/javascripts/js/skel.min.js"></script>
-<script src="/javascripts/js/util.js"></script>
-<!--[if lte IE 8]><script src="/javascripts/js/ie/respond.min.js"></script><![endif]-->
-<script src="/javascripts/js/main.js"></script>
-
-
+<% include ../footer.ejs %>
 </body>
 </html>

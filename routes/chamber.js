@@ -4,9 +4,6 @@ var mysql_dbc = require('../service/db_con')();
 var connection = mysql_dbc.init();
 mysql_dbc.test_open(connection);
 
-var user_id;
-var sub;
-
 /* GET chamber listing. */
 
 router.get('/:chamberID/', function (req, res, next) {
@@ -76,9 +73,7 @@ router.get('/:chamberID/rtc', function (req, res, next) {
 router.post('/:chamberID/newmember', function (req, res, next) {
     var newMember = req.body.newMember;
     var chamberID = req.params.chamberID;
-
     var user_id = req.user.id;
-    // Use the connection
 
     var selectChamberSql = "select * from CHAMBER_INVITATION where chamber_id = ? and user_invitation = ?";
     connection.query(selectChamberSql, [chamberID, newMember], function (err, chambers) {
@@ -122,6 +117,38 @@ router.post('/:chamberID/allow', function (req, res, next) {
             }
         });
     });
+});
+
+list = require('../service/awsS3'),
+    async = require('async'),
+    router.get('/:chamberID/documents', function (req, res, next) {
+    var chamberID = req.params.chamberID;
+    var user_id = req.user.id;
+
+        list.getlist('/', function (err, result) {
+            console.log('result : '+result);
+        });
+
+    if (chamberID != 'undefined' && user_id != 'undefined') {
+        var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
+        var selectChamberSql = "select * from CHAMBERS where chamber_id = ?;";
+        var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
+
+        connection.query(selectMyUserSql + selectChamberSql + selectMyProfileSql, [chamberID, chamberID, user_id], function (err, results) {
+            if (err) {
+                console.log('err : ' + err);
+            } else {
+                res.render('./chamber/documents', {
+                    title: 'Magical Chamber',
+                    users: results[0],
+                    chamber: results[1],
+                    profile: results[2]
+                });
+            }
+        });
+    } else {
+        res.redirect('/');
+    }
 });
 
 module.exports = router;

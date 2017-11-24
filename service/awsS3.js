@@ -2,7 +2,7 @@ var formidable = require('formidable');
 var AWS = require('aws-sdk');
 var key = require('../config/keys.js');
 
-var Upload = {};
+var s3Conn = {};
 AWS.config.region = 'ap-northeast-2';
 
 var s3 = new AWS.S3();
@@ -19,7 +19,7 @@ var params = {
     Body: null
 };
 
-Upload.formidable = function (req, callback) {
+s3Conn.formidable = function (req, callback) {
     form.parse(req, function (err, fields, files) {
     });
 
@@ -33,7 +33,7 @@ Upload.formidable = function (req, callback) {
         callback('form.on(aborted)', null);
     });
 };
-Upload.s3 = function (files, path, callback) {
+s3Conn.upload = function (files, path, callback) {
     params.Key = path + files[0].name;
     params.Body = require('fs').createReadStream(files[0].path);
     s3.upload(params, function (err, result) {
@@ -41,7 +41,7 @@ Upload.s3 = function (files, path, callback) {
     });
 };
 
-Upload.profile = function (files, path, callback) {
+s3Conn.profile = function (files, path, callback) {
     params.Key = path + 'pic';
     params.Body = require('fs').createReadStream(files[0].path);
     s3.upload(params, function (err, result) {
@@ -49,4 +49,19 @@ Upload.profile = function (files, path, callback) {
     });
 };
 
-module.exports = Upload;
+s3Conn.getlist = function (path, callback) {
+    s3.listObjects({Bucket: key.awsBucketName}).on('success', function handlePage(response) {
+        for(var name in response.data.Contents){
+            console.log(response.data.Contents[name].Key);
+            console.log(response.data.Contents[name].LastModified);
+            console.log(response.data.Contents[name].Owner);
+            console.log(response.data.Contents[name].Size);
+            console.log(response.data.Contents[name].ETag);
+        }
+        if (response.hasNextPage()) {
+            response.nextPage().on('success', handlePage).send();
+        }
+    }).send();
+};
+
+module.exports = s3Conn;

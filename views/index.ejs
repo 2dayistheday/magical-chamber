@@ -6,42 +6,40 @@
 <body>
 
 <!-- Banner -->
-<div class="jumbotron" id="#">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <img src="/images/pic01.jpg">
+<div class="main-container" id="#">
+    <section class="imageblock switchable height-100">
+        <div class="imageblock__content col-md-6 col-sm-4 pos-right">
+            <div class="background-image-holder">
+                <img alt="image" src="images/inner-7.jpg"/>
             </div>
-            <div class="col-lg-6">
-                <h2>회원가입</h2>
-                <br/>
-                <div>
-                    <button class="btn btn-lg btn-danger" onclick="location.href='/auth/google'">Google 회원가입</button>
-                    <button class="btn btn-lg btn-primary" onclick="location.href='/auth/facebook'">Facebook 회원가입</button>
+        </div>
+        <div class="container pos-vertical-center">
+            <div class="row">
+                <div class="col-md-5 col-sm-7">
+                    <h1>Magical Chamber</h1>
+                    <p class="lead">
+                        <b>회원가입</b>
+                        <br />
+                        <a class="btn btn--primary type--uppercase" href='/auth/google'>
+                            <span class="btn__text">
+                                Google 회원가입
+                            </span>
+                        </a>
+                        <br />
+                        <br />
+                        <a class="btn btn--primary type--uppercase" href='/auth/facebook'>
+                            <span class="btn__text">
+                                Facebook 회원가입
+                            </span>
+                        </a>
+                    </p>
                 </div>
             </div>
+            <!--end of row-->
         </div>
-    </div>
-    <div class="container">
-        <h3>Magical Chamber</h3>
-        <div class="row">
-            <div class="col-md-4">
-                <h4>One</h4>
-                <p>asdf</p>
-            </div>
-            <div class="col-md-4">
-                <h4>Two</h4>
-                <p>asdf</p>
-            </div>
-            <div class="col-md-4">
-                <h4>Three</h4>
-                <p>asdf</p>
-            </div>
-        </div>
-    </div>
-    <a href="#one">Next</a>
+        <!--end of container-->
+    </section>
 </div>
-<hr>
 
 <div class="container" id="one">
     <h1>What is Chamber?</h1>
@@ -90,22 +88,21 @@
     <h3>Team Redpoint | SW Maestro 8th</h3>
     <div class="row">
         <div class="col-md-4">
-            <img src="/images/pic01.jpg">
+            <img src="/images/avatar-large-3.png">
             <h2>김민경</h2>
             <p>자세한 설명</p>
         </div>
         <div class="col-md-4">
-            <img src="/images/pic01.jpg">
+            <img src="/images/avatar-large-3.png">
             <h2>이지윤</h2>
             <p>자세한 설명</p>
         </div>
         <div class="col-md-4">
-            <img src="/images/pic01.jpg">
+            <img src="/images/avatar-large-3.png">
             <h2>임현지</h2>
             <p>자세한 설명</p>
         </div>
     </div>
-    <a href="#">위로</a>
 </div>
 <hr>
 

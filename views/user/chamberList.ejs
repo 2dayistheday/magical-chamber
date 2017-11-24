@@ -5,16 +5,22 @@
 </head>
 
 <body>
+<div class="page-header">
+    <h1>Chamber List
+        <small>나의 체임버 목록</small>
+    </h1>
+</div>
 <div class="container">
-    <b>초대 챔버</b>
+
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-md-3">
+            <b>초대 챔버</b>
             <%
             for(var i = 0;i < invitations.length;i++){
             %>
-            <div class="panel panel-default">
-                <div class="panel-heading"><%= invitations[i].chamber_name %> </div>
-                <div class="panel-body"><%= invitations[i].chamber_des %>
+            <div class="">
+                <div class=""><%= invitations[i].chamber_name %> </div>
+                <div class=""><%= invitations[i].chamber_des %>
                     <form action="/chamber/<%= invitations[i].chamber_id %>/allow" method="post">
                         <button type="submit">수락하기</button>
                     </form>
@@ -24,28 +30,47 @@
             }
             %>
         </div>
-    </div>
-    <b>현재 챔버</b>
-    <div class="row">
-        <div class="col-sm-3">
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><a href="/user/newchamber">New Chamber</a></div>
-                <div class="panel-body">새로운 체임버 만들기</div>
+        <div class="col-md-3 col-sm-6">
+            <b>현재 챔버</b>
+            <!--
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><a href="/user/newchamber">New Chamber</a></div>
+                            <div class="panel-body">새로운 체임버 만들기</div>
+                        </div>
+                        -->
+            <div class="boxed boxed--border">
+                <h5>새로운 체임버 만들기</h5>
+                <p>
+                    Build a Chamber
+                </p>
+                <a class="btn btn--primary" href="newchamber">
+                    <span class="btn__text">
+                        Build Now
+                    </span>
+                </a>
             </div>
+
             <%
             for(var i = 0;i < chambers.length;i++){
             %>
-            <div class="panel panel-default">
-                <div class="panel-heading"><a
-                            href="/chamber/<%= chambers[i].chamber_id %>"><%= chambers[i].chamber_name %></a></div>
-                <div class="panel-body"><%= chambers[i].chamber_des %></div>
+            <div class="boxed boxed--border">
+                <h5><%= chambers[i].chamber_name %></h5>
+                <p>
+                    <%= chambers[i].chamber_des %>
+                </p>
+                <a class="btn btn--primary" href="/chamber/<%= chambers[i].chamber_id %>/">
+                    <span class="btn__text">
+                        입장
+                    </span>
+                </a>
             </div>
             <%
             }
             %>
         </div>
     </div>
+
+
 </div>
 
 <% include ../footer.ejs %>
