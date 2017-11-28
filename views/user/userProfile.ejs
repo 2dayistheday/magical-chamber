@@ -1,46 +1,237 @@
 <!DOCTYPE HTML>
-
-<html>
+<html lang="kr">
 <head>
     <% include ../header.ejs %>
 </head>
-<body>
-<div class="container">
-    <header class="major">
-        <h2>My Profile</h2>
-        <p>프로필 수정</p>
-    </header>
-    <div class="row 150%">
-        <div class="3u 12u$(medium)">
 
-        </div>
+<body class=" " data-smooth-scroll-offset='180'>
+    <a id="start"></a>
 
-        <div class="8u$ 12u$(medium) important(medium)">
-            <!-- Content -->
-            <section id="content">
-                <div class="col-md-8">
-                    <form action="/user/profile/imgupload" enctype="multipart/form-data" method="post">
-                        <input type="file" name="img_files[]" accept="image/*">
-                        <button type="submit">Submit</button>
-                    </form>
-                    <hr/>
-                    <form action="/user/profile/update" method="post" id="updateProfileForm" class="container 50%">
-                        <div class="6u 12u$(xsmall)">
-                            닉네임: <input type="text" name="user_nickname" placeholder="<%= profile[0].user_nickname %>"
-                                        required><br/>
-                        </div>
-                        <div class="6u 12u$(xsmall)">
-                            자기소개: <input type="text" name="user_des" placeholder="<%= profile[0].user_des %>"><br/>
-                        </div>
-                        <div class="4u$ 12u$(xsmall)">
-                            <input type="submit" value="닉네임 수정">
-                        </div>
-                    </form>
+    <% if (profile != undefined) { %>
+    <!-- Navigation Bar Start -->
+    <div class="nav-container ">
+
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="/">
+                            <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                            <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                        </a>
+                    </div>
+                    <div class="col-xs-9 col-sm-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                            <i class="icon icon--sm stack-interface stack-menu"></i>
+                        </a>
+                    </div>
                 </div>
-            </section>
+            </div>
         </div>
+
+        <nav id="menu1" class="bar bar-2 hidden-xs bar--absolute" data-scroll-class='90vh:pos-fixed'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1 col-sm-2 hidden-xs">
+                        <div class="bar__module">
+                            <a href="/">
+                                <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                                <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-11 col-sm-12 text-right text-left-xs text-left-sm">
+                        <div class="bar__module">
+                            <a class="btn btn--sm type--uppercase" href="/user/chamberList">
+                                    <span class="btn__text">
+                                        Go back to list
+                                    </span>
+                            </a>
+                            <a class="btn btn--sm btn--primary type--uppercase" href="/api/logout">
+                                    <span class="btn__text">
+                                        Sign Out
+                                    </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
     </div>
-</div>
-<% include ../footer.ejs %>
+    <!-- Navigation Bar End -->
+    <% } else { %> window.location.href = '/'; <% } %>
+
+    <!-- Main Page Start -->
+    <div class="main-container">
+        <section class="bg--secondary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="boxed boxed--lg boxed--border">
+                            <div class="text-block text-center">
+                                <img alt="avatar" src="/img/profile.jpg" class="image" />
+                                <span class="h5"><%= profile[0].user_nickname %></span>
+                                <span><%= profile[0].user_des %></span>
+                                <span class="label">Premium</span>
+                            </div>
+                            <hr>
+                            <div class="text-block">
+                                <ul class="menu-vertical">
+                                    <li>
+                                        <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-profile;hidden">Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-notifications;hidden">Email Notifications</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-billing;hidden">Billing Details</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-password;hidden">Password</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-delete;hidden">Delete Account</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="boxed boxed--lg boxed--border">
+                            <div id="account-profile" class="account-tab">
+                                <h4>Profile</h4>
+                                <form action="/user/profile/update" method="post" id="updateProfileForm">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label>Nickname:</label>
+                                            <input type="text" name="user_nickname" value="<%= profile[0].user_nickname %>" required>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label>Self Introduction:</label>
+                                            <textarea rows="4" name="user_des" placeholder="<%= profile[0].user_des %>" required></textarea>
+                                        </div>
+                                        <div class="col-md-3 col-sm-4">
+                                            <input type="submit" class="btn btn--primary type--uppercase" value="Save">
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <br>
+                                <hr />
+
+                                <h4>Profile Image</h4>
+                                <form action="/user/profile/imgupload" enctype="multipart/form-data" method="post">
+                                    <input type="file" name="img_files[]" accept="image/*">
+                                    <button type="submit">Submit</button>
+                                </form>
+                            </div>
+                            <div id="account-notifications" class="hidden account-tab">
+                                <h4>Email Notifications</h4>
+                                <p>Select the frequency with which you'd like to recieve product summary emails:</p>
+                                <form>
+                                    <div class="row">
+                                        <div class="boxed bg--secondary boxed--border">
+                                            <div class="col-xs-4 text-center">
+                                                <div class="input-radio">
+                                                    <span>Never</span>
+                                                    <input type="radio" name="frequency" value="never" class="validate-required" />
+                                                    <label></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <div class="input-radio checked">
+                                                    <span>Weekly</span>
+                                                    <input type="radio" name="frequency" value="weekly" class="validate-required" />
+                                                    <label></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <div class="input-radio">
+                                                    <span>Monthly</span>
+                                                    <input type="radio" name="frequency" value="monthly" class="validate-required" />
+                                                    <label></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5">
+                                            <button type="submit" class="btn btn--primary type--uppercase">Save Preferences</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="account-billing" class="hidden account-tab">
+                                <h4>Billing Details</h4>
+                                <div class="boxed boxed--border bg--secondary">
+                                    <h5>Payment Methods</h5>
+                                    <hr>
+                                    <form>
+                                        <div class="row">
+                                            <ul>
+                                                <li>
+                                                    <div class="col-sm-6">
+                                                        <p>
+                                                            <i class="material-icons">credit_card</i>
+                                                            <span> Mastercard ending in
+                                                                        <strong>4722</strong>
+                                                                    </span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-sm-3 text-right text-left-xs">
+                                                        <button type="submit" class="btn bg--error">Remove</button>
+                                                    </div>
+                                                    <div class="col-sm-3 text-right text-left-xs">
+                                                        <button type="submit" class="btn">Edit</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <hr>
+                                        <button type="submit" class="btn">Add New Method</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div id="account-password" class="hidden account-tab">
+                                <h4>Password</h4>
+                                <p>Passwords must be at least 6 characters in length.</p>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <label>Old Password:</label>
+                                            <input type="password" name="old-password" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>New Password:</label>
+                                            <input type="password" name="new-password" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Retype New Password:</label>
+                                            <input type="password" name="new-password-confirm" />
+                                        </div>
+                                        <div class="col-md-3 col-sm-4">
+                                            <button type="submit" class="btn btn--primary type--uppercase">Save Password</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="account-delete" class="hidden account-tab">
+                                <h4>Delete Account</h4>
+                                <p>Permanently remove your account using the button below. Warning, this action is permanent.</p>
+                                <form>
+                                    <button type="submit" class="btn bg--error type--uppercase">Delete Account</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <% include ../footer.ejs %>
+
+    </div>
+    <!-- Main Page End -->
+
 </body>
+
 </html>

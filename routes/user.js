@@ -96,7 +96,7 @@ router.post('/profile/update', function (req, res, next) {
         if (err)
             console.log("err : " + err);
         else
-            res.redirect('/chamber/list');
+            res.redirect('/user/chamberList');
     });
 });
 
