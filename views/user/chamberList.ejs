@@ -10,14 +10,44 @@
         <small>나의 체임버 목록</small>
     </h1>
 </div>
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
         <div class="col-md-3">
-            <b>초대 챔버</b>
-            <%
-            for(var i = 0;i < invitations.length;i++){
-            %>
+            <p>
+                <a href="#" class="thumbnail" style="width: 200px; height: 200px;">
+                    <img src="/images/pic01.jpg" alt="...">
+                </a>
+                <%= profile[0].user_nickname %>
+                <a class="btn--transparent" href="profile">edit</a>
+                <%= profile[0].user_des %>
+            </p>
+            <p>
+
+            <ul>
+                <a href="#" class="">
+                    <li>
+                        내가 만든 Chamber
+                    </li>
+                </a>
+                <a href="#" class="">
+                    <li>
+                        내가 속한 Chamber
+                    </li>
+                </a>
+                <a href="#" class="">
+                    <li>
+                        초대온 Chamber
+                    </li>
+                </a>
+            </ul>
+
+            </p>
+            <p>
+                <b>초대장</b>
+                <%
+                for(var i = 0;i < invitations.length;i++){
+                %>
             <div class="">
                 <div class=""><%= invitations[i].chamber_name %> </div>
                 <div class=""><%= invitations[i].chamber_des %>
@@ -29,44 +59,55 @@
             <%
             }
             %>
+            </p>
         </div>
-        <div class="col-md-3 col-sm-6">
-            <b>현재 챔버</b>
-            <!--
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><a href="/user/newchamber">New Chamber</a></div>
-                            <div class="panel-body">새로운 체임버 만들기</div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="masonry__container">
+                    <div class="masonry__item col-sm-4" data-masonry-filter="New">
+                        <!--filter로 구분 카테고리 구분(만든쳄버 / 속한 쳄버 / 초대 쳄버-->
+                        <div class="product product--tile bg--secondary text-center">
+                            <a class="block" href="#">
+                                <div>
+                                    <h5>새로운 체임버 만들기</h5>
+                                    <span>Build a Chamber</span>
+                                </div>
+                                <div>
+                                    <a class="btn btn--primary" href="newchamber">
+                                        <span class="btn__text">
+                                            Build Now
+                                        </span>
+                                    </a>
+                                </div>
+                            </a>
                         </div>
-                        -->
-            <div class="boxed boxed--border">
-                <h5>새로운 체임버 만들기</h5>
-                <p>
-                    Build a Chamber
-                </p>
-                <a class="btn btn--primary" href="newchamber">
-                    <span class="btn__text">
-                        Build Now
-                    </span>
-                </a>
+                    </div>
+                    <%
+                    for(var i = 0;i < chambers.length;i++){
+                    %>
+                    <div class="masonry__item col-sm-4" data-masonry-filter="New">
+                        <!--filter로 구분 카테고리 구분(만든쳄버 / 속한 쳄버 / 초대 쳄버-->
+                        <div class="product product--tile bg--secondary text-center">
+                            <a class="block" href="#">
+                                <div>
+                                    <h5><%= chambers[i].chamber_name %></h5>
+                                    <span><%= chambers[i].chamber_des %></span>
+                                </div>
+                                <div>
+                                    <a class="btn btn--primary" href="/chamber/<%= chambers[i].chamber_id %>/">
+                                        <span class="btn__text">
+                                            입장
+                                        </span>
+                                    </a>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <%
+                    }
+                    %>
+                </div>
             </div>
-
-            <%
-            for(var i = 0;i < chambers.length;i++){
-            %>
-            <div class="boxed boxed--border">
-                <h5><%= chambers[i].chamber_name %></h5>
-                <p>
-                    <%= chambers[i].chamber_des %>
-                </p>
-                <a class="btn btn--primary" href="/chamber/<%= chambers[i].chamber_id %>/">
-                    <span class="btn__text">
-                        입장
-                    </span>
-                </a>
-            </div>
-            <%
-            }
-            %>
         </div>
     </div>
 
