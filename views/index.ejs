@@ -89,11 +89,19 @@
                                             Free Trial
                                         </span>
                             </a>
-                            <a class="btn btn--sm btn--primary type--uppercase inner-link" href="#start" data-scroll-class="100vh:active">
-                                        <span class="btn__text">
-                                            Sign In
-                                        </span>
+                            <% if (profile != undefined) { %>
+                            <a class="btn btn--sm btn--primary type--uppercase inner-link" href="/user/chamberlist" data-scroll-class="100vh:active">
+                                <span class="btn__text">
+                                    Let's Go!
+                                </span>
                             </a>
+                            <% } else { %>
+                            <a class="btn btn--sm btn--primary type--uppercase inner-link" href="#start" data-scroll-class="100vh:active">
+                                <span class="btn__text">
+                                    Sign In
+                                </span>
+                            </a>
+                            <% } %>
                         </div>
                     </div>
                 </div>

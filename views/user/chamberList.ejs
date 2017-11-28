@@ -1,119 +1,190 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <% include header.ejs %>
+    <% include ../header.ejs %>
 </head>
 
-<body>
-<div class="page-header">
-    <h1>Chamber List
-        <small>나의 체임버 목록</small>
-    </h1>
-</div>
-<div class="container-fluid">
+<body class=" " data-smooth-scroll-offset='180'>
+    <a id="start"></a>
 
-    <div class="row">
-        <div class="col-md-3">
-            <p>
-                <a href="#" class="thumbnail" style="width: 200px; height: 200px;">
-                    <img src="/images/pic01.jpg" alt="...">
-                </a>
-                <%= profile[0].user_nickname %>
-                <a class="btn--transparent" href="profile">edit</a>
-                <%= profile[0].user_des %>
-            </p>
-            <p>
+    <% if (profile != undefined) { %>
+    <!-- Navigation Bar Start -->
+    <div class="nav-container ">
 
-            <ul>
-                <a href="#" class="">
-                    <li>
-                        내가 만든 Chamber
-                    </li>
-                </a>
-                <a href="#" class="">
-                    <li>
-                        내가 속한 Chamber
-                    </li>
-                </a>
-                <a href="#" class="">
-                    <li>
-                        초대온 Chamber
-                    </li>
-                </a>
-            </ul>
-
-            </p>
-            <p>
-                <b>초대장</b>
-                <%
-                for(var i = 0;i < invitations.length;i++){
-                %>
-            <div class="">
-                <div class=""><%= invitations[i].chamber_name %> </div>
-                <div class=""><%= invitations[i].chamber_des %>
-                    <form action="/chamber/<%= invitations[i].chamber_id %>/allow" method="post">
-                        <button type="submit">수락하기</button>
-                    </form>
-                </div>
-            </div>
-            <%
-            }
-            %>
-            </p>
-        </div>
-        <div class="col-md-9">
-            <div class="row">
-                <div class="masonry__container">
-                    <div class="masonry__item col-sm-4" data-masonry-filter="New">
-                        <!--filter로 구분 카테고리 구분(만든쳄버 / 속한 쳄버 / 초대 쳄버-->
-                        <div class="product product--tile bg--secondary text-center">
-                            <a class="block" href="#">
-                                <div>
-                                    <h5>새로운 체임버 만들기</h5>
-                                    <span>Build a Chamber</span>
-                                </div>
-                                <div>
-                                    <a class="btn btn--primary" href="newchamber">
-                                        <span class="btn__text">
-                                            Build Now
-                                        </span>
-                                    </a>
-                                </div>
-                            </a>
-                        </div>
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="/">
+                            <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                            <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                        </a>
                     </div>
-                    <%
-                    for(var i = 0;i < chambers.length;i++){
-                    %>
-                    <div class="masonry__item col-sm-4" data-masonry-filter="New">
-                        <!--filter로 구분 카테고리 구분(만든쳄버 / 속한 쳄버 / 초대 쳄버-->
-                        <div class="product product--tile bg--secondary text-center">
-                            <a class="block" href="#">
-                                <div>
-                                    <h5><%= chambers[i].chamber_name %></h5>
-                                    <span><%= chambers[i].chamber_des %></span>
-                                </div>
-                                <div>
-                                    <a class="btn btn--primary" href="/chamber/<%= chambers[i].chamber_id %>/">
-                                        <span class="btn__text">
-                                            입장
-                                        </span>
-                                    </a>
-                                </div>
-                            </a>
-                        </div>
+                    <div class="col-xs-9 col-sm-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                            <i class="icon icon--sm stack-interface stack-menu"></i>
+                        </a>
                     </div>
-                    <%
-                    }
-                    %>
                 </div>
             </div>
         </div>
+
+        <nav id="menu1" class="bar bar-2 hidden-xs bar--absolute" data-scroll-class='90vh:pos-fixed'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1 col-sm-2 hidden-xs">
+                        <div class="bar__module">
+                            <a href="/">
+                                <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                                <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-11 col-sm-12 text-right text-left-xs text-left-sm">
+                        <div class="bar__module">
+                            <ul class="menu-horizontal text-left">
+                                <li class="dropdown">
+                                    <span><a href="#" style="all:unset">Menu1</a></span>
+                                </li>
+                                <li class="dropdown">
+                                    <span><a href="#" style="all:unset">Menu2</a></span>
+                                </li>
+                                <li class="dropdown">
+                                    <span><a href="#" style="all:unset">Menu3</a></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bar__module">
+                            <a class="btn btn--sm type--uppercase" href="/user//profile">
+                                        <span class="btn__text">
+                                            Edit Profile
+                                        </span>
+                            </a>
+                            <a class="btn btn--sm btn--primary type--uppercase" href="/api/logout">
+                                        <span class="btn__text">
+                                            Sign Out
+                                        </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
     </div>
+    <!-- Navigation Bar End -->
+    <% } else { %> window.location.href = '/'; <% } %>
 
+    <!-- Main Page Start -->
+    <div class="main-container">
+        <!-- Heading Start -->
+        <section class="text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10 col-md-8">
+                        <br>
+                        <h2>Hello, <%= profile[0].user_nickname %>!<br>Here's your Chamber List.</h2>
+                        <p class="lead">
+                            Got what it takes to work with us? Great! Send us a link to your resumé or portfolio to become part of our talent pool.
+                        </p>
+                        <a class="btn btn--primary type--uppercase" href="newchamber">
+                            <span class="btn__text">
+                                Create New Chamber
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Heading End -->
 
-</div>
+        <!-- Chamber List Start-->
+        <section class="bg--secondary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="heading-block">
+                            <h3>Current Openings</h3>
+                        </div>
+                    </div>
+                    <% for (var i = 0; i < chambers.length; i++) { %>
+                    <div class="col-sm-4">
+                        <div class="feature feature-1 boxed boxed--border">
+                            <span class="label">Owner</span>
+                            <h5><%= chambers[i].chamber_name %></h5>
+                            <p><%= chambers[i].chamber_des %></p>
+                            <a href="/chamber/<%= chambers[i].chamber_id %>/">Go into this Chamber!</a>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+        <!-- Chamber List End -->
 
-<% include ../footer.ejs %>
+        <!-- Making Chamber Instruction Start -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="heading-block">
+                            <h3>Instructions</h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-5">
+                        <ul class="accordion accordion-2 accordion--oneopen">
+                            <li class="active">
+                                <div class="accordion__title">
+                                    <span class="h5">First. 블라블라</span>
+                                </div>
+                                <div class="accordion__content">
+                                    <p class="lead">
+                                        Stack follows the BEM naming convention that focusses on logical code readability that is reflected in both the HTML and CSS. Interactive elements such as accordions and tabs follow the same markup patterns making rapid development easier for developers and beginners alike.
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="accordion__title">
+                                    <span class="h5">Second. 블라블라</span>
+                                </div>
+                                <div class="accordion__content">
+                                    <p class="lead">
+                                        Stack offers a clean and contemporary to suit a range of purposes from corporate, tech startup, marketing site to digital storefront. Elements have been designed to showcase content in a diverse yet consistent manner.
+                                    </p>
+                                    <p class="lead">
+                                        Multiple font and colour scheme options mean that dramatically altering the look of your site is just clicks away &mdash; Customizing your site in the included Variant Page Builder makes experimenting with styles and content arrangements dead simple.
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="accordion__title">
+                                    <span class="h5">Third. 블라블라</span>
+                                </div>
+                                <div class="accordion__content">
+                                    <p class="lead">
+                                        Medium Rare is an elite author known for offering high-quality, high-value products backed by timely and personable support. Recognised and awarded by Envato on multiple occasions for producing consistently outstanding products, it's no wonder over 20,000 customers enjoy using Medium Rare templates.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-6 switchable__text text-center">
+                        <div class="video-cover border--round">
+                            <div class="video-play-icon"></div>
+                            <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowfullscreen="allowfullscreen"></iframe>
+                        </div>
+                        <span>This is instruction video for making new chamber and use it</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Making Chamber Instruction End -->
+
+        <% include ../footer.ejs %>
+
+    </div>
+    <!-- Main Page End -->
+
 </body>
+
 </html>
