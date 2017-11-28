@@ -5331,10 +5331,10 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
                 var paused = e.mediaElement.pause();
                 if (typeof paused !== 'undefined') {
                     paused.then(function() {
-                        e.mediaElement.poster = e.snapshot || 'https://cdn.webrtc-experiment.com/images/muted.png';
+                        e.mediaElement.poster = e.snapshot || 'https://cdn.webrtc-experiment.com/img/muted.png';
                     });
                 } else {
-                    e.mediaElement.poster = e.snapshot || 'https://cdn.webrtc-experiment.com/images/muted.png';
+                    e.mediaElement.poster = e.snapshot || 'https://cdn.webrtc-experiment.com/img/muted.png';
                 }
             } else if (e.muteType === 'audio') {
                 e.mediaElement.muted = true;

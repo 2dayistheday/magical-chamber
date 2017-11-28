@@ -1,113 +1,333 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="kr">
 <head>
     <% include header.ejs %>
 </head>
-<body>
+<body class=" " data-smooth-scroll-offset='180'>
+    <a id="start"></a>
 
-<!-- Banner -->
-<div class="main-container" id="#">
-    <section class="imageblock switchable height-100">
-        <div class="imageblock__content col-md-6 col-sm-4 pos-right">
-            <div class="background-image-holder">
-                <img alt="image" src="images/inner-7.jpg"/>
-            </div>
-        </div>
-        <div class="container pos-vertical-center">
-            <div class="row">
-                <div class="col-md-5 col-sm-7">
-                    <h1>Magical Chamber</h1>
-                    <p class="lead">
-                        <b>회원가입</b>
-                        <br />
-                        <a class="btn btn--primary type--uppercase" href='/auth/google'>
-                            <span class="btn__text">
-                                Google 회원가입
-                            </span>
+    <!-- Navigation Bar Start -->
+    <div class="nav-container ">
+
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="/">
+                            <img class="logo logo-dark" alt="logo" src="img/logo-dark.png" />
+                            <img class="logo logo-light" alt="logo" src="img/logo-light.png" />
                         </a>
-                        <br />
-                        <br />
-                        <a class="btn btn--primary type--uppercase" href='/auth/facebook'>
-                            <span class="btn__text">
-                                Facebook 회원가입
-                            </span>
+                    </div>
+                    <div class="col-xs-9 col-sm-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                            <i class="icon icon--sm stack-interface stack-menu"></i>
                         </a>
-                    </p>
+                    </div>
                 </div>
             </div>
-            <!--end of row-->
         </div>
-        <!--end of container-->
-    </section>
-</div>
 
-<div class="container" id="one">
-    <h1>What is Chamber?</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <h2>마법의 공간 체임버</h2>
-            <p><b>실시간 커뮤니케이션</b> 도구 체임버는 혼자, 둘이서, 함께 하는 공간입니다. N:M 화상대화를 지원하며
-                동시에 페어 에디팅 도큐먼트 작성합니다.</p>
-        </div>
-        <div class="col-md-4">
-            <h2>WebRTC</h2>
-            <p>explain...</p>
-        </div>
-        <div class="col-md-4">
-            <h2>언제 어디에 있어도,</h2>
-            <p>당장 눈앞에서 얘기하는 것처럼 이야기를 시작하세요! <br/>모든게 과거로 지나가버렸어도, 우리가 대신 기록해둘게요!
-                <b>이게그냥뭐라딱말할순없어도 너무좋은데 '말'로만은 설명이 안되어도,</b> 유용한 도구들을 활용해보세요!</p>
-        </div>
+        <nav id="menu2" class="bar bar-2 hidden-xs bar--transparent bar--absolute" data-scroll-class='90vh:pos-fixed'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 text-center text-left-sm hidden-xs col-md-push-5">
+                        <div class="bar__module">
+                            <a href="/">
+                                <img class="logo logo-dark" alt="logo" src="img/logo-dark.png" />
+                                <img class="logo logo-light" alt="logo" src="img/logo-light.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-md-pull-2">
+                        <div class="bar__module">
+                            <ul class="menu-horizontal text-left">
+                                <li>
+                                    <span><a class="inner-link" href="#start" data-scroll-class="100vh:active" style="all:unset">Home</a></span>
+                                </li>
+                                <li>
+                                    <span><a class="inner-link" href="#about" data-scroll-class="100vh:active" style="all:unset">About</a></span>
+                                </li>
+                                <li>
+                                    <span><a class="inner-link" href="#feature" data-scroll-class="100vh:active" style="all:unset">Features</a></span>
+                                </li>
+                                <li>
+                                    <span><a class="inner-link" href="#pricing" data-scroll-class="100vh:active" style="all:unset">Pricing</a></span>
+                                </li>
+                                <li class="dropdown dropdown--hover">
+                                    <span class="dropdown__trigger">Dropdown</span>
+                                    <div class="dropdown__container">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 dropdown__content">
+                                                    <h5>Select an option</h5>
+                                                    <ul class="menu-vertical">
+                                                        <li>
+                                                            <a href="#">Create</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Manage</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Share</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Logout</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-5 text-right text-left-xs text-left-sm">
+                        <div class="bar__module">
+                            <a class="btn btn--sm type--uppercase" href="#">
+                                        <span class="btn__text">
+                                            Free Trial
+                                        </span>
+                            </a>
+                            <a class="btn btn--sm btn--primary type--uppercase inner-link" href="#start" data-scroll-class="100vh:active">
+                                        <span class="btn__text">
+                                            Sign In
+                                        </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
-    <a href="#two">Next</a>
-</div>
+    <!-- Navigation Bar End -->
 
-<hr>
+    <!-- Main Page Start -->
+    <div class="main-container">
+        <!-- Title Page Start -->
+        <section class="cover height-90 videobg text-center" data-overlay="2" id="home">
+            <div class="youtube-background" data-video-url="QRsVn_6zaxI" data-start-at="1"></div>
+            <div class="container pos-vertical-center" style="z-index: 10">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <img alt="Image" class="unmarg--bottom" src="img/headline-1.png" />
+                        <div class="typed-headline">
+                            <br>
+                            <span class="h3 inline-block">Magical Chamber &mdash; The perfect tool for</span>
+                            <span class="h3 inline-block typed-text typed-text--cursor color--primary" data-typed-strings="group chatting, international meeting, personal archiving"></span>
+                        </div>
+                        <a class="btn btn--icon bg--facebook" href="/auth/facebook">
+                            <span class="btn__text">
+                                <i class="socicon socicon-facebook"></i>
+                                Join with Facebook
+                            </span>
+                        </a>
+                        <a class="btn btn--icon bg--googleplus" href="/auth/google">
+                            <span class="btn__text">
+                                <i class="socicon socicon-google"></i>
+                                Join with Google
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Title Page End -->
 
-<div class="container" id="two">
-    <h1>How to Use</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <h4>Step1. Chamber</h4>
-            <p>Chamber를 만든다. Chamber는 방 단위의 활동 공간을 의미한다.</p>
-        </div>
-        <div class="col-md-4">
-            <h4>Step2. Real Time Communication</h4>
-            <p>만들어진 방에서 함께 화상대화를 통해 자유롭게 소통한다. 모두가 모여 같은 작업공간을 통해 의견을 주고받는다. 사담은 채팅을 통해, 파일은 드라이브를 통해 실시간으로 공유한다.</p>
-        </div>
-        <div class="col-md-4">
-            <h4>Step3. Histroy</h4>
-            <p>실시간 커뮤니케이션을 즐기고 난 후, 기록물을 관리한다. 드라이브에서는 파일을 확인하고 활동로그에서는 참여했던 사건을 관리한다.</p>
-        </div>
+        <!-- Advertisement Start -->
+        <section class="text-center cta cta-4 space--xxs border--bottom ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="label label--inline">HIT!</span>
+                        <span>광고문구 광고문구 광고문구 광고광고광고광고</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Advertisement End -->
+
+        <!-- About Start -->
+        <section class="text-center" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                        <h2>All the tools you'll need</h2>
+                        <p class="lead">
+                            <em>실시간 커뮤니케이션 도구</em> Chamber는 혼자, 둘이서, 혹은 모두가 함께 하는 공간입니다. 멀티유저 화상 채팅을 지원하며, 동시에 작성 가능한 도큐멘팅 도구와 파일 공유 등의 기능 또한 제공됩니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="feature">
+                            <img alt="Image" src="img/about-1.jpg" class="border--round" />
+                            <h4>Startups</h4>
+                            <p>
+                                Quickly launch a professional site &mdash; minimal effort, maximum impact.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature">
+                            <img alt="Image" src="img/about-2.jpg" class="border--round" />
+                            <h4>Agencies</h4>
+                            <p>
+                                Deliver results to your clients faster than ever with rapid page building.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature">
+                            <img alt="Image" src="img/about-3.jpg" class="border--round" />
+                            <h4>Freelancers</h4>
+                            <p>
+                                Stack is your silent partner, it does the heavy-lifting while you take the glory!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="text-center ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-6">
+                        <div class="cta">
+                            <h2>Use 'em all by Premium Plan</h2>
+                            <a class="btn btn--primary type--uppercase" href="#">
+                                        <span class="btn__text">
+                                            Purchase Now
+                                        </span>
+                                <span class="label">$17 USD</span>
+                            </a>
+                            <p class="type--fine-print">유의사항이나 결제메세지 뭐 블라블라</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- About End -->
+
+        <!-- Features Start -->
+        <section class="bg--secondary" id="feature">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="feature">
+                            <i class="icon icon-Sidebar-Window color--primary"></i>
+                            <h4>Interactive Elements</h4>
+                            <p>
+                                With rich modal and notification functionality and a robust suite of options, Stack makes building feature-heavy pages simple and enjoyable.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature">
+                            <i class="icon icon-Duplicate-Window color--primary"></i>
+                            <h4>Save Development Time</h4>
+                            <p>
+                                Drastically reduce the time it takes to move from initial concept to production-ready with Stack and Variant Page Builder. Your clients will love you for it!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature">
+                            <i class="icon icon-Code-Window color--primary"></i>
+                            <h4>Friendly Support</h4>
+                            <p>
+                                Our customers love the comfort that comes with six-months free support. Our dedicated support forum makes interacting with us hassle-free and efficient.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Features End -->
+
+        <!-- Pricing Start -->
+        <section class="text-center" id="pricing">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                        <h2>Pricing Plans</h2>
+                        <p class="lead">
+                            We offer a range of plans that suit a variety of needs. All plans are billed monthly and can be upgraded or downgraded at any time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pricing-section-2 text-center ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-offset-2 col-md-4">
+                        <div class="pricing pricing-3">
+                            <div class="pricing__head bg--secondary boxed">
+                                <h5>Free</h5>
+                                <span class="h1">
+                                            <span class="pricing__dollar">$</span>0</span>
+                                <p class="type--fine-print">Per Month, AUD.</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <span>Anywhere Access</span>
+                                </li>
+                                <li>
+                                    <span>1GB Online Storage</span>
+                                </li>
+                                <li>
+                                    <span>Import User Data</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--end pricing-->
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="pricing pricing-3">
+                            <div class="pricing__head bg--primary boxed">
+                                <span class="label">Value</span>
+                                <h5>Medium</h5>
+                                <span class="h1">
+                                            <span class="pricing__dollar">$</span>29</span>
+                                <p class="type--fine-print">Per Month, AUD.</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <span>Anywhere Access</span>
+                                </li>
+                                <li>
+                                    <span>10GB Online Storage</span>
+                                </li>
+                                <li>
+                                    <span>Import User Data</span>
+                                </li>
+                                <li>
+                                    <span>Automatic Transfer</span>
+                                </li>
+                                <li>
+                                    <span>24/7 Support</span>
+                                </li>
+                                <li>
+                                    <span>10 Unique Users</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--end pricing-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Pricing End -->
+
+        <% include footer.ejs %>
+
     </div>
-    <a href="#two">Next</a>
-</div>
-<hr>
-
-<div class="container" id="three">
-    <h1>We are</h1>
-    <h3>Team Redpoint | SW Maestro 8th</h3>
-    <div class="row">
-        <div class="col-md-4">
-            <img src="/images/avatar-large-3.png">
-            <h2>김민경</h2>
-            <p>자세한 설명</p>
-        </div>
-        <div class="col-md-4">
-            <img src="/images/avatar-large-3.png">
-            <h2>이지윤</h2>
-            <p>자세한 설명</p>
-        </div>
-        <div class="col-md-4">
-            <img src="/images/avatar-large-3.png">
-            <h2>임현지</h2>
-            <p>자세한 설명</p>
-        </div>
-    </div>
-</div>
-<hr>
-
-<% include footer.ejs %>
+    <!-- Main Page End -->
 
 </body>
 </html>
