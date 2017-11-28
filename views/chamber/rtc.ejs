@@ -118,6 +118,7 @@
     /* RTCMultiConnection Code Start */
     // 커넥션 기본 세팅
     var connection = new RTCMultiConnection();  // constructor
+    connection.userid = '<%= profile[0].user_nickname %>';
     connection.socketURL = '/';
     connection.socketMessageEvent = 'audio-video-file-chat-demo';
     connection.enableFileSharing = true;
@@ -234,10 +235,11 @@
     // 방 코드 설정 부분
     var roomid = '';
     if (localStorage.getItem(connection.socketMessageEvent)) {
-        roomid = localStorage.getItem(connection.socketMessageEvent);
+        //roomid = localStorage.getItem(connection.socketMessageEvent);
+        roomid = '<%= profile[0].user_nickname %>';
     } else {
         // roomid = connection.token();
-        roomid = '<%=chamber[0].chamber_name%>';
+        roomid = '<%= profile[0].user_nickname %>';
     }
     // 방 코드 화면에 보여주는 부분
     document.getElementById('room-id').value = roomid;

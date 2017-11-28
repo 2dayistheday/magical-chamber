@@ -60,10 +60,17 @@ router.get('/:chamberID/member', function (req, res, next) {
 
 router.get('/:chamberID/rtc', function (req, res, next) {
     var chamberID = req.params.chamberID;
-    if (chamberID != "undefined") {
-        var selectMyChamberSql = "select * from CHAMBERS where chamber_id = ?";
-        connection.query(selectMyChamberSql, chamberID, function (err, chamber) {
-            res.render('./chamber/rtc', {title: 'Magical Chamber', chamber: chamber, profile: undefined});
+    var user_id = req.user.id;
+
+    if (chamberID != "undefined" && user_id != 'undefined') {
+        var selectMyChamberSql = "select * from CHAMBERS where chamber_id = ?;";
+        var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
+        connection.query(selectMyChamberSql + selectMyProfileSql, [chamberID, user_id], function (err, results) {
+            res.render('./chamber/rtc', {
+                title: 'Magical Chamber',
+                chamber: results[0],
+                profile: results[1]
+            });
         });
     } else {
         res.redirect('/');
@@ -134,7 +141,7 @@ awsS3Conn = require('../service/awsS3'),
                 if (err) {
                     console.log('err : ' + err);
                 } else {
-                    awsS3Conn.getlist('chamber/'+chamberID+'/files/', function (filelist) {
+                    awsS3Conn.getlist('chamber/' + chamberID + '/files/', function (filelist) {
                         filelist = JSON.parse(filelist);
 
                         res.render('./chamber/documents', {

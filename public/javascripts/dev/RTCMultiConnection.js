@@ -4021,7 +4021,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
     })();
 
     // RTCMultiConnection.js 기본 동작부분
-    (function(connection) {
+    (function(connection) {//TODO: userid parameter
         forceOptions = forceOptions || {
             useDefaultDevices: true
         };
@@ -4559,7 +4559,10 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
         connection.closeBeforeUnload = true;
         window.addEventListener('beforeunload', beforeUnload, false);
 
-        connection.userid = getRandomString();
+        //connection.userid = userid;//getRandomString(); TODO: 여기서 유저값연결
+        if(connection.userid == 'undefined'){
+            connection.userid = getRandomString();
+        }
         connection.changeUserId = function(newUserId, callback) {
             callback = callback || function() {};
             connection.userid = newUserId || getRandomString();
