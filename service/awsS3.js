@@ -50,15 +50,16 @@ s3Conn.profile = function (files, path, callback) {
 };
 
 s3Conn.getlist = function (path, callback) {
-    s3.listObjects({Bucket: key.awsBucketName}).on('success', function handlePage(response) {
-        /*for(var name in response.data.Contents){
-            //console.log(response.data.Contents[name].Key);
-        }*/
+    s3.listObjects({Bucket: key.awsBucketName, Prefix: path}).on('success', function handlePage(response) {
+        for(var name in response.data.Contents){
+            console.log(response.data.Contents[name]);
+        }
         callback(JSON.stringify(response.data.Contents));
         if (response.hasNextPage()) {
             response.nextPage().on('success', handlePage).send();
         }
     }).send();
 };
+
 
 module.exports = s3Conn;

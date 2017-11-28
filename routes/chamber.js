@@ -134,7 +134,7 @@ awsS3Conn = require('../service/awsS3'),
                 if (err) {
                     console.log('err : ' + err);
                 } else {
-                    awsS3Conn.getlist('/', function (filelist) {
+                    awsS3Conn.getlist('chamber/'+chamberID+'/files/', function (filelist) {
                         filelist = JSON.parse(filelist);
 
                         res.render('./chamber/documents', {
