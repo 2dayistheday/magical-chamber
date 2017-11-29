@@ -8013,7 +8013,8 @@ iframe[src*='google.com/maps'] {
   border: none;
 }
 .map-container {
-  min-height: 400px;
+  /*min-height: 400px;*/
+  min-height:50vh;
 }
 .map-container:not(:last-child) {
   margin-bottom: 1.85714286em;

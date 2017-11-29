@@ -96,11 +96,13 @@
                     </div>
                     <% for (var i = 0; i < chambers.length; i++) { %>
                     <div class="col-sm-4">
-                        <div class="feature feature-1 boxed boxed--border">
+                        <div class="feature feature-4 boxed boxed--lg boxed--border">
                             <span class="label">Owner</span>
-                            <h5><%= chambers[i].chamber_name %></h5>
+                            <h4><%= chambers[i].chamber_name %></h4>
+                            <hr>
                             <p><%= chambers[i].chamber_des %></p>
-                            <a href="/chamber/<%= chambers[i].chamber_id %>/">Go into this Chamber!</a>
+                            <a class="btn btn--primary" href="/chamber/<%= chambers[i].chamber_id %>/"><span class="btn__text">Go into this Chamber!</span>
+                            </a>
                         </div>
                     </div>
                     <% } %>
@@ -118,49 +120,49 @@
                             <h3>Instructions</h3>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-5">
-                        <ul class="accordion accordion-2 accordion--oneopen">
-                            <li class="active">
-                                <div class="accordion__title">
-                                    <span class="h5">First. 블라블라</span>
-                                </div>
-                                <div class="accordion__content">
-                                    <p class="lead">
-                                        Stack follows the BEM naming convention that focusses on logical code readability that is reflected in both the HTML and CSS. Interactive elements such as accordions and tabs follow the same markup patterns making rapid development easier for developers and beginners alike.
+                    <div class="col-sm-12 col-md-8 col-md-offset-2">
+                        <div class="wizard bg--white">
+                            <h5>Welcome</h5>
+                            <section class="text-center">
+                                <div class="pos-vertical-center">
+                                    <img alt="pic" src="/img/about-1.jpg" />
+                                    <h4>Welcome, let's go over the basics!</h4>
+                                    <p class="type--fade type--fine-print">
+                                        * Use the next button, or your keyboard arrows to advance
                                     </p>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="accordion__title">
-                                    <span class="h5">Second. 블라블라</span>
-                                </div>
-                                <div class="accordion__content">
-                                    <p class="lead">
-                                        Stack offers a clean and contemporary to suit a range of purposes from corporate, tech startup, marketing site to digital storefront. Elements have been designed to showcase content in a diverse yet consistent manner.
-                                    </p>
-                                    <p class="lead">
-                                        Multiple font and colour scheme options mean that dramatically altering the look of your site is just clicks away &mdash; Customizing your site in the included Variant Page Builder makes experimenting with styles and content arrangements dead simple.
+                            </section>
+                            <h5>Media</h5>
+                            <section class="text-center">
+                                <div class="pos-vertical-center">
+                                    <img alt="pic" src="/img/about-1.jpg" />
+                                    <h4>Add your own media using the media browser.</h4>
+                                    <p class="type--fade type--fine-print">
+                                        * Use the sidebar and click "Add Media"
                                     </p>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="accordion__title">
-                                    <span class="h5">Third. 블라블라</span>
-                                </div>
-                                <div class="accordion__content">
-                                    <p class="lead">
-                                        Medium Rare is an elite author known for offering high-quality, high-value products backed by timely and personable support. Recognised and awarded by Envato on multiple occasions for producing consistently outstanding products, it's no wonder over 20,000 customers enjoy using Medium Rare templates.
+                            </section>
+                            <h5>Device Guide</h5>
+                            <section class="text-center">
+                                <div class="pos-vertical-center">
+                                    <img alt="pic" src="/img/about-1.jpg" />
+                                    <h4>Test your site on different devices using Device Guide</h4>
+                                    <p class="type--fade type--fine-print">
+                                        * The device guide is located in the sidebar
                                     </p>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-6 switchable__text text-center">
-                        <div class="video-cover border--round">
-                            <div class="video-play-icon"></div>
-                            <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowfullscreen="allowfullscreen"></iframe>
+                            </section>
+                            <h5>Begin</h5>
+                            <section class="text-center">
+                                <div class="pos-vertical-center">
+                                    <img alt="pic" src="/img/about-1.jpg" />
+                                    <h4>You're all set — Click 'Finish' to get started</h4>
+                                    <p class="type--fade type--fine-print">
+                                        * Find more help articles under "Help" in the sidebar
+                                    </p>
+                                </div>
+                            </section>
                         </div>
-                        <span>This is instruction video for making new chamber and use it</span>
                     </div>
                 </div>
             </div>

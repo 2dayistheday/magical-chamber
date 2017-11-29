@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="kr">
+<head>
+    <% include header.ejs %>
+</head>
+<body class=" " data-smooth-scroll-offset='180'>
+<a id="start"></a>
+
+<!-- Navigation Bar Start -->
+<div class="nav-container ">
+
+    <div class="bar bar--sm visible-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3 col-sm-2">
+                    <a href="/">
+                        <img class="logo logo-dark" alt="logo" src="img/logo-dark.png" />
+                        <img class="logo logo-light" alt="logo" src="img/logo-light.png" />
+                    </a>
+                </div>
+                <div class="col-xs-9 col-sm-10 text-right">
+                    <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                        <i class="icon icon--sm stack-interface stack-menu"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav id="menu2" class="bar bar-2 hidden-xs bar--absolute" data-scroll-class='90vh:pos-fixed'>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 text-center text-left-sm hidden-xs col-md-push-5">
+                    <div class="bar__module">
+                        <a href="/">
+                            <img class="logo logo-dark" alt="logo" src="img/logo-dark.png" />
+                            <img class="logo logo-light" alt="logo" src="img/logo-light.png" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- Navigation Bar End -->
+
+<!-- Main Page Start -->
+<div class="main-container">
+    <!-- Headings Start -->
+    <section class="text-center imagebg height-50" data-overlay="3">
+        <div class="background-image-holder">
+            <img alt="background" src="img/about-2.jpg" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-6">
+                    <h1><br>Hi, We're RedPoint.</h1>
+                    <p class="lead">
+                        An innovative collective of like-minded folks making useful and enduring technology products
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Heading End -->
+
+    <!-- Members Start-->
+    <section class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <h2>Meet the makers</h2>
+                    <p class="lead">
+                        Whether you’re building a welcome mat for your SaaS or a clean, corporate portfolio, Stack has your design needs covered.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="feature feature-8">
+                        <img alt="Image" src="img/avatar-round-1.png" />
+                        <h5>Vera Duncan</h5>
+                        <span>Founder &amp; CEO</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="feature feature-8">
+                        <img alt="Image" src="img/avatar-round-3.png" />
+                        <h5>Zach Smith</h5>
+                        <span>Co-Founder &amp; CTO</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="feature feature-8">
+                        <img alt="Image" src="img/avatar-round-2.png" />
+                        <h5>Bernice Lucas</h5>
+                        <span>Chief of Operations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Members End-->
+
+    <% include footer.ejs %>
+</div>
+<!-- Main Page End -->
+
+</body>
+</html>

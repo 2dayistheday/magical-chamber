@@ -1,6 +1,9 @@
 //
-var user_id = prompt("사용자 ID를 입력하세요", "default");
-var chamber_name = prompt("소속된 챔버명을 입력하세요", "redpoint");
+// var user_id = prompt("사용자 ID를 입력하세요", "default");
+// var chamber_name = prompt("소속된 챔버명을 입력하세요", "redpoint");
+
+var user_id;
+var chamber_name;
 
 //calling canvas
 (function( $ ){

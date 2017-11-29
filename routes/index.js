@@ -24,9 +24,16 @@ router.get('/', function (req, res, next) {
     }
 });
 
+router.get('/about', function (req, res, next) {
+    res.render('about', {title: 'Magical Chamber | About Us'});
+});
 
-router.get('/verify', function (req, res, next) {
-    res.render('verify', {title: 'Magical Chamber'});
+router.get('/contact', function (req, res, next) {
+    res.render('contact', {title: 'Magical Chamber | Contact Us'});
+});
+
+router.get('/faq', function (req, res, next) {
+    res.render('faq', {title: 'Magical Chamber | F&Q'});
 });
 
 module.exports = router;
