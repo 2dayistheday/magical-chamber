@@ -13,15 +13,17 @@ router.get('/:chamberID/', function (req, res, next) {
     if (chamberID != "undefined") {
         var selectMyChamberSql = "select * from CHAMBERS where chamber_id = ?;";
         var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
+        var selectPostSql = "select distinct * from CHAMBER_POST as cp inner join USER_PROFILE as up on cp.post_authorID = up.user_id where cp.chamber_id = ?;"
 
-        connection.query(selectMyChamberSql + selectMyProfileSql, [chamberID, user_id], function (err, results) {
+        connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql, [chamberID, user_id, chamberID], function (err, results) {
             if (err) {
                 console.log('err : ' + err);
             } else {
                 res.render('./chamber/chamberHome', {
                     title: 'Magical Chamber',
                     chamber: results[0],
-                    profile: results[1]
+                    profile: results[1],
+                    post: results[2]
                 });
             }
         });
@@ -158,5 +160,59 @@ awsS3Conn = require('../service/awsS3'),
             res.redirect('/');
         }
     });
+
+awsS3Conn = require('../service/awsS3'),
+    async = require('async'),
+    router.post('/:chamberID/upload/files', function (req, res, next) {
+        var chamberID = req.params.chamberID;
+        var tasks = [
+            function (callback) {
+                awsS3Conn.formidable(req, function (err, files, field) {
+                    callback(err, files);
+                });
+            },
+            function (files, callback) {
+                awsS3Conn.upload(files,'chamber/'+chamberID+'/files/', function (err, result) {
+                    callback(err, files);
+                });
+            }
+        ];
+        async.waterfall(tasks, function (err, result) {
+            if(err){
+                console.log('err : ' + err);
+            }else{
+                console.log('result : ' + result);
+            }
+        });
+    });
+
+router.post('/:chamberID/upload/post', function (req, res, next) {
+    var user_id = req.user.id;
+    var chamberID = req.params.chamberID;
+    var post_content = req.body.post_content;
+
+    var InsertPostSql = "insert into CHAMBER_POST(chamber_id, post_content, post_authorID) values(?,?,?);";
+    connection.query(InsertPostSql, [chamberID, post_content, user_id], function (err, post) {
+        if(err){
+            console.log('err : ' + err);
+        }else{
+            res.redirect('/chamber/'+chamberID+'/');
+        }
+    });
+});
+
+router.post('/:chamberID/delete/post', function (req, res, next) {
+    var post_id = req.body.postID;
+    var chamberID = req.params.chamberID;
+
+    var DeletePostSql = "delete from CHAMBER_POST where post_id = ?;";
+    connection.query(DeletePostSql, post_id, function (err, result) {
+       if(err){
+           console.log('err : ' + err);
+       }else{
+           res.redirect('/chamber/'+chamberID+'/');
+       }
+    });
+});
 
 module.exports = router;

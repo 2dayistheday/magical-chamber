@@ -33,11 +33,11 @@ s3Conn.formidable = function (req, callback) {
         callback('form.on(aborted)', null);
     });
 };
-s3Conn.upload = function (files, path) {
+s3Conn.upload = function (files, path, callback) {
     params.Key = path + files[0].name;
     params.Body = require('fs').createReadStream(files[0].path);
     s3.upload(params, function (err, result) {
-        //callback(err, result);
+        callback(err, result);
     });
 };
 
@@ -60,6 +60,5 @@ s3Conn.getlist = function (path, callback) {
         }
     }).send();
 };
-
 
 module.exports = s3Conn;

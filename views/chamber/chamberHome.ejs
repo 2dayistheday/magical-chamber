@@ -29,15 +29,37 @@
                 <div class="col-sm-8 sidenav">
                     <div class="list-group">
                         <a href="#" class="list-group-item active">공지사항</a>
-                        <a href="#" class="list-group-item">그룹 내 욕설 금지</a>
-                        <a href="#" class="list-group-item">매주 수요일 저녁 10시 화상회의 진행</a>
+                        <form action="upload/post" method="post" >
+                            <div>
+                                공지내용: <input type="text" name="post_content" placeholder="ex. 회의는 짧고 명확하게!" required><br/>
+                                <input type="submit" value="추가">
+                            </div>
+                        </form>
+                        <% for (var i = 0; i < post.length; i++) { %>
+                        <div>
+                                <%= post[i].post_content %>
+                        </div>
+                        <div>
+                            <%= post[i].user_nickname %>
+                        </div>
+                        <%
+                            if (post[i].post_authorID == profile[0].user_id){
+                        %>
+                        <form action="delete/post" method="post">
+                            <input type="hidden" name="postID" value="<%= post[i].post_id %>">
+                            <input type="submit" value="삭제">
+                        </form>
+                        <%
+                            }
+                        }
+                        %>
                     </div>
-
+<!--
                     <div class="list-group">
                         <a href="#" class="list-group-item active">2017/09/23</a>
                         <a href="#" class="list-group-item">활동로그 예시 - 2017/09/23 23:00 김민경 update document v3. "페이지 뷰
                             수정"</a>
-                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/23 17:23 김민경, 이지윤, 임현지 그룹화상통화 ~30분간
+                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/23 17ç:23 김민경, 이지윤, 임현지 그룹화상통화 ~30분간
                             진행"</a>
                     </div>
 
@@ -48,6 +70,7 @@
                         <a href="#" class="list-group-item">활동로그 예시 - 2017/09/21 17:23 김민경, 이지윤, 임현지 그룹화상통화 ~30분간
                             진행"</a>
                     </div>
+                    -->
                 </div>
             </div>
         </div>

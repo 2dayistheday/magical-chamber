@@ -4,11 +4,6 @@ var mysql_dbc = require('../service/db_con')();
 var connection = mysql_dbc.init();
 mysql_dbc.test_open(connection);
 
-var sub;
-var nickname;
-var email;
-var user_id;
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     if(req.user){

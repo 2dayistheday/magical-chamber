@@ -117,9 +117,10 @@ router.post('/profile/imgupload', function (req, res, next) {
     ];
     async.waterfall(tasks, function (err, result) {
         if(err){
-           res.json({sucess: false, msg: '실패', err: err})
+            console.log('err:' + err);
+            res.redirect('/user/profile');
         }else{
-            res.json({sucess: true, msg: '업로드 성공'})
+            res.redirect('/user/profile');
         }
     });
 });
