@@ -6,7 +6,7 @@ var chamber_name = prompt("소속된 챔버명을 입력하세요", "redpoint");
 (function( $ ){
     $.fn.canvas = function() {
         var iFrameLink = '<iframe id="canvas"';
-            iFrameLink = iFrameLink + 'src="https://0.0.0.0:3001?chamber=' +chamber_name;
+            iFrameLink = iFrameLink + 'src="https://canvas-redpoint.herokuapp.com/?chamber=' +chamber_name;
             iFrameLink = iFrameLink + '&userName=' + user_id;
             iFrameLink = iFrameLink +'" width="' + '100%';//settings.width;
             iFrameLink = iFrameLink +'" height="' + '100%;';//settings.height;
