@@ -1,83 +1,220 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="kr">
 <head>
     <% include ../header.ejs %>
 </head>
-<body>
 
-<div class="page-header">
-    <h1><%= chamber[0].chamber_name %>
-        <small>여기는 채임버 개별 페이지</small>
-    </h1>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3">
-            <div id="sidebar">
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="member">새멤버 초대</a></li>
-                    <li><a href="rtc"><span
-                                    class="glyphicon glyphicon-facetime-video"/> Group Live Call </a></li>
-                    <li><a href="documents"><span class="glyphicon glyphicon-file"/> Documents </a></li>
-                </ul>
-                <br>
-            </div>
-        </div>
+<body class=" " data-smooth-scroll-offset='180'>
+    <a id="start"></a>
 
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-sm-8 sidenav">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">공지사항</a>
-                        <form action="upload/post" method="post" >
-                            <div>
-                                공지내용: <input type="text" name="post_content" placeholder="ex. 회의는 짧고 명확하게!" required><br/>
-                                <input type="submit" value="추가">
-                            </div>
-                        </form>
-                        <% for (var i = 0; i < post.length; i++) { %>
-                        <div>
-                                <%= post[i].post_content %>
-                        </div>
-                        <div>
-                            <%= post[i].user_nickname %>
-                        </div>
-                        <%
-                            if (post[i].post_authorID == profile[0].user_id){
-                        %>
-                        <form action="delete/post" method="post">
-                            <input type="hidden" name="postID" value="<%= post[i].post_id %>">
-                            <input type="submit" value="삭제">
-                        </form>
-                        <%
-                            }
-                        }
-                        %>
-                    </div>
-<!--
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">2017/09/23</a>
-                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/23 23:00 김민경 update document v3. "페이지 뷰
-                            수정"</a>
-                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/23 17ç:23 김민경, 이지윤, 임현지 그룹화상통화 ~30분간
-                            진행"</a>
-                    </div>
+    <% if (profile != undefined) { %>
+    <!-- Navigation Bar Start -->
+    <div class="nav-container ">
 
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">2017/09/21</a>
-                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/21 19:00 김민경 update document v3. "페이지 뷰
-                            수정"</a>
-                        <a href="#" class="list-group-item">활동로그 예시 - 2017/09/21 17:23 김민경, 이지윤, 임현지 그룹화상통화 ~30분간
-                            진행"</a>
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="/">
+                            <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                            <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                        </a>
                     </div>
-                    -->
+                    <div class="col-xs-9 col-sm-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                            <i class="icon icon--sm stack-interface stack-menu"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<% include ../footer.ejs %>
+        <nav id="menu1" class="bar bar-2 hidden-xs bar--absolute" data-scroll-class='90vh:pos-fixed'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1 col-sm-2 hidden-xs">
+                        <div class="bar__module">
+                            <a href="/">
+                                <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                                <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-11 col-sm-12 text-right text-left-xs text-left-sm">
+                        <div class="bar__module">
+                            <a class="btn btn--sm type--uppercase" href="#">
+                                        <span class="btn__text">
+                                            Edit Profile
+                                        </span>
+                            </a>
+                            <a class="btn btn--sm btn--primary type--uppercase" href="#">
+                                        <span class="btn__text">
+                                            Sign Out
+                                        </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+    <!-- Navigation Bar End -->
+    <% } else { window.location.href = '/'; } %>
+
+    <!-- Main Page Start -->
+    <div class="main-container">
+        <section class="bg--secondary space--sm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <!-- Heading Start -->
+                        <div class="boxed boxed--lg boxed--border">
+                            <div class="text-block text-center">
+                                <h3><%= chamber[0].chamber_name %></h3>
+                                <span><%= chamber[0].chamber_des %></span>
+                            </div>
+                            <div class="text-block text-center">
+                                <a class="btn btn--primary-1 btn--icon" href="rtc">
+                                    <span class="btn__text"><i class="icon-Video-5" style="color: #fff"></i> Start Group Call</span>
+                                </a>
+                                <a class="btn btn--primary-2 btn--icon" href="member">
+                                    <span class="btn__text"><i class="icon-Add-User" style="color: #fff"></i> Invite Member</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Heading End -->
+
+                        <!-- Notice Start -->
+                        <div class="boxed boxed--border">
+                            <% for (var i = 0; i < post.length; i++) { %>
+                            <div class="alert bg--primary">
+                                <div class="alert__body">
+                                    <span><%= post[i].user_nickname %>: <b><%= post[i].post_content %></b></span>
+                                </div>
+                                <% if (post[i].post_authorID == profile[0].user_id){ %>
+                                <!-- <div class="alert__close">&times;</div> -->
+                                <div class="col-sm-2 col-sm-offset-10">
+                                    <form action="delete/post" method="post">
+                                        <input type="hidden" name="postID" value="<%= post[i].post_id %>">
+                                        <input type="submit" class="btn" style="position: absolute; z-index: 5; left: 13px; top: -47px;" value="삭제">
+                                    </form>
+                                </div>
+                                <% } %>
+                            </div>
+                            <% } %>
+                            <hr />
+                            <form action="upload/post" method="post">
+                                <div class="col-sm-10">
+                                    <input type="text" name="post_content" placeholder="ex. 회의는 짧고 명확하게!" required>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="submit" class="btn btn--primary type--uppercase" value="추가">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Notice End -->
+
+                        <!-- Activity Log & File Archive Start -->
+                        <div class="boxed boxed--border text-center">
+                            <div class="tabs-container">
+                                <ul class="tabs">
+                                    <li class="active">
+                                        <div class="tab__title text-center">
+                                            <i class="icon icon--sm block icon-Bulleted-List"></i>
+                                            <span class="h5">Activity Log</span>
+                                        </div>
+                                        <div class="tab__content">
+                                            <ul>
+                                                <li class="clearfix">
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-xs-3 text-center">
+                                                            <div class="icon-circle">
+                                                                <i class="icon icon--lg material-icons">comment</i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 col-xs-7 text-left">
+                                                            <span class="type--fine-print">21st July, 2017</span>
+                                                            <a href="#" class="block color--primary">Check out the relaunched Scope</a>
+                                                            <p>
+                                                                Discourse in writing dealing with a particular point or idea.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="tab__title text-center">
+                                            <i class="icon icon--sm block icon-Data-Download"></i>
+                                            <span class="h5">File Archive</span>
+                                        </div>
+                                        <div class="tab__content">
+                                            <table class="border--round">
+                                                <thead>
+                                                <tr>
+                                                    <th>Value 1</th>
+                                                    <th>Value 2</th>
+                                                    <th>Value 3</th>
+                                                    <th>Value 4</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="tab__title text-center">
+                                            <i class="icon icon--sm block icon-Conference"></i>
+                                            <span class="h5">Members</span>
+                                        </div>
+                                        <div class="tab__content">
+                                            <ul class="clearfix row row--list text-center">
+                                                <% for(var j = 0; j < users.length; j++){ %>
+                                                <li class="col-sm-3 col-xs-6">
+                                                    <a href="#">
+                                                        <img alt="avatar" src="/img/avatar-round-1.png" class="image--sm" />
+                                                        <span class="block"><%= users[j].user_nickname %></span>
+                                                    </a>
+                                                </li>
+                                                <% } %>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Activity Log & File Archive End -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <% include ../footer.ejs %>
+
+    </div>
+    <!-- Main Page End -->
 
 </body>
 </html>

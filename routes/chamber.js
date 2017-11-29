@@ -13,9 +13,10 @@ router.get('/:chamberID/', function (req, res, next) {
     if (chamberID != "undefined") {
         var selectMyChamberSql = "select * from CHAMBERS where chamber_id = ?;";
         var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
-        var selectPostSql = "select distinct * from CHAMBER_POST as cp inner join USER_PROFILE as up on cp.post_authorID = up.user_id where cp.chamber_id = ?;"
+        var selectPostSql = "select distinct * from CHAMBER_POST as cp inner join USER_PROFILE as up on cp.post_authorID = up.user_id where cp.chamber_id = ?;";
+        var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
 
-        connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql, [chamberID, user_id, chamberID], function (err, results) {
+        connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql + selectMyUserSql, [chamberID, user_id, chamberID, chamberID], function (err, results) {
             if (err) {
                 console.log('err : ' + err);
             } else {
@@ -23,7 +24,8 @@ router.get('/:chamberID/', function (req, res, next) {
                     title: 'Magical Chamber',
                     chamber: results[0],
                     profile: results[1],
-                    post: results[2]
+                    post: results[2],
+                    users: results[3],
                 });
             }
         });

@@ -4846,7 +4846,8 @@ section.parallax .row .background-image-holder {
   border-radius: 6px;
 }
 .alert:not(:last-child) {
-  margin-bottom: 1.85714286em;
+  /*margin-bottom: 1.85714286em;*/
+  margin-bottom: 0.5em;
 }
 .alert .alert__close {
   font-size: 1.35714286em;
