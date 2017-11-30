@@ -29,31 +29,17 @@ var chamber_name;
     $.fn.pad = function( options ) {
         var settings = {
             //'host'              : 'http://beta.etherpad.org',
-            'host'              : 'https://0.0.0.0:9001',
+            'host'              : ' https://agile-springs-86898.herokuapp.com',
             'baseUrl'           : '/p/',
-            'showControls'      : true,
-            'showChat'          : false,
-            'showLineNumbers'   : true,
             'userName'          : user_id,
             'lang'              : '',
-            'useMonospaceFont'  : false,
-            'noColors'          : false,
             'userColor'         : true,
-            'hideQRCode'        : false,
-            'alwaysShowChat'    : false,
-            'border'            : 0,
-            'borderStyle'       : 'solid',
-            'toggleTextOn'      : 'Disable Rich-text',
-            'toggleTextOff'     : 'Enable Rich-text',
-            'plugins'           : {},
-            'rtl'               : false,
             'padId'             : chamber_name    };
 
         var $self = this;
         if (!$self.length) return;
         if (!$self.attr('id')) throw new Error('No "id" attribute');
 
-        var useValue = $self[0].tagName.toLowerCase() == 'textarea';
         var selfId = $self.attr('id');
         var epframeId = 'epframe'+ selfId;
         // This writes a new frame if required
@@ -70,48 +56,16 @@ var chamber_name;
             var iFrameLink = '<iframe id="'+epframeId;
             iFrameLink = iFrameLink +'" name="' + epframeId;
             iFrameLink = iFrameLink +'" src="' + settings.host+settings.baseUrl+settings.padId;
-            iFrameLink = iFrameLink + '?showControls=' + settings.showControls;
-            iFrameLink = iFrameLink + '&showChat=' + settings.showChat;
-            iFrameLink = iFrameLink + '&showLineNumbers=' + settings.showLineNumbers;
-            iFrameLink = iFrameLink + '&useMonospaceFont=' + settings.useMonospaceFont;
+            iFrameLink = iFrameLink + '?showChat=false';
             iFrameLink = iFrameLink + '&userName=' + settings.userName;
-            if (settings.lang) {
-                iFrameLink = iFrameLink + '&lang=' + settings.lang;
-            }
-            iFrameLink = iFrameLink + '&noColors=' + settings.noColors;
             iFrameLink = iFrameLink + '&userColor=' + settings.userColor;
-            iFrameLink = iFrameLink + '&hideQRCode=' + settings.hideQRCode;
-            iFrameLink = iFrameLink + '&alwaysShowChat=' + settings.alwaysShowChat;
-            iFrameLink = iFrameLink + '&rtl=' + settings.rtl;
-            iFrameLink = iFrameLink + pluginParams;
-            iFrameLink = iFrameLink +'" style="border:' + settings.border;
-            iFrameLink = iFrameLink +'; border-style:' + settings.borderStyle;
             iFrameLink = iFrameLink +';" width="' + '100%';//settings.width;
             iFrameLink = iFrameLink +'" height="' + '100%;';//settings.height;
             iFrameLink = iFrameLink +'"></iframe>';
 
-
             var $iFrameLink = $(iFrameLink);
-
-            if (useValue) {
-                var $toggleLink = $('<a href="#'+ selfId +'">'+ settings.toggleTextOn +'</a>').click(function(){
-                    var $this = $(this);
-                    $this.toggleClass('active');
-                    if ($this.hasClass('active')) $this.text(settings.toggleTextOff);
-                    $self.pad({getContents: false});
-                    return false;
-                });
-                $self
-                    .hide()
-                    .after($toggleLink)
-                    .after($iFrameLink)
-                ;
-            }
-            else {
-                $self.html(iFrameLink);
-            }
+            $self.html(iFrameLink);
         }
-
         // This reads the etherpad contents if required
         else {
             var frameUrl = $('#'+ epframeId).attr('src').split('?')[0];
@@ -131,8 +85,6 @@ var chamber_name;
                 $('#'+ epframeId).remove();
             });
         }
-
-
         return $self;
     };
 })( jQuery );
