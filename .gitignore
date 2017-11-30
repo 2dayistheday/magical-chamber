@@ -5,3 +5,4 @@ config
 .idea/
 cert
 package-lock.json
+npm-debug.log
