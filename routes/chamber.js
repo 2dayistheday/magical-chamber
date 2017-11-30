@@ -6,33 +6,39 @@ mysql_dbc.test_open(connection);
 
 /* GET chamber listing. */
 
-router.get('/:chamberID/', function (req, res, next) {
-    var chamberID = req.params.chamberID;
-    var user_id = req.user.id;
+// awsS3Conn = require('../service/awsS3'),
+//     async = require('async'),
+    router.get('/:chamberID/', function (req, res, next) {
+        var chamberID = req.params.chamberID;
+        var user_id = req.user.id;
 
-    if (chamberID != "undefined") {
-        var selectMyChamberSql = "select * from CHAMBERS where chamber_id = ?;";
-        var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
-        var selectPostSql = "select distinct * from CHAMBER_POST as cp inner join USER_PROFILE as up on cp.post_authorID = up.user_id where cp.chamber_id = ?;";
-        var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
+        if (chamberID != "undefined") {
+            var selectMyChamberSql = "select * from CHAMBERS where chamber_id = ?;";
+            var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
+            var selectPostSql = "select distinct * from CHAMBER_POST as cp inner join USER_PROFILE as up on cp.post_authorID = up.user_id where cp.chamber_id = ?;";
+            var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
 
-        connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql + selectMyUserSql, [chamberID, user_id, chamberID, chamberID], function (err, results) {
-            if (err) {
-                console.log('err : ' + err);
-            } else {
-                res.render('./chamber/chamberHome', {
-                    title: 'Magical Chamber',
-                    chamber: results[0],
-                    profile: results[1],
-                    post: results[2],
-                    users: results[3],
-                });
-            }
-        });
-    } else {
-        res.redirect('/');
-    }
-});
+            connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql + selectMyUserSql, [chamberID, user_id, chamberID, chamberID], function (err, results) {
+                if (err) {
+                    console.log('err : ' + err);
+                } else {
+                    // awsS3Conn.getlist('chamber/' + chamberID + '/files/', function (filelist) {
+                    //     filelist = JSON.parse(filelist);
+                        res.render('./chamber/chamberHome', {
+                            title: 'Magical Chamber',
+                            chamber: results[0],
+                            profile: results[1],
+                            post: results[2],
+                            users: results[3],
+                            // filelist: filelist
+                        });
+                    // });
+                }
+            });
+        } else {
+            res.redirect('/');
+        }
+    });
 
 router.get('/:chamberID/member', function (req, res, next) {
     var chamberID = req.params.chamberID;

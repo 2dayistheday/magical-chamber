@@ -130,7 +130,7 @@
                                                     <div class="row">
                                                         <div class="col-md-2 col-xs-3 text-center">
                                                             <div class="icon-circle">
-                                                                <i class="icon icon--lg material-icons">comment</i>
+                                                                <i class="icon icon--lg material-icons">update</i>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-8 col-xs-7 text-left">
@@ -154,30 +154,28 @@
                                             <table class="border--round">
                                                 <thead>
                                                 <tr>
-                                                    <th>Value 1</th>
-                                                    <th>Value 2</th>
-                                                    <th>Value 3</th>
-                                                    <th>Value 4</th>
+                                                    <th>Name</th>
+                                                    <th>Updated at</th>
+                                                    <th>Size</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                <%#
+                                                console.log('----:'+filelist.length);
+                                                for(var i = 0;i < filelist.length;i++){
+                                                %>
+                                                <!--
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
+                                                    <td><a href="https://s3.ap-northeast-2.amazonaws.com/magical-chamber/<%#= filelist[i].Key %>"><%#= (filelist[i].Key).split('/').pop(-1) %></a></td>
+                                                    <td><%#= (filelist[i].LastModified).substring(0, 10) %></td>
+                                                    <td><%#= (filelist[i].Size)/1000000 %> MB</td>
                                                 </tr>
+                                                -->
+                                                <%# } %>
                                                 <tr>
                                                     <td>1</td>
                                                     <td>2</td>
                                                     <td>3</td>
-                                                    <td>4</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
