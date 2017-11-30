@@ -1,28 +1,108 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="kr">
 <head>
     <% include ../header.ejs %>
 </head>
-<body>
 
-<div class="page-header">
-    <h1>Create Chamber
-        <small>나의 체임버를 생성하기</small>
-    </h1>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <form action="/user/newchamber" method="post" id="newChamberForm" >
-                <div>
-                    체임버명: <input type="text" name="chamber_name" placeholder="Chamber Name" required><br/>
-                    체임버소개: <input type="text" name="chamber_des" placeholder="Chamber Description"><br/>
-                    <input type="submit" value="만들기">
+<body class=" " data-smooth-scroll-offset='180'>
+    <a id="start"></a>
+
+    <% if (profile != undefined) { %>
+    <!-- Navigation Bar Start -->
+    <div class="nav-container ">
+
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="/">
+                            <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                            <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                        </a>
+                    </div>
+                    <div class="col-xs-9 col-sm-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                            <i class="icon icon--sm stack-interface stack-menu"></i>
+                        </a>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
+
+        <nav id="menu1" class="bar bar-2 hidden-xs bar--absolute" data-scroll-class='90vh:pos-fixed'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1 col-sm-2 hidden-xs">
+                        <div class="bar__module">
+                            <a href="/">
+                                <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                                <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-11 col-sm-12 text-right text-left-xs text-left-sm">
+                        <div class="bar__module">
+                            <div class="bar__module">
+                                <a class="btn btn--sm type--uppercase" href="/user/chamberList">
+                                        <span class="btn__text">
+                                            Go back to list
+                                        </span>
+                                </a>
+                                <a class="btn btn--sm btn--primary type--uppercase" href="/api/logout">
+                                        <span class="btn__text">
+                                            Sign Out
+                                        </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </nav>
+
     </div>
-</div>
-<% include ../footer.ejs %>
+    <!-- Navigation Bar End -->
+    <% } else { window.location.href = '/'; } %>
+
+    <!-- Main Page Start -->
+    <div class="main-container">
+        <!-- Create Form Start -->
+        <section class="height-100 text-center">
+            <div class="container pos-vertical-center">
+                <div class="row">
+                    <div class="col-sm-7 col-md-5">
+                        <h2>Recover your account</h2>
+                        <p class="lead">
+                            Enter email address to send a recovery email.
+                        </p>
+                        <form action="/user/newchamber" method="post" id="newChamberForm">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <input type="text" name="chamber_name" placeholder="Chamber name" required />
+                                </div>
+                                <div class="col-xs-12">
+                                    <textarea rows="4" name="chamber_des" placeholder="Chamber description"></textarea>
+                                </div>
+                                <div class="col-xs-12">
+                                    <input type="submit" class="btn btn--primary" value="Create Chamber">
+                                </div>
+                                <div class="col-xs-12">
+                                            <span class="type--fine-print">If you want more information about making chamber,
+                                                <a href="#">see instruction</a>
+                                            </span>
+                                </div>
+                            </div>
+                            <!--end row-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Create Form End -->
+
+        <% include ../footer.ejs %>
+
+    </div>
+    <!-- Main Page End -->
+
 </body>
 </html>
