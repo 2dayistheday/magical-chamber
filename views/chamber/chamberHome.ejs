@@ -160,23 +160,16 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <%#
+                                                <%
                                                 console.log('----:'+filelist.length);
                                                 for(var i = 0;i < filelist.length;i++){
                                                 %>
-                                                <!--
                                                 <tr>
-                                                    <td><a href="https://s3.ap-northeast-2.amazonaws.com/magical-chamber/<%#= filelist[i].Key %>"><%#= (filelist[i].Key).split('/').pop(-1) %></a></td>
-                                                    <td><%#= (filelist[i].LastModified).substring(0, 10) %></td>
-                                                    <td><%#= (filelist[i].Size)/1000000 %> MB</td>
+                                                    <td><a href="https://s3.ap-northeast-2.amazonaws.com/magical-chamber/<%= filelist[i].Key %>"><%= (filelist[i].Key).split('/').pop(-1) %></a></td>
+                                                    <td><%= (filelist[i].LastModified).substring(0, 10) %></td>
+                                                    <td><%= (filelist[i].Size)/1000000 %> MB</td>
                                                 </tr>
-                                                -->
-                                                <%# } %>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                </tr>
+                                                <% } %>
                                                 </tbody>
                                             </table>
                                         </div>

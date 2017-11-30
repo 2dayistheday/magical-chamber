@@ -6,8 +6,8 @@ mysql_dbc.test_open(connection);
 
 /* GET chamber listing. */
 
-// awsS3Conn = require('../service/awsS3'),
-//     async = require('async'),
+awsS3Conn = require('../service/awsS3'),
+    async = require('async'),
     router.get('/:chamberID/', function (req, res, next) {
         var chamberID = req.params.chamberID;
         var user_id = req.user.id;
@@ -22,17 +22,17 @@ mysql_dbc.test_open(connection);
                 if (err) {
                     console.log('err : ' + err);
                 } else {
-                    // awsS3Conn.getlist('chamber/' + chamberID + '/files/', function (filelist) {
-                    //     filelist = JSON.parse(filelist);
+                    awsS3Conn.getlist('chamber/' + chamberID + '/files/', function (filelist) {
+                        filelist = JSON.parse(filelist);
                         res.render('./chamber/chamberHome', {
                             title: 'Magical Chamber',
                             chamber: results[0],
                             profile: results[1],
                             post: results[2],
                             users: results[3],
-                            // filelist: filelist
+                            filelist: filelist
                         });
-                    // });
+                    });
                 }
             });
         } else {
