@@ -138,39 +138,6 @@ router.post('/:chamberID/allow', function (req, res, next) {
 
 awsS3Conn = require('../service/awsS3'),
     async = require('async'),
-    router.get('/:chamberID/documents', function (req, res, next) {
-        var chamberID = req.params.chamberID;
-        var user_id = req.user.id;
-
-        if (chamberID != 'undefined' && user_id != 'undefined') {
-            var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
-            var selectChamberSql = "select * from CHAMBERS where chamber_id = ?;";
-            var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
-
-            connection.query(selectMyUserSql + selectChamberSql + selectMyProfileSql, [chamberID, chamberID, user_id], function (err, results) {
-                if (err) {
-                    console.log('err : ' + err);
-                } else {
-                    awsS3Conn.getlist('chamber/' + chamberID + '/files/', function (filelist) {
-                        filelist = JSON.parse(filelist);
-
-                        res.render('./chamber/documents', {
-                            title: 'Magical Chamber',
-                            users: results[0],
-                            chamber: results[1],
-                            profile: results[2],
-                            filelist: filelist
-                        });
-                    });
-                }
-            });
-        } else {
-            res.redirect('/');
-        }
-    });
-
-awsS3Conn = require('../service/awsS3'),
-    async = require('async'),
     router.post('/:chamberID/upload/files', function (req, res, next) {
         var chamberID = req.params.chamberID;
         var tasks = [
