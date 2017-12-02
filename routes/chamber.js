@@ -17,8 +17,9 @@ awsS3Conn = require('../service/awsS3'),
             var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
             var selectPostSql = "select distinct * from CHAMBER_POST as cp inner join USER_PROFILE as up on cp.post_authorID = up.user_id where cp.chamber_id = ?;";
             var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
+            var selectInvitationSql = "select * from CHAMBER_INVITATION where chamber_id = ? and allowed = FALSE;";
 
-            connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql + selectMyUserSql, [chamberID, user_id, chamberID, chamberID], function (err, results) {
+            connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql + selectMyUserSql + selectInvitationSql, [chamberID, user_id, chamberID, chamberID, chamberID], function (err, results) {
                 if (err) {
                     console.log('err : ' + err);
                 } else {
@@ -30,6 +31,7 @@ awsS3Conn = require('../service/awsS3'),
                             profile: results[1],
                             post: results[2],
                             users: results[3],
+                            invitations: results[4],
                             filelist: filelist
                         });
                     });
@@ -39,34 +41,6 @@ awsS3Conn = require('../service/awsS3'),
             res.redirect('/');
         }
     });
-
-router.get('/:chamberID/member', function (req, res, next) {
-    var chamberID = req.params.chamberID;
-    var user_id = req.user.id;
-
-    if (chamberID != "undefined") {
-        var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
-        var selectInvitationSql = "select * from CHAMBER_INVITATION where chamber_id = ? and allowed = FALSE;";
-        var selectChamberSql = "select * from CHAMBERS where chamber_id = ?;";
-        var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
-
-        connection.query(selectMyUserSql + selectInvitationSql + selectChamberSql + selectMyProfileSql, [chamberID, chamberID, chamberID, user_id], function (err, results) {
-            if (err) {
-                console.log('err : ' + err);
-            } else {
-                res.render('./chamber/newMember', {
-                    title: 'Magical Chamber',
-                    users: results[0],
-                    invitations: results[1],
-                    chamber: results[2],
-                    profile: results[3]
-                });
-            }
-        });
-    } else {
-        res.redirect('/');
-    }
-});
 
 router.get('/:chamberID/rtc', function (req, res, next) {
     var chamberID = req.params.chamberID;
@@ -96,14 +70,14 @@ router.post('/:chamberID/newmember', function (req, res, next) {
     connection.query(selectChamberSql, [chamberID, newMember], function (err, chambers) {
         if (chambers === "undefined") {
             console.log('이미 초대함');
-            res.redirect('/chamber/' + chamberID + '/member');
+            res.redirect('/chamber/' + chamberID + '/');
         } else {
             var insertChambersql = "insert into CHAMBER_INVITATION(chamber_id, user_invitation) values(?,?); ";
             connection.query(insertChambersql, [chamberID, newMember], function (err, rows) {
                 if (err)
                     console.error("err : " + err);
                 else {
-                    res.redirect('/chamber/' + chamberID + '/member');
+                    res.redirect('/chamber/' + chamberID + '/');
                 }
             });
         }
@@ -199,29 +173,5 @@ router.post('/post/test', function (req, res) {
     }
 
 });
-
-// awsS3Conn = require('../service/awsS3'),
-//     async = require('async'),
-//     router.post('/post/test', function (req, res, next) {
-//         console.log("test con");
-//         var tasks = [
-//             function (callback) {
-//                 awsS3Conn.formidable(req, function (err, files, field) {
-//                     callback(err, files);
-//                 });
-//             },
-//             function (files, callback) {
-//                 awsS3Conn.upload(files,'test/chamber/files/', function (err, result) {
-//                     callback(err, files);
-//                 });
-//             }
-//         ];
-//         async.waterfall(tasks, function (err, result) {
-//             if(err){
-//                 console.log('err:' + err);
-//             }else{
-//             }
-//         });
-//     });
 
 module.exports = router;
