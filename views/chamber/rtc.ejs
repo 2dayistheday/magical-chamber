@@ -19,14 +19,17 @@
 <section class="make-center">
     <input type="text" id="room-id" placeholder="Unique Room ID" autocorrect=off autocapitalize=off size=30>
     <button id="open-or-join-room">Start</button>
-
     <br>
 
     <!-- 방 입장하기 전에는 채팅 및 나가기 버튼 비활성화 -->
     <input type="text" id="input-text-chat" placeholder="Enter Text Chat" style="visibility: hidden">
-    <button id="share-file" style="visibility: hidden">Share File</button>
 
     <br>
+    <form action="upload/file" method="post" enctype="multipart/form-data" id="fileForm">
+        <!--<input type="file" id="share-file" name="fileInput" style="visibility: hidden">-->
+    </form>
+    <button id="share-file" style="visibility: hidden">Share File</button>
+    <input type="text" id="filePath">
 
     <button id="disconnect-room" style="visibility: hidden">Disconnect</button>
 
@@ -62,6 +65,7 @@
 
 <!-- Client JavaScript Code -->
 <script>
+
     window.enableAdapter = true;  // adapter.js 활성화
     /* UI Code Start */
     // 방 입장 버튼
@@ -92,27 +96,6 @@
         var fileSelector = new FileSelector();
         fileSelector.selectSingleFile(function(file) {
             connection.send(file);
-//            $.post( '/chamber/post/test', { name: 'john'});//enctype="multipart/form-data"
-            /*$.ajax({
-                url:'/chamber/post/test',
-                type:'POST',
-                data: file,
-                async:false,
-                cache:false,
-                contentType:'multipart/form-data',
-                processData:false
-            }).done(function(response){
-                alert(response);
-            });*/
-            $.ajax({
-                url: '/chamber/post/test',
-                method: 'POST',
-                data: {file: file},
-                processData: false,
-                contentType: false,
-                success: function(result){},
-                error: function(er){}
-            });
         });
     };
     // 채팅창

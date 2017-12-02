@@ -17,6 +17,7 @@ router.get('/chamberlist', function (req, res, next) {
         var selectMyProfileSql = "SELECT * FROM USER_PROFILE WHERE user_id = ?;";
         var selectMyInvitationSql = "SELECT DISTINCT * FROM CHAMBERS AS C INNER JOIN CHAMBER_INVITATION AS CI ON C.chamber_id = CI.chamber_id " +
             "WHERE CI.allowed = FALSE AND CI.user_invitation = (SELECT user_email FROM USERS WHERE user_id = ?);";
+        var selectChamberUserSql = "SELECT DISTINCT * CHAMBER_USER as cu a inner join USER_PROFILE as up on cu.user_id = up.user_id where cu.chamber_id = ?;";
 
         connection.query(selectMyChamberSql + selectMyProfileSql + selectMyInvitationSql, [user_id, user_id, user_id], function (err, results) {
             if (err) {
