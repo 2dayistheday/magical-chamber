@@ -190,4 +190,38 @@ router.post('/:chamberID/delete/post', function (req, res, next) {
     });
 });
 
+awsS3Conn = require('../service/awsS3'),
+router.post('/post/test', function (req, res) {
+    if(req){
+        console.log('test :' + req.body.file);
+    }else{
+        console.log('no test :');
+    }
+
+});
+
+// awsS3Conn = require('../service/awsS3'),
+//     async = require('async'),
+//     router.post('/post/test', function (req, res, next) {
+//         console.log("test con");
+//         var tasks = [
+//             function (callback) {
+//                 awsS3Conn.formidable(req, function (err, files, field) {
+//                     callback(err, files);
+//                 });
+//             },
+//             function (files, callback) {
+//                 awsS3Conn.upload(files,'test/chamber/files/', function (err, result) {
+//                     callback(err, files);
+//                 });
+//             }
+//         ];
+//         async.waterfall(tasks, function (err, result) {
+//             if(err){
+//                 console.log('err:' + err);
+//             }else{
+//             }
+//         });
+//     });
+
 module.exports = router;

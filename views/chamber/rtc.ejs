@@ -92,6 +92,27 @@
         var fileSelector = new FileSelector();
         fileSelector.selectSingleFile(function(file) {
             connection.send(file);
+//            $.post( '/chamber/post/test', { name: 'john'});//enctype="multipart/form-data"
+            /*$.ajax({
+                url:'/chamber/post/test',
+                type:'POST',
+                data: file,
+                async:false,
+                cache:false,
+                contentType:'multipart/form-data',
+                processData:false
+            }).done(function(response){
+                alert(response);
+            });*/
+            $.ajax({
+                url: '/chamber/post/test',
+                method: 'POST',
+                data: {file: file},
+                processData: false,
+                contentType: false,
+                success: function(result){},
+                error: function(er){}
+            });
         });
     };
     // 채팅창

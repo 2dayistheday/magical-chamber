@@ -184,7 +184,10 @@
                                                 <% for(var j = 0; j < users.length; j++){ %>
                                                 <li class="col-sm-3 col-xs-6">
                                                     <a href="#">
-                                                        <img alt="avatar" src="/img/avatar-round-1.png" class="image--sm" />
+                                                        <img alt="avatar"
+                                                             src="https://s3.ap-northeast-2.amazonaws.com/magical-chamber/user/<%= users[j].user_id %>/profile/pic"
+                                                             class="image--sm"
+                                                             onerror="javascript:this.src='/img/avatar-round-1.png'"/>
                                                         <span class="block"><%= users[j].user_nickname %></span>
                                                     </a>
                                                 </li>
