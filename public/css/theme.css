@@ -2481,6 +2481,9 @@ a[data-notification-link]:hover {
   }
 }
 /**! 25. Video **/
+video {
+  max-width: 100%;
+}
 iframe {
   width: 100%;
   min-height: 350px;

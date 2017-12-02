@@ -1,201 +1,246 @@
 <!DOCTYPE HTML>
 <html lang="kr">
 <head>
-    <title><%title%></title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <% include ../header.ejs %>
 </head>
+
 <body class="landing">
+    <a id="start"></a>
 
-    <h1 class="make-center"><%= chamber[0].chamber_name %></h1>
+    <% if (profile != undefined) { %>
+    <!-- Navigation Bar Start -->
+    <div class="nav-container ">
 
-    <hr />
-
-    <section class="make-center">
-
-        <!-- RTC Start -->
-        <div id="videos-container"></div>
-        <!-- RTC End -->
-
-        <!-- Etherpad & Canvas Start -->
-        <div id="innerpart">
-            <h1>PAIR DOCS + PAIR CANVAS!</h1>
-            <div id="tools">
-                <div id="docs" style="float:left"></div>
-                <div id="cv" style="float:left"></div>
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="/">
+                            <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                            <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                        </a>
+                    </div>
+                    <div class="col-xs-9 col-sm-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                            <i class="icon icon--sm stack-interface stack-menu"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- Etherpad & Canvas End -->
 
-        <!-- Text Chatting & File Sharing Start -->
-        <input type="text" id="input-text-chat" placeholder="Enter Text Chat">
-        <br>
-        <form action="upload/file" method="post" enctype="multipart/form-data" id="fileForm">
-        </form>
-        <button id="share-file">Share File</button>
-        <!--<input type="text" id="filePath">-->
+        <nav id="menu1" class="bar bar-2 hidden-xs bar--absolute" data-scroll-class='90vh:pos-fixed'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1 col-sm-2 hidden-xs">
+                        <div class="bar__module">
+                            <a href="/">
+                                <img class="logo logo-dark" alt="logo" src="/img/logo-dark.png" />
+                                <img class="logo logo-light" alt="logo" src="/img/logo-light.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-11 col-sm-12 text-right text-left-xs text-left-sm">
+                        <div class="bar__module">
+                            <a class="btn btn--sm btn--primary type--uppercase" href="javascript:history.back()">
+                                    <span class="btn__text">
+                                        Quit
+                                    </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-        <div id="chat-container">
-            <div id="file-container"></div>
-            <div class="chat-output"></div>
-        </div>
-        <!-- Text Chatting & File Sharing End -->
+    </div>
+    <!-- Navigation Bar End -->
+    <% } else { %> window.location.href = '/'; <% } %>
 
+    <!-- Main Page Start -->
+    <div class="main-container">
+        <section class="bg--secondary space--sm">
+            <div class="container">
+                <h2 class="text-center">< <%= chamber[0].chamber_name %> ></h2>
+                <div class="row">
+                    <!-- RTC Start -->
+                    <div class="col-md-3">
+                        <div class="boxed boxed--lg boxed--border">
+                            <div class="text-block text-center">
+                                <h4>Videos</h4>
+                                <div id="videos-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- RTC End -->
 
-    </section>
+                    <!-- Etherpad & Canvas Start -->
+                    <div class="col-md-6">
+                        <div class="boxed boxed--lg boxed--border">
+                            <h4>Tools</h4>
+                            <div id="innerpart">
+                                <div id="tools">
+                                    <div id="docs" style="width: 100%;"></div>
+                                    <div id="cv" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Etherpad & Canvas End -->
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/6.0.1/adapter.js"></script>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/javascripts/ChamberTools.js"></script>
-    <script src="/javascripts/dev/CodecsHandler.js"></script>
-    <script src="/javascripts/dev/DetectRTC.js"></script>
-    <script src="/javascripts/dev/FileBufferReader.js"></script>
-    <script src="/javascripts/dev/getHTMLMediaElement.js"></script>
-    <script src="/javascripts/dev/getUserMedia.js"></script>
-    <script src="/javascripts/dev/globals.js"></script>
-    <script src="/javascripts/dev/IceServersHandler.js"></script>
-    <script src="/javascripts/dev/OnIceCandidateHandler.js"></script>
-    <script src="/javascripts/dev/RTCMultiConnection.js"></script>
-    <script src="/javascripts/dev/RTCPeerConnection.js"></script>
-    <script src="/javascripts/dev/StreamsHandler.js"></script>
-    <script src="/javascripts/dev/TextSenderReceiver.js"></script>
+                    <!-- Text Chatting & File Sharing Start -->
+                    <div class="col-md-3">
+                        <div class="boxed boxed--lg boxed--border">
+                            <h4>Chats</h4>
+                            <div id="chat-container">
+                                <div id="file-container"></div>
+                                <div class="chat-output"></div>
+                            </div>
+                            <input type="text" id="input-text-chat" placeholder="Enter Text Chat">
+                            <br>
+                            <form action="upload/file" method="post" enctype="multipart/form-data" id="fileForm">
+                                </form>
+                            <button id="share-file">Share File</button>
+                        </div>
+                    </div>
+                    <!-- Text Chatting & File Sharing End -->
+                </div>
+            </div>
+        </section>
 
-    <!-- RTC Client JavaScript Code -->
-    <script>
+        <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/6.0.1/adapter.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/javascripts/ChamberTools.js"></script>
+        <script src="/javascripts/dev/CodecsHandler.js"></script>
+        <script src="/javascripts/dev/DetectRTC.js"></script>
+        <script src="/javascripts/dev/FileBufferReader.js"></script>
+        <script src="/javascripts/dev/getHTMLMediaElement.js"></script>
+        <script src="/javascripts/dev/getUserMedia.js"></script>
+        <script src="/javascripts/dev/globals.js"></script>
+        <script src="/javascripts/dev/IceServersHandler.js"></script>
+        <script src="/javascripts/dev/OnIceCandidateHandler.js"></script>
+        <script src="/javascripts/dev/RTCMultiConnection.js"></script>
+        <script src="/javascripts/dev/RTCPeerConnection.js"></script>
+        <script src="/javascripts/dev/StreamsHandler.js"></script>
+        <script src="/javascripts/dev/TextSenderReceiver.js"></script>
 
-        // 파일 공유(FileBufferReader.js)
-        document.getElementById('share-file').onclick = function() {
-            var fileSelector = new FileSelector();
-            fileSelector.selectSingleFile(function(file) {
-                connection.send(file);
+        <!-- RTC Client JavaScript Code -->
+        <script>
+            // RTCMultiConnection Code
+            var connection = new RTCMultiConnection();
+            connection.autoCloseEntireSession = false;
+            connection.userid = '<%= profile[0].user_nickname %>';
+            connection.socketURL = '/';
+            connection.socketMessageEvent = 'RTC';
+            var roomid = '<%= chamber[0].chamber_name %>';
+
+            connection.openOrJoin(roomid, function(isRoomExists, roomid) {
+                if (!isRoomExists) {
+                    $.post('add/log', {log_msg: '그룹 콜 시작'});
+                }
             });
-        };
-        // 채팅창
-        document.getElementById('input-text-chat').onkeyup = function(e) {
-            if (e.keyCode != 13) return;  // 엔터 누르면 리턴
-            // removing trailing/leading whitespace
-            this.value = this.value.replace(/^\s+|\s+$/g, '');
-            if (!this.value.length) return;
-            connection.send(this.value);
-            appendDIV(this.value);
-            this.value = '';
-        };
 
-        var chatContainer = document.querySelector('.chat-output');
+            connection.enableFileSharing = true;
+            connection.session = {
+                audio: true,
+                video: true,
+                data: true
+            };
 
-        // 채팅문구를 화면에 표시
-        function appendDIV(event) {
-            var div = document.createElement('div');
-            div.innerHTML = (event.userid || connection.userid) + ': ' + (event.data || event);
-            chatContainer.insertBefore(div, chatContainer.firstChild);
-            div.tabIndex = 0;
-            div.focus();
-            document.getElementById('input-text-chat').focus();
-        }
+            connection.sdpConstraints.mandatory = {
+                OfferToReceiveAudio: true,
+                OfferToReceiveVideo: true
+            };
 
-        // RTCMultiConnection Code
-        var connection = new RTCMultiConnection();
-        connection.autoCloseEntireSession = false;
-        connection.userid = '<%= profile[0].user_nickname %>';
-        connection.socketURL = '/';
-        connection.socketMessageEvent = 'RTC';
-        var roomid = '<%= chamber[0].chamber_name %>';
+            connection.videosContainer = document.getElementById('videos-container');
 
-        connection.openOrJoin(roomid, function(isRoomExists, roomid) {
-            if (!isRoomExists) {
-                console.log('방 오픈!');
-            }
-        });
-
-        connection.enableFileSharing = true;
-        connection.session = {
-            audio: true,
-            video: true,
-            data: true
-        };
-        connection.sdpConstraints.mandatory = {
-            OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
-        };
-        connection.videosContainer = document.getElementById('videos-container');
-        connection.onstream = function(event) {
-            event.mediaElement.id = event.userid;
-            connection.videosContainer.appendChild(event.mediaElement);
-            event.mediaElement.play();
-            setTimeout(function() {
+            connection.onstream = function(event) {
+                event.mediaElement.id = event.userid;
+                connection.videosContainer.appendChild(event.mediaElement);
                 event.mediaElement.play();
-            }, 5000);
-        };
-        connection.onstreamended = connection.onleave = connection.onclose = function(event) {
-            var video = document.getElementById(event.userid);
-            if(!video) return;
-            video.parentNode.removeChild(video);
+                setTimeout(function() {
+                    event.mediaElement.play();
+                }, 5000);
+            };
 
-            if (!connection.getAllParticipants().length) {
-                document.querySelector('h1').innerHTML = '계속 ' + connection.getAllParticipants().join(' ') + '와 연결되어 있습니다.';
-            } else {
-                document.querySelector('h1').innerHTML = '나 혼자 남았네요...ㅠ';
-                $.post('add/log', {log_msg: '그룹 콜 종료'});
-            }
-        };
+            connection.onstreamended = connection.onleave = connection.onclose = function(event) {
+                var video = document.getElementById(event.userid);
+                if(!video) return;
+                video.parentNode.removeChild(video);
 
-        connection.onmessage = appendDIV;
-        connection.filesContainer = document.getElementById('file-container');
-        connection.onopen = function() {
-            document.getElementById('share-file').disabled = false;
-            document.getElementById('input-text-chat').disabled = false;
-        };
+                if (!connection.getAllParticipants().length) {
+                    document.querySelector('h1').innerHTML = '계속 ' + connection.getAllParticipants().join(' ') + '와 연결되어 있습니다.';
+                } else {
+                    document.querySelector('h1').innerHTML = '나 혼자 남았네요...ㅠ';
+                    $.post('add/log', {log_msg: '그룹 콜 종료'});
+                }
+            };
 
-        // Handling Room-ID
-        (function() {
-            var params = {},
-                r = /([^&=]+)=?([^&]*)/g;
-            function d(s) {
-                return decodeURIComponent(s.replace(/\+/g, ' '));
-            }
-            var match, search = window.location.search;
-            while (match = r.exec(search.substring(1)))
-                params[d(match[1])] = d(match[2]);
-            window.params = params;
-        })();
-        var roomid = '';
-        if (localStorage.getItem(connection.socketMessageEvent)) {
-            roomid = localStorage.getItem(connection.socketMessageEvent);
-        } else {
-            roomid = connection.token();
-        }
-        var hashString = location.hash.replace('#', '');
-        if(hashString.length && hashString.indexOf('comment-') == 0) {
-            hashString = '';
-        }
-        var roomid = params.roomid;
-        if(!roomid && hashString.length) {
-            roomid = hashString;
-        }
-        if(roomid && roomid.length) {
-            // auto-join-room
-            (function reCheckRoomPresence() {
-                connection.checkPresence(roomid, function(isRoomExists) {
-                    if(isRoomExists) {
-                        document.getElementById('join-room').onclick();
-                        return;
-                    }
-                    setTimeout(reCheckRoomPresence, 5000);
-                });
+            connection.onmessage = appendDIV;
+            connection.filesContainer = document.getElementById('file-container');
+            connection.onopen = function() {
+                document.getElementById('share-file').disabled = false;
+                document.getElementById('input-text-chat').disabled = false;
+            };
+
+            // Handling Room-ID
+            (function() {
+                var params = {},
+                    r = /([^&=]+)=?([^&]*)/g;
+                function d(s) {
+                    return decodeURIComponent(s.replace(/\+/g, ' '));
+                }
+                var match, search = window.location.search;
+                while (match = r.exec(search.substring(1)))
+                    params[d(match[1])] = d(match[2]);
+                window.params = params;
             })();
-            disableInputButtons();
-        }
-    </script>
-    <!-- RTC Client JavaScript Code End -->
 
-    <!-- Etherpad & Canvas Javascript Code Start -->
-    <script type="text/javascript">
-        $('#docs').pad({'showChat':'false'});
-        $('#cv').canvas();
-    </script>
-    <!-- Etherpad & Canvas Javascript Code Start -->
 
+            // 파일 공유(FileBufferReader.js)
+            document.getElementById('share-file').onclick = function() {
+                var fileSelector = new FileSelector();
+                fileSelector.selectSingleFile(function(file) {
+                    connection.send(file);
+                });
+            };
+
+            // 채팅창
+            document.getElementById('input-text-chat').onkeyup = function(e) {
+                if (e.keyCode != 13) return;  // 엔터 누르면 리턴
+                // removing trailing/leading whitespace
+                this.value = this.value.replace(/^\s+|\s+$/g, '');
+                if (!this.value.length) return;
+                connection.send(this.value);
+                appendDIV(this.value);
+                this.value = '';
+            };
+
+            var chatContainer = document.querySelector('.chat-output');
+
+            // 채팅문구를 화면에 표시
+            function appendDIV(event) {
+                var div = document.createElement('div');
+                div.innerHTML = (event.userid || connection.userid) + ': ' + (event.data || event);
+                chatContainer.insertBefore(div, chatContainer.firstChild);
+                div.tabIndex = 0;
+                div.focus();
+                document.getElementById('input-text-chat').focus();
+            }
+        </script>
+        <!-- RTC Client JavaScript Code End -->
+
+        <!-- Etherpad & Canvas Javascript Code Start -->
+        <script type="text/javascript">
+            $('#docs').pad({'showChat':'false'});
+            $('#cv').canvas();
+        </script>
+        <!-- Etherpad & Canvas Javascript Code Start -->
+
+        <% include ../footer.ejs %>
+
+    </div>
 </body>
 </html>

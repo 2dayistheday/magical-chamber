@@ -24,8 +24,8 @@ awsS3Conn = require('../service/awsS3'),
                 if (err) {
                     console.log('err : ' + err);
                 } else {
-                    // awsS3Conn.getlist('chamber/' + chamberID + '/files/', function (filelist) {
-                    //     filelist = JSON.parse(filelist);
+                    awsS3Conn.getlist('chamber/' + chamberID + '/files/', function (filelist) {
+                        filelist = JSON.parse(filelist);
                         res.render('./chamber/chamberHome', {
                             title: 'Magical Chamber',
                             chamber: results[0],
@@ -33,10 +33,10 @@ awsS3Conn = require('../service/awsS3'),
                             post: results[2],
                             users: results[3],
                             invitations: results[4],
-                            // filelist: filelist,
+                            filelist: filelist,
                             log: results[5]
                         });
-                    // });
+                    });
                 }
             });
         } else {
