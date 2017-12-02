@@ -178,11 +178,13 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-8 col-xs-7 text-left">
-                                                            <span class="type--fine-print">21st July, 2017</span>
-                                                            <a href="#" class="block color--primary">Check out the relaunched Scope</a>
-                                                            <p>
-                                                                Discourse in writing dealing with a particular point or idea.
-                                                            </p>
+                                                            <% for (var l = 0; l < log.length; l++) { %>
+                                                                <span class="type--fine-print"><%= (log[l].log_time).toDateString("yyyy-MM-dd")%><%=(log[l].log_time).toTimeString()%></span>
+                                                                <a href="#" class="block color--primary"><%= log[l].log_msg %>/a>
+                                                                <p>
+                                                                    Discourse in writing dealing with a particular point or idea.
+                                                                </p>
+                                                            <% } %>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -207,16 +209,16 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <%
+                                                <%#
                                                 console.log('----:'+filelist.length);
                                                 for(var i = 0;i < filelist.length;i++){
                                                 %>
                                                 <tr>
-                                                    <td><a href="https://s3.ap-northeast-2.amazonaws.com/magical-chamber/<%= filelist[i].Key %>"><%= (filelist[i].Key).split('/').pop(-1) %></a></td>
-                                                    <td><%= (filelist[i].LastModified).substring(0, 10) %></td>
-                                                    <td><%= (filelist[i].Size)/1000000 %> MB</td>
+                                                    <td><a href="https://s3.ap-northeast-2.amazonaws.com/magical-chamber/<%#= filelist[i].Key %>"><%#= (filelist[i].Key).split('/').pop(-1) %></a></td>
+                                                    <td><%#= (filelist[i].LastModified).substring(0, 10) %></td>
+                                                    <td><%#= (filelist[i].Size)/1000000 %> MB</td>
                                                 </tr>
-                                                <% } %>
+                                                <%# } %>
                                                 </tbody>
                                             </table>
                                         </div>

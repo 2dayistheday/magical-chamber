@@ -17,6 +17,8 @@
         g.adapter = f()
     }
 })(function() {
+    console.info('- adapter.js 내부 코드 실행됨 -');
+
     var define, module, exports;
     return (function e(t, n, r) {
         function s(o, u) {
@@ -1431,7 +1433,7 @@
                 shimGetSendersWithDtmf: chromeShim.shimGetSendersWithDtmf,
                 shimSourceObject: chromeShim.shimSourceObject,
                 shimPeerConnection: chromeShim.shimPeerConnection,
-                shimGetUserMedia: require('getusermedia'),
+                shimGetUserMedia: require('./getusermedia')
             };
 
         }, {
@@ -1709,7 +1711,7 @@
             var shimRTCPeerConnection = require('./rtcpeerconnection_shim');
 
             module.exports = {
-                shimGetUserMedia: require('./getUserMedia'),
+                shimGetUserMedia: require('./getusermedia'),
                 shimPeerConnection: function(window) {
                     var browserDetails = utils.detectBrowser(window);
 
@@ -3419,7 +3421,7 @@
                 shimOnTrack: firefoxShim.shimOnTrack,
                 shimSourceObject: firefoxShim.shimSourceObject,
                 shimPeerConnection: firefoxShim.shimPeerConnection,
-                shimGetUserMedia: require('./getUserMedia')
+                shimGetUserMedia: require('./getusermedia')
             };
 
         }, {

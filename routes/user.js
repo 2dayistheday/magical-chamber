@@ -17,9 +17,9 @@ router.get('/chamberlist', function (req, res, next) {
         var selectMyProfileSql = "SELECT * FROM USER_PROFILE WHERE user_id = ?;";
         var selectMyInvitationSql = "SELECT DISTINCT * FROM CHAMBERS AS C INNER JOIN CHAMBER_INVITATION AS CI ON C.chamber_id = CI.chamber_id " +
             "WHERE CI.allowed = FALSE AND CI.user_invitation = (SELECT user_email FROM USERS WHERE user_id = ?);";
-        var selectChamberUserSql = "SELECT DISTINCT * CHAMBER_USER as cu a inner join USER_PROFILE as up on cu.user_id = up.user_id where cu.chamber_id = ?;";
+        var selectChamberUserSql = "SELECT DISTINCT * from CHAMBER_USER as cu inner join USER_PROFILE as up on cu.user_id = up.user_id " + "where cu.chamber_id IN (select distinct chamber_id from CHAMBER_USER where user_id = ?);";
 
-        connection.query(selectMyChamberSql + selectMyProfileSql + selectMyInvitationSql, [user_id, user_id, user_id], function (err, results) {
+        connection.query(selectMyChamberSql + selectMyProfileSql + selectMyInvitationSql + selectChamberUserSql, [user_id, user_id, user_id, user_id], function (err, results) {
             if (err) {
                 //TODO: ERROR HANDLING
                 console.log('err: ', err);
@@ -30,6 +30,7 @@ router.get('/chamberlist', function (req, res, next) {
                     chambers: results[0],
                     profile: results[1],
                     invitations: results[2],
+                    relations: results[3]
                 });
             }
         });
@@ -61,10 +62,11 @@ router.post('/newchamber', function (req, res, next) {
             console.error("err : " + err);
         }
         else {
-            //console.log("rows : " + JSON.stringify(rows));
             var chamber_id = rows.insertId;
-            var addRelationsql = "INSERT into CHAMBER_USER(chamber_id, user_id) values(?, ?)";
-            connection.query(addRelationsql, [chamber_id, user_id], function (err, rows) {
+            var addRelationSql = "INSERT into CHAMBER_USER(chamber_id, user_id) values(?, ?);";
+            var addLogSql = "INSERT into CHAMBER_LOG(chamber_id, log_msg) values(?, ?);";
+            var logData = "챔버 생성";
+            connection.query(addRelationSql + addLogSql, [chamber_id, user_id, chamber_id, logData], function (err, rows) {
                 if (err)
                     console.log("err : " + err);
                 else

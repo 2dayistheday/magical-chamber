@@ -1,7 +1,8 @@
 module.exports = function (app, socketCallback) {
+    console.info('- Signalling-Server.js 내부 코드 실행됨 -');
+
     // 모든 소켓, 유저id, extra-data, 연결된 소켓들을 저장한다
     var io = require('socket.io');
-    var fs = require('fs');
     var userList = {};
     var isRoomExist = userList['room-id'];  // isRoomExist != null 로 검사할 수 있다
     var shiftedModerationControls = {};
@@ -26,6 +27,8 @@ module.exports = function (app, socketCallback) {
 
     // ===== 유저가 방에 들어오면 유저를 추가하는 함수 =====
     function appendUser(socket) {
+        console.info('- Signalling-Server.js 내부의 appendUser 함수 실행됨 -');
+
         var alreadyExist = userList[socket.userid];
         var extra = {};
         var params = socket.handshake.query;
@@ -57,11 +60,12 @@ module.exports = function (app, socketCallback) {
 
     // ===== 소켓으로 커넥션하는 함수 =====
     function onConnection(socket) {
+        console.info('- Signalling-Server.js 내부의 onConnection 함수 실행됨 -');
+
         var params = socket.handshake.query;
         var socketMessageEvent = params.msgEvent;   // socketMessageEvent 변수는 roomid를 담는 주머니가 된다
         var sessionid = params.sessionid;
         var autoCloseEntireSession = params.autoCloseEntireSession;
-        var passwordTries = 0;
 
         socket.userid = params.userid;
         appendUser(socket);
@@ -95,7 +99,7 @@ module.exports = function (app, socketCallback) {
             callback(userList[remoteUserId].extra);
         });
 
-        // 파일 전송과 관련된 부분
+        // UUID 변경
         socket.on('changed-uuid', function(newUserId, callback) {
             callback = callback || function() {};
 
@@ -126,18 +130,7 @@ module.exports = function (app, socketCallback) {
             }
         });
 
-        // 비밀번호 설정 부분
-        socket.on('set-password', function(password) {
-            try {
-                if (userList[socket.userid]) {
-                    userList[socket.userid].password = password;
-                }
-            } catch (e) {
-                pushLogs('set-password', e);
-            }
-        });
-
-        // 누군가와 연결이 끊겼을 때
+        // 누군가와 연결을 끊을 때
         socket.on('disconnect-with', function(remoteUserId, callback) {
             try {
                 if (userList[socket.userid] && userList[socket.userid].connectedWith[remoteUserId]) {
@@ -176,7 +169,7 @@ module.exports = function (app, socketCallback) {
             }
         });
 
-        // 방이 이미 만들어져서 존재한지 아닌지 체크
+        // 유저가 현재 존재하는지 확인
         socket.on('check-presence', function(userid, callback) {
             if (!userList[userid]) {
                 callback(false, userid, {});
@@ -189,27 +182,6 @@ module.exports = function (app, socketCallback) {
         socket.on(socketMessageEvent, function (message, callback) {
             try {
                 if (message.remoteUserId && message.remoteUserId != 'system' && message.message.newParticipationRequest) {
-                    if (userList[message.remoteUserId] && userList[message.remoteUserId].password) {
-                        // 최대 비번입력 시도 횟수는 5
-                        if (passwordTries > 5) {
-                            socket.emit('password-max-tries-over', message.remoteUserId);
-                            return;
-                        }
-
-                        if (!message.password) {
-                            passwordTries++;
-                            socket.emit('join-with-password', message.remoteUserId);
-                            return;
-                        }
-
-                        // 비번 틀리면 시도 횟수 늘리고 재시도
-                        if (message.password != userList[message.remoteUserId].password) {
-                            passwordTries++;
-                            socket.emit('invalid-password', message.remoteUserId, message.password);
-                            return;
-                        }
-                    }
-
                     if (userList[message.remoteUserId]) {
                         joinRoom(message);
                         return;
@@ -233,32 +205,6 @@ module.exports = function (app, socketCallback) {
                         extra: {},
                         maxParticipantsAllowed: params.maxParticipantsAllowed || 100
                     };
-                }
-
-                // 부재중이던 사람이 방에 들어오려고 시도할 때
-                if (message.message.newParticipationRequest) {
-                    var waitFor = 60 * 10; // 10분까지는 기다린다
-                    var invokedTimes = 0;
-                    (function repeater() {
-                        if (typeof socket == 'undefined' || !userList[socket.userid]) {
-                            return;
-                        }
-
-                        invokedTimes++;
-                        if (invokedTimes > waitFor) {
-                            socket.emit('user-not-found', message.remoteUserId);
-                            return;
-                        }
-
-                        if (userList[message.remoteUserId] && userList[message.remoteUserId].socket) {
-                            joinRoom(message);
-                            return;
-                        }
-
-                        setTimeout(repeater, 1000);
-                    })();
-
-                    return;
                 }
 
                 onMessageCallback(message);
@@ -321,8 +267,10 @@ module.exports = function (app, socketCallback) {
             socketCallback(socket);
         }
 
-        // ===== 채팅이나 파일이 아닌 데이터를 받는 onmessage 메소드의 콜백함수 =====
+        // ===== onmessage 콜백함수 =====
         function onMessageCallback(message) {
+            console.info('- Signalling-Server.js 내부의 onMessageCallback 함수 실행됨 -');
+
             try {
                 if (!userList[message.sender]) {
                     socket.emit('user-not-found', message.sender);
@@ -361,6 +309,8 @@ module.exports = function (app, socketCallback) {
 
         // ===== 방에 참여하는 함수 =====
         function joinRoom(message) {
+            console.info('- Signalling-Server.js 내부의 joinRoom 함수 실행됨 -');
+
             var roomInitiator = userList[message.remoteUserId];
 
             if (!roomInitiator) {

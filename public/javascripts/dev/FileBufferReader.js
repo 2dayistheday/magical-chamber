@@ -1,18 +1,18 @@
-'use strict';
-
-(function () {
+(function() {
 
     function FileBufferReader() {
+        console.info('- FileBufferReader.js 내부 코드 실행됨 -');
+
         var fbr = this;
         var fbrHelper = new FileBufferReaderHelper();
 
         fbr.chunks = {};
         fbr.users = {};
 
-        fbr.readAsArrayBuffer = function (file, callback, extra) {
+        fbr.readAsArrayBuffer = function(file, callback, extra) {
             var options = {
                 file: file,
-                earlyCallback: function (chunk) {
+                earlyCallback: function(chunk) {
                     callback(fbrClone(chunk, {
                         currentPosition: -1
                     }));
@@ -23,7 +23,7 @@
             };
 
             if (file.extra && Object.keys(file.extra).length) {
-                Object.keys(file.extra).forEach(function (key) {
+                Object.keys(file.extra).forEach(function(key) {
                     options.extra[key] = file.extra[key];
                 });
             }
@@ -31,7 +31,7 @@
             fbrHelper.readAsArrayBuffer(fbr, options);
         };
 
-        fbr.getNextChunk = function (fileUUID, callback, userid) {
+        fbr.getNextChunk = function(fileUUID, callback, userid) {
             var currentPosition;
 
             if (typeof fileUUID.currentPosition !== 'undefined') {
@@ -95,7 +95,7 @@
 
             fbr.onProgress(nextChunk);
 
-            fbr.convertToArrayBuffer(nextChunk, function (buffer) {
+            fbr.convertToArrayBuffer(nextChunk, function(buffer) {
                 if (nextChunk.currentPosition == nextChunk.maxChunks) {
                     callback(buffer, true);
                     return;
@@ -107,12 +107,12 @@
 
         var fbReceiver = new FileBufferReceiver(fbr);
 
-        fbr.addChunk = function (chunk, callback) {
+        fbr.addChunk = function(chunk, callback) {
             if (!chunk) {
                 return;
             }
 
-            fbReceiver.receive(chunk, function (chunk) {
+            fbReceiver.receive(chunk, function(chunk) {
                 fbr.convertToArrayBuffer({
                     readyForNextChunk: true,
                     currentPosition: chunk.currentPosition,
@@ -121,24 +121,20 @@
             });
         };
 
-        fbr.chunkMissing = function (chunk) {
+        fbr.chunkMissing = function(chunk) {
             delete fbReceiver.chunks[chunk.uuid];
             delete fbReceiver.chunksWaiters[chunk.uuid];
         };
 
-        fbr.onBegin = function () {
-        };
-        fbr.onEnd = function () {
-        };
-        fbr.onProgress = function () {
-        };
+        fbr.onBegin = function() {};
+        fbr.onEnd = function() {};
+        fbr.onProgress = function() {};
 
         fbr.convertToObject = FileConverter.ConvertToObject;
         fbr.convertToArrayBuffer = FileConverter.ConvertToArrayBuffer
 
         // for backward compatibility----it is redundant.
-        fbr.setMultipleUsers = function () {
-        };
+        fbr.setMultipleUsers = function() {};
 
         // extends 'from' object with members from 'to'. If 'to' is null, a deep clone of 'from' is returned
         function fbrClone(from, to) {
@@ -172,7 +168,7 @@
             return worker;
         }
 
-        fbrHelper.readAsArrayBuffer = function (fbr, options) {
+        fbrHelper.readAsArrayBuffer = function(fbr, options) {
             var earlyCallback = options.earlyCallback;
             delete options.earlyCallback;
 
@@ -203,11 +199,10 @@
                     earlyCallback = null;
                 }
             }
-
             if (false && typeof Worker !== 'undefined') {
                 var webWorker = processInWebWorker(fileReaderWrapper);
 
-                webWorker.onmessage = function (event) {
+                webWorker.onmessage = function(event) {
                     processChunk(event.data);
                 };
 
@@ -218,7 +213,7 @@
         };
 
         function fileReaderWrapper(options, callback) {
-            callback = callback || function (chunk) {
+            callback = callback || function(chunk) {
                 postMessage(chunk);
             };
 
@@ -259,9 +254,9 @@
 
             var blob, reader = new FileReader();
 
-            reader.onloadend = function (evt) {
+            reader.onloadend = function(evt) {
                 if (evt.target.readyState == FileReader.DONE) {
-                    addChunks(file.name, evt.target.result, function () {
+                    addChunks(file.name, evt.target.result, function() {
                         sliceId++;
                         if ((sliceId + 1) * sliceSize < file.size) {
                             blob = file.slice(sliceId * sliceSize, (sliceId + 1) * sliceSize);
@@ -325,36 +320,34 @@
     function FileSelector() {
         var selector = this;
 
-        var noFileSelectedCallback = function () {
-        };
+        var noFileSelectedCallback = function() {};
 
-        selector.selectSingleFile = function (callback, failure) {
+        selector.selectSingleFile = function(callback, failure) {
             if (failure) {
                 noFileSelectedCallback = failure;
             }
 
-            selectFile_update(callback);
+            selectFile(callback);
         };
-        selector.selectMultipleFiles = function (callback, failure) {
+        selector.selectMultipleFiles = function(callback, failure) {
             if (failure) {
                 noFileSelectedCallback = failure;
             }
 
-            selectFile_update(callback, true);
+            selectFile(callback, true);
         };
-        selector.selectDirectory = function (callback, failure) {
+        selector.selectDirectory = function(callback, failure) {
             if (failure) {
                 noFileSelectedCallback = failure;
             }
 
-            selectFile_update(callback, true, true);
+            selectFile(callback, true, true);
         };
 
         selector.accept = '*.*';
 
         function selectFile(callback, multiple, directory) {
-            callback = callback || function () {
-            };
+            callback = callback || function() {};
 
             var file = document.createElement('input');
             file.type = 'file';
@@ -369,12 +362,12 @@
 
             file.accept = selector.accept;
 
-            file.onclick = function () {
+            file.onclick = function() {
                 file.clickStarted = true;
             };
 
-            document.body.onfocus = function () {
-                setTimeout(function () {
+            document.body.onfocus = function() {
+                setTimeout(function() {
                     if (!file.clickStarted) return;
                     file.clickStarted = false;
 
@@ -384,7 +377,7 @@
                 }, 500);
             };
 
-            file.onchange = function () {
+            file.onchange = function() {
                 if (multiple) {
                     if (!file.files.length) {
                         console.error('No file selected.');
@@ -392,7 +385,7 @@
                     }
 
                     var arr = [];
-                    Array.from(file.files).forEach(function (file) {
+                    Array.from(file.files).forEach(function(file) {
                         file.url = file.webkitRelativePath;
                         arr.push(file);
                     });
@@ -407,88 +400,6 @@
 
                 callback(file.files[0]);
 
-                file.parentNode.removeChild(file);
-            };
-            file.style.display = 'none';
-            (document.body || document.documentElement).appendChild(file);
-            fireClickEvent(file);
-        }
-
-        function selectFile_update(callback, multiple, directory) {
-            callback = callback || function () {
-            };
-            var file = document.createElement('input');
-            file.type = 'file';
-
-            if (multiple) {
-                file.multiple = true;
-            }
-
-            if (directory) {
-                file.webkitdirectory = true;
-            }
-
-            file.accept = selector.accept;
-
-            file.onclick = function () {
-                file.clickStarted = true;
-            };
-
-            document.body.onfocus = function () {
-                setTimeout(function () {
-                    if (!file.clickStarted) return;
-                    file.clickStarted = false;
-
-                    if (!file.value) {
-                        noFileSelectedCallback();
-                    }
-                }, 500);
-            };
-
-            file.onchange = function () {
-                if (multiple) {
-                    if (!file.files.length) {
-                        console.error('No file selected.');
-                        return;
-                    }
-
-                    var arr = [];
-                    Array.from(file.files).forEach(function (file) {
-                        file.url = file.webkitRelativePath;
-                        arr.push(file);
-                    });
-                    callback(arr);
-                    return;
-                }
-
-                if (!file.files[0]) {
-                    console.error('No file selected.');
-                    return;
-                }
-
-                var form = $('#fileForm')[0];
-                var formData = new FormData(form);
-
-                for( var i = 0; i < file.files.length; ++i ) {
-                    var filelist = file.files[i];
-                    formData.append("file" + (i+1), filelist);
-                }
-
-                $.ajax({
-                    type: 'post',
-                    url: 'upload/file',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        $('#filePath').val(data);
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-
-                callback(file.files[0]);
                 file.parentNode.removeChild(file);
             };
             file.style.display = 'none';
@@ -548,7 +459,7 @@
 
         function receive(chunk, callback) {
             if (!chunk.uuid) {
-                fbr.convertToObject(chunk, function (object) {
+                fbr.convertToObject(chunk, function(object) {
                     receive(object);
                 });
                 return;
@@ -566,7 +477,7 @@
             if (chunk.end) {
                 var chunksObject = fbReceiver.chunks[chunk.uuid];
                 var chunksArray = [];
-                Object.keys(chunksObject).forEach(function (item, idx) {
+                Object.keys(chunksObject).forEach(function(item, idx) {
                     chunksArray.push(chunksObject[item]);
                 });
 
@@ -591,7 +502,7 @@
             if (!chunk.end) {
                 callback(chunk);
 
-                fbReceiver.chunksWaiters[chunk.uuid] = function () {
+                fbReceiver.chunksWaiters[chunk.uuid] = function() {
                     function looper() {
                         if (!chunk.buffer) {
                             return;
@@ -606,7 +517,6 @@
                             setTimeout(looper, 5000);
                         }
                     }
-
                     setTimeout(looper, 5000);
                 };
 
@@ -618,12 +528,12 @@
     }
 
     var FileConverter = {
-        ConvertToArrayBuffer: function (object, callback) {
-            binarize.pack(object, function (dataView) {
+        ConvertToArrayBuffer: function(object, callback) {
+            binarize.pack(object, function(dataView) {
                 callback(dataView.buffer);
             });
         },
-        ConvertToObject: function (buffer, callback) {
+        ConvertToObject: function(buffer, callback) {
             binarize.unpack(buffer, callback);
         }
     };
@@ -635,8 +545,7 @@
         for (var item in mergeto) {
             try {
                 mergein[item] = mergeto[item];
-            } catch (e) {
-            }
+            } catch (e) {}
         }
         return mergein;
     }
@@ -715,7 +624,7 @@
         'Uint8' // Types.BUFFER
     ];
 
-    var binary_dump = function (view, start, length) {
+    var binary_dump = function(view, start, length) {
         var table = [],
             endianness = BIG_ENDIAN,
             ROW_LENGTH = 40;
@@ -735,7 +644,7 @@
         }
     };
 
-    var find_type = function (obj) {
+    var find_type = function(obj) {
         var type = undefined;
 
         if (obj === undefined) {
@@ -820,11 +729,11 @@
         return type;
     };
 
-    var utf16_utf8 = function (string) {
+    var utf16_utf8 = function(string) {
         return unescape(encodeURIComponent(string));
     };
 
-    var utf8_utf16 = function (bytes) {
+    var utf8_utf16 = function(bytes) {
         return decodeURIComponent(escape(bytes));
     };
 
@@ -833,7 +742,7 @@
      * @param  {Array} serialized Serialized array of elements.
      * @return {DataView} view of packed binary
      */
-    var pack = function (serialized) {
+    var pack = function(serialized) {
         var cursor = 0,
             i = 0,
             j = 0,
@@ -951,7 +860,7 @@
      * @param  {Number} cursor [description]
      * @return {Object}
      */
-    var unpack = function (view, cursor) {
+    var unpack = function(view, cursor) {
         var i = 0,
             endianness = BIG_ENDIAN,
             start = cursor;
@@ -1118,14 +1027,14 @@
      * @param  {Function} callback [description]
      * @return {void} no return value
      */
-    var deferredSerialize = function (array, callback) {
+    var deferredSerialize = function(array, callback) {
         var length = array.length,
             results = [],
             count = 0,
             byte_length = 0;
         for (var i = 0; i < array.length; i++) {
-            (function (index) {
-                serialize(array[index], function (result) {
+            (function(index) {
+                serialize(array[index], function(result) {
                     // store results in order
                     results[index] = result;
                     // count byte length
@@ -1149,7 +1058,7 @@
      * @param  {mixed} obj JavaScript object you want to serialize
      * @return {Array} Serialized array object
      */
-    var serialize = function (obj, callback) {
+    var serialize = function(obj, callback) {
         var subarray = [],
             unit = 1,
             header_size = TYPE_LENGTH + BYTES_LENGTH,
@@ -1190,7 +1099,7 @@
                 break;
 
             case Types.ARRAY:
-                deferredSerialize(obj, function (subarray, byte_length) {
+                deferredSerialize(obj, function(subarray, byte_length) {
                     callback([{
                         type: type,
                         length: obj.length,
@@ -1210,7 +1119,7 @@
                         length++;
                     }
                 }
-                deferredSerialize(deferred, function (subarray, byte_length) {
+                deferredSerialize(deferred, function(subarray, byte_length) {
                     callback([{
                         type: type,
                         length: length,
@@ -1228,8 +1137,8 @@
             case Types.BLOB:
                 var mime_type = obj.type;
                 var reader = new FileReader();
-                reader.onload = function (e) {
-                    deferredSerialize([mime_type, e.target.result], function (subarray, byte_length) {
+                reader.onload = function(e) {
+                    deferredSerialize([mime_type, e.target.result], function(subarray, byte_length) {
                         callback([{
                             type: type,
                             length: length,
@@ -1239,7 +1148,7 @@
                         }].concat(subarray));
                     });
                 };
-                reader.onerror = function (e) {
+                reader.onerror = function(e) {
                     throw 'FileReader Error: ' + e;
                 };
                 reader.readAsArrayBuffer(obj);
@@ -1267,7 +1176,7 @@
      * @param  ArrayBuffer buffer ArrayBuffer you want to deserialize
      * @return mixed              Retrieved JavaScript object
      */
-    var deserialize = function (buffer, callback) {
+    var deserialize = function(buffer, callback) {
         var view = buffer instanceof DataView ? buffer : new DataView(buffer);
         var result = unpack(view, 0);
         return result.value;
@@ -1286,10 +1195,10 @@
     }
 
     var binarize = {
-        pack: function (obj, callback) {
+        pack: function(obj, callback) {
             try {
                 if (debug) console.info('%cPacking Start', 'font-weight: bold; color: red;', obj);
-                serialize(obj, function (array) {
+                serialize(obj, function(array) {
                     if (debug) console.info('Serialized Object', array);
                     callback(pack(array));
                 });
@@ -1297,7 +1206,7 @@
                 throw e;
             }
         },
-        unpack: function (buffer, callback) {
+        unpack: function(buffer, callback) {
             try {
                 if (debug) console.info('%cUnpacking Start', 'font-weight: bold; color: red;', buffer);
                 var result = deserialize(buffer);
@@ -1312,4 +1221,108 @@
     window.FileConverter = FileConverter;
     window.FileSelector = FileSelector;
     window.FileBufferReader = FileBufferReader;
+})();
+
+
+// ===== FileProgressBarHandler.js Start =====
+var FileProgressBarHandler = (function() {
+    function handle(connection) {
+        var progressHelper = {};
+
+        // www.RTCMultiConnection.org/docs/onFileStart/
+        connection.onFileStart = function(file) {
+            var div = document.createElement('div');
+            div.title = file.name;
+            div.innerHTML = '<label>0%</label> <progress></progress>';
+
+            if (file.remoteUserId) {
+                div.innerHTML += ' (Sharing with:' + file.remoteUserId + ')';
+            }
+
+            if (!connection.filesContainer) {
+                connection.filesContainer = document.body || document.documentElement;
+            }
+
+            connection.filesContainer.insertBefore(div, connection.filesContainer.firstChild);
+
+            if (!file.remoteUserId) {
+                progressHelper[file.uuid] = {
+                    div: div,
+                    progress: div.querySelector('progress'),
+                    label: div.querySelector('label')
+                };
+                progressHelper[file.uuid].progress.max = file.maxChunks;
+                return;
+            }
+
+            if (!progressHelper[file.uuid]) {
+                progressHelper[file.uuid] = {};
+            }
+
+            progressHelper[file.uuid][file.remoteUserId] = {
+                div: div,
+                progress: div.querySelector('progress'),
+                label: div.querySelector('label')
+            };
+            progressHelper[file.uuid][file.remoteUserId].progress.max = file.maxChunks;
+        };
+
+        // www.RTCMultiConnection.org/docs/onFileProgress/
+        connection.onFileProgress = function(chunk) {
+            var helper = progressHelper[chunk.uuid];
+            if (!helper) {
+                return;
+            }
+            if (chunk.remoteUserId) {
+                helper = progressHelper[chunk.uuid][chunk.remoteUserId];
+                if (!helper) {
+                    return;
+                }
+            }
+
+            helper.progress.value = chunk.currentPosition || chunk.maxChunks || helper.progress.max;
+            updateLabel(helper.progress, helper.label);
+        };
+
+        // www.RTCMultiConnection.org/docs/onFileEnd/
+        connection.onFileEnd = function(file) {
+            var helper = progressHelper[file.uuid];
+            if (!helper) {
+                console.error('No such progress-helper element exist.', file);
+                return;
+            }
+
+            if (file.remoteUserId) {
+                helper = progressHelper[file.uuid][file.remoteUserId];
+                if (!helper) {
+                    return;
+                }
+            }
+
+            var div = helper.div;
+
+            // 다운로드 링크와 파일 미리보기를 띄우는 부분
+
+            // if (file.type.indexOf('image') != -1) {
+            //     div.innerHTML = '<a href="' + file.url + '" download="' + file.name + '">Download <strong style="color:red;">' + file.name + '</strong></a><br><img src="\' + file.url + \'" title="\' + file.name + \'" style="max-width: 80%;">';
+            // } else {
+            //     div.innerHTML = '<a href="' + file.url + '" download="' + file.name + '">Download <strong style="color:red;">' + file.name + '</strong></a><br><iframe src="\' + file.url + \'" title="\' + file.name + \'" style="width: 80%;border: 0;height: inherit;margin-top:1em;"></iframe>';
+            // }
+
+            div.innerHTML = '<a href="' + file.url + '" download="' + file.name + '">Download <strong style="color:red;">' + file.name + '</strong></a>';
+        };
+
+        function updateLabel(progress, label) {
+            if (progress.position === -1) {
+                return;
+            }
+
+            var position = +progress.position.toFixed(2).split('.')[1] || 100;
+            label.innerHTML = position + '%';
+        }
+    }
+
+    return {
+        handle: handle
+    };
 })();

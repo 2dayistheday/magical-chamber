@@ -95,14 +95,23 @@
                             <h3>Participating Chamber</h3>
                         </div>
                     </div>
-                    <% for (var i = chambers.length-1; i >= 0; i--) { %>
+                    <% for ( var i = chambers.length-1; i >= 0; i-- ) { %>
                     <div class="col-sm-4">
                         <div class="feature feature-4 boxed boxed--border">
-                            <span class="label"><%= profile[0].user_id %></span>
+                            <% if (chambers[i].chamber_leader == profile[0].user_id) { %>
+                                <span class="label">Owner</span>
+                            <% } %>
                             <h4><%= chambers[i].chamber_name %></h4>
                             <hr>
                             <p><%= chambers[i].chamber_des %></p>
-                            <a class="btn btn--primary" href="/chamber/<%= chambers[i].chamber_id %>/"><span class="btn__text">Go into this Chamber!</span>
+                            <!--
+                            <hr class="short">
+                            <%# for (var j = 0; j < relations.length; j++) { %>
+                                <p><%#= relations[j].user_nickname %></p>
+                            <%# } %>
+                            -->
+                            <a class="btn btn--primary" href="/chamber/<%= chambers[i].chamber_id %>/">
+                                <span class="btn__text">Go into this Chamber!</span>
                             </a>
                         </div>
                     </div>
@@ -132,12 +141,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <% for(var j = 0; j < invitations.length; j++){ %>
+                        <% for(var k = 0; k < invitations.length; k++){ %>
                         <tr>
-                            <td><%= invitations[j].chamber_id %></td>
-                            <td><%= invitations[j].chamber_des %></td>
-                            <td><%= invitations[j].user_email %></td>
-                            <td><form action="/chamber/<%= invitations[j].chamber_id %>/allow" method="post">
+                            <td><%= invitations[k].chamber_id %></td>
+                            <td><%= invitations[k].chamber_des %></td>
+                            <td><%= invitations[k].user_email %></td>
+                            <td><form action="/chamber/<%= invitations[k].chamber_id %>/allow" method="post">
                                     <button class="btn btn--primary" type="submit">수락하기</button>
                                 </form>
                             </td>
