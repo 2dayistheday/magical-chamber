@@ -14,11 +14,6 @@
     <section class="make-center">
 
         <!-- RTC Start -->
-        <input type="text" id="room-id" value="abcdef">
-        <button id="open-room">Open Room</button>
-        <button id="join-room">Join Room</button>
-        <br>
-        <button id="disconnect-room" disabled>Disconnect Room</button>
         <div id="videos-container"></div>
         <!-- RTC End -->
 
@@ -70,12 +65,6 @@
     <!-- RTC Client JavaScript Code -->
     <script>
 
-        document.getElementById('disconnect-room').onclick = function() {
-            if (!connection.peers[connection.connectionDescription.remoteUserId]) return;
-            this.disabled = true;
-            connection.peers[connection.connectionDescription.remoteUserId].peer.close();
-        };
-
         // 파일 공유(FileBufferReader.js)
         document.getElementById('share-file').onclick = function() {
             var fileSelector = new FileSelector();
@@ -113,12 +102,8 @@
         connection.socketURL = '/';
         connection.socketMessageEvent = 'RTC';
         var roomid = '<%= chamber[0].chamber_name %>';
-        document.getElementById('room-id').value = roomid;
-        document.getElementById('room-id').onkeyup = function() {
-            localStorage.setItem(connection.socketMessageEvent, this.value);
-        };
 
-        connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
+        connection.openOrJoin(roomid, function(isRoomExists, roomid) {
             if (!isRoomExists) {
                 console.log('방 오픈!');
             }
@@ -148,7 +133,7 @@
             if(!video) return;
             video.parentNode.removeChild(video);
 
-            if (connection.getAllParticipants().length) {
+            if (!connection.getAllParticipants().length) {
                 document.querySelector('h1').innerHTML = '계속 ' + connection.getAllParticipants().join(' ') + '와 연결되어 있습니다.';
             } else {
                 document.querySelector('h1').innerHTML = '나 혼자 남았네요...ㅠ';
@@ -162,11 +147,6 @@
             document.getElementById('share-file').disabled = false;
             document.getElementById('input-text-chat').disabled = false;
         };
-        function disableInputButtons() {
-            document.getElementById('open-room').disabled = true;
-            document.getElementById('join-room').disabled = true;
-            document.getElementById('room-id').disabled = true;
-        }
 
         // Handling Room-ID
         (function() {
@@ -186,10 +166,6 @@
         } else {
             roomid = connection.token();
         }
-        document.getElementById('room-id').value = roomid;
-        document.getElementById('room-id').onkeyup = function() {
-            localStorage.setItem(connection.socketMessageEvent, this.value);
-        };
         var hashString = location.hash.replace('#', '');
         if(hashString.length && hashString.indexOf('comment-') == 0) {
             hashString = '';
@@ -199,8 +175,6 @@
             roomid = hashString;
         }
         if(roomid && roomid.length) {
-            document.getElementById('room-id').value = roomid;
-            localStorage.setItem(connection.socketMessageEvent, roomid);
             // auto-join-room
             (function reCheckRoomPresence() {
                 connection.checkPresence(roomid, function(isRoomExists) {
