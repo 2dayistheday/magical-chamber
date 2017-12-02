@@ -9,7 +9,7 @@
 
     <% if (profile != undefined) { %>
     <!-- Navigation Bar Start -->
-    <div class="nav-container ">
+    <div class="nav-container">
 
         <div class="bar bar--sm visible-xs">
             <div class="container">
@@ -75,12 +75,55 @@
                                 <span><%= chamber[0].chamber_des %></span>
                             </div>
                             <div class="text-block text-center">
-                                <a class="btn btn--primary-1 btn--icon" href="rtc">
-                                    <span class="btn__text"><i class="icon-Video-5" style="color: #fff"></i> Start Group Call</span>
-                                </a>
-                                <a class="btn btn--primary-2 btn--icon" href="member">
-                                    <span class="btn__text"><i class="icon-Add-User" style="color: #fff"></i> Invite Member</span>
-                                </a>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <a class="btn btn--primary-1 btn--icon" href="rtc" style="display: block;">
+                                            <span class="btn__text"><i class="icon-Video-5" style="color: #fff"></i> Start Group Call</span>
+                                        </a>
+                                    </div>
+
+                                    <!-- Invite New Member Start -->
+                                    <div class="modal-instance block col-md-6">
+                                        <a class="btn btn--primary-2 btn--icon modal-trigger" href="#">
+                                            <span class="btn__text"><i class="icon-Add-User" style="color: #fff"></i> Invite Member</span>
+                                        </a>
+                                        <div class="modal-container">
+                                            <div class="modal-content section-modal">
+                                                <section class="unpad">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-offset-3 col-sm-offset-3 col-xs-12">
+                                                                <div class="feature feature-1">
+                                                                    <div class="feature__body boxed boxed--lg boxed--border text-center">
+                                                                        <div class="modal-close modal-close-cross"></div>
+                                                                        <div class="text-block">
+                                                                            <h3>Invite New Member</h3>
+                                                                            <p>
+                                                                                새로운 멤버를 초대해보세요!
+                                                                            </p>
+                                                                        </div>
+                                                                        <form action="/chamber/<%= chamber[0].chamber_id %>/newmember" method="post" id="newChamberMemForm">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12">
+                                                                                    <input type="email" name="newMember" placeholder="페이스북 or 구글 이메일" id="email" required>
+                                                                                </div>
+                                                                                <div class="col-sm-12">
+                                                                                    <input class="btn btn--primary type--uppercase" type="submit" value="초대하기">
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Invite New Member End -->
+                                </div>
+
                             </div>
                         </div>
                         <!-- Heading End -->
@@ -115,10 +158,11 @@
                         </div>
                         <!-- Notice End -->
 
-                        <!-- Activity Log & File Archive Start -->
+                        <!-- Sub Menu Start -->
                         <div class="boxed boxed--border text-center">
                             <div class="tabs-container">
                                 <ul class="tabs">
+                                    <!-- Activity Log Start -->
                                     <li class="active">
                                         <div class="tab__title text-center">
                                             <i class="icon icon--sm block icon-Bulleted-List"></i>
@@ -145,6 +189,9 @@
                                             </ul>
                                         </div>
                                     </li>
+                                    <!-- Activity Log End-->
+
+                                    <!-- File Archive Start -->
                                     <li>
                                         <div class="tab__title text-center">
                                             <i class="icon icon--sm block icon-Data-Download"></i>
@@ -174,6 +221,9 @@
                                             </table>
                                         </div>
                                     </li>
+                                    <!-- File Archive End -->
+
+                                    <!-- Members Start -->
                                     <li>
                                         <div class="tab__title text-center">
                                             <i class="icon icon--sm block icon-Conference"></i>
@@ -181,6 +231,7 @@
                                         </div>
                                         <div class="tab__content">
                                             <ul class="clearfix row row--list text-center">
+                                                <h5>참여중인 멤버</h5>
                                                 <% for(var j = 0; j < users.length; j++){ %>
                                                 <li class="col-sm-3 col-xs-6">
                                                     <a href="#">
@@ -193,12 +244,21 @@
                                                 </li>
                                                 <% } %>
                                             </ul>
+                                            <% if (invitations.length != 0) { %>
+                                                <hr />
+                                                <h5>초대보낸 멤버</h5>
+                                                <% for(var k = 0; k < invitations.length; k++){ %>
+                                                    <%= invitations[k].user_invitation %><br>
+                                                <% } %>
+                                            <% } %>
                                         </div>
                                     </li>
+                                    <!--  Members End -->
+
                                 </ul>
                             </div>
                         </div>
-                        <!-- Activity Log & File Archive End -->
+                        <!-- Sub Menu End -->
 
                     </div>
                 </div>

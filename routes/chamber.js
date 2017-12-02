@@ -17,8 +17,9 @@ awsS3Conn = require('../service/awsS3'),
             var selectMyProfileSql = "select * from USER_PROFILE where user_id = ?;";
             var selectPostSql = "select distinct * from CHAMBER_POST as cp inner join USER_PROFILE as up on cp.post_authorID = up.user_id where cp.chamber_id = ?;";
             var selectMyUserSql = "select distinct * from USER_PROFILE as UP inner join CHAMBER_USER as CU on UP.user_id = CU.user_id where CU.chamber_id = ?;";
+            var selectInvitationSql = "select * from CHAMBER_INVITATION where chamber_id = ? and allowed = FALSE;";
 
-            connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql + selectMyUserSql, [chamberID, user_id, chamberID, chamberID], function (err, results) {
+            connection.query(selectMyChamberSql + selectMyProfileSql + selectPostSql + selectMyUserSql + selectInvitationSql, [chamberID, user_id, chamberID, chamberID, chamberID], function (err, results) {
                 if (err) {
                     console.log('err : ' + err);
                 } else {
@@ -30,6 +31,7 @@ awsS3Conn = require('../service/awsS3'),
                             profile: results[1],
                             post: results[2],
                             users: results[3],
+                            invitations: results[4],
                             filelist: filelist
                         });
                     });
@@ -96,14 +98,14 @@ router.post('/:chamberID/newmember', function (req, res, next) {
     connection.query(selectChamberSql, [chamberID, newMember], function (err, chambers) {
         if (chambers === "undefined") {
             console.log('이미 초대함');
-            res.redirect('/chamber/' + chamberID + '/member');
+            res.redirect('/chamber/' + chamberID + '/');
         } else {
             var insertChambersql = "insert into CHAMBER_INVITATION(chamber_id, user_invitation) values(?,?); ";
             connection.query(insertChambersql, [chamberID, newMember], function (err, rows) {
                 if (err)
                     console.error("err : " + err);
                 else {
-                    res.redirect('/chamber/' + chamberID + '/member');
+                    res.redirect('/chamber/' + chamberID + '/');
                 }
             });
         }
@@ -190,23 +192,6 @@ router.post('/:chamberID/delete/post', function (req, res, next) {
     });
 });
 
-// var fs = require('fs');
-// var multiparty = require('multiparty');
-// router.post('/upload/test', function (req, res) {
-//     var form = new multiparty.Form({
-//         autoFiles: false, // 요청이 들어오면 파일을 자동으로 저장할 것인가
-//         uploadDir: 'temp/', // 파일이 저장되는 경로(프로젝트 내의 temp 폴더에 저장됩니다.)
-//         maxFilesSize: 1024 * 1024 * 5 // 허용 파일 사이즈 최대치
-//     });
-//
-//     form.parse(req, function (error, fields, files) {
-//         // 파일 전송이 요청되면 이곳으로 온다.
-//         // 에러와 필드 정보, 파일 객체가 넘어온다.
-//         var path = files.fileInput[0].path;
-//         console.log(path);
-//         res.send(path); // 파일과 예외 처리를 한 뒤 브라우저로 응답해준다.
-//     });
-// });
 
 awsS3Conn = require('../service/awsS3'),
     async = require('async'),
@@ -230,12 +215,6 @@ awsS3Conn = require('../service/awsS3'),
             }else{
                 result = JSON.stringify(result);
                 result = JSON.parse(result);
-
-                 // awsS3Conn.getData('chamber/'+chamberID+'/files/', result[0].name, function (result) {
-                 //     res.send(result);
-                 // });
-
-                // console.log(result);
                 res.send(result[0].name);
             }
         });

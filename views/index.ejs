@@ -86,23 +86,28 @@
                     </div>
                     <div class="col-md-5 text-right text-left-xs text-left-sm">
                         <div class="bar__module">
+                            <% if (profile != undefined) { %>
+                            <a class="btn btn--sm type--uppercase" href="/user/chamberlist">
+                                        <span class="btn__text">
+                                            My Chamber List
+                                        </span>
+                            </a>
+                            <a class="btn btn--sm btn--primary type--uppercase" href="/api/logout">
+                                        <span class="btn__text">
+                                            Sign Out
+                                        </span>
+                            </a>
+                            <% } else { %>
                             <a class="btn btn--sm type--uppercase" href="#">
                                         <span class="btn__text">
                                             Free Trial
                                         </span>
                             </a>
-                            <% if (profile != undefined) { %>
-                            <a class="btn btn--sm btn--primary type--uppercase inner-link" href="/user/chamberlist" data-scroll-class="100vh:active">
-                                <span class="btn__text">
-                                    Let's Go!
-                                </span>
-                            </a>
-                            <% } else { %>
-                            <a class="btn btn--sm btn--primary type--uppercase inner-link" href="#start" data-scroll-class="100vh:active">
-                                <span class="btn__text">
-                                    Sign In
-                                </span>
-                            </a>
+                            <!--<a class="btn btn&#45;&#45;sm btn&#45;&#45;primary type&#45;&#45;uppercase inner-link" href="#start" data-scroll-class="100vh:active">-->
+                                <!--<span class="btn__text">-->
+                                    <!--Sign In-->
+                                <!--</span>-->
+                            <!--</a>-->
                             <% } %>
                         </div>
                     </div>
