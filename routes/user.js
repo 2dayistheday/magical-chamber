@@ -28,7 +28,7 @@ router.get('/chamberlist', function (req, res, next) {
                     title: 'Magical Chamber',
                     chambers: results[0],
                     profile: results[1],
-                    invitations: results[2]
+                    invitations: results[2],
                 });
             }
         });

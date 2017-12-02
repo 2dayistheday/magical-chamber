@@ -9,7 +9,7 @@
 
     <% if (profile != undefined) { %>
     <!-- Navigation Bar Start -->
-    <div class="nav-container ">
+    <div class="nav-container">
 
         <div class="bar bar--sm visible-xs">
             <div class="container">
@@ -231,7 +231,7 @@
                                         </div>
                                         <div class="tab__content">
                                             <ul class="clearfix row row--list text-center">
-                                                <h5>참여멤버</h5>
+                                                <h5>참여중인 멤버</h5>
                                                 <% for(var j = 0; j < users.length; j++){ %>
                                                 <li class="col-sm-3 col-xs-6">
                                                     <a href="#">
@@ -244,10 +244,12 @@
                                                 </li>
                                                 <% } %>
                                             </ul>
-                                            <hr />
-                                            <h5>초대보낸 멤버</h5>
-                                            <% for(var k = 0; k < invitations.length; k++){ %>
-                                                <%= invitations[k].user_invitation %><br>
+                                            <% if (invitations.length != 0) { %>
+                                                <hr />
+                                                <h5>초대보낸 멤버</h5>
+                                                <% for(var k = 0; k < invitations.length; k++){ %>
+                                                    <%= invitations[k].user_invitation %><br>
+                                                <% } %>
                                             <% } %>
                                         </div>
                                     </li>
