@@ -4,98 +4,105 @@
     <% include header.ejs %>
 </head>
 <body class=" " data-smooth-scroll-offset='180'>
-<a id="start"></a>
+    <a id="start"></a>
 
-<!-- Navigation Bar Start -->
-<div class="nav-container ">
+    <!-- Navigation Bar Start -->
+    <div class="nav-container ">
 
-    <div class="bar bar--sm visible-xs">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-3 col-sm-2">
-                    <a href="/">
-                        <img class="logo logo-dark" alt="logo" src="img/logo-dark.png" />
-                        <img class="logo logo-light" alt="logo" src="img/logo-light.png" />
-                    </a>
-                </div>
-                <div class="col-xs-9 col-sm-10 text-right">
-                    <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
-                        <i class="icon icon--sm stack-interface stack-menu"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav id="menu2" class="bar bar-2 hidden-xs bar--absolute" data-scroll-class='90vh:pos-fixed'>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2 text-center text-left-sm hidden-xs col-md-push-5">
-                    <div class="bar__module">
+        <div class="bar bar--sm visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
                         <a href="/">
                             <img class="logo logo-dark" alt="logo" src="img/logo-dark.png" />
                             <img class="logo logo-light" alt="logo" src="img/logo-light.png" />
                         </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-</div>
-<!-- Navigation Bar End -->
-
-<!-- Main Page Start -->
-<div class="main-container">
-    <section class="unpad height-50">
-        <div class="map-container border--round" data-maps-api-key="AIzaSyCfo_V3gmpPm1WzJEC9p_sRbgvyVbiO83M" data-address="서울특별시 강남구 역삼동 702-10" data-marker-title="Stack" data-map-style="[{&quot;featureType&quot;:&quot;landscape&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FFBB00&quot;},{&quot;saturation&quot;:43.400000000000006},{&quot;lightness&quot;:37.599999999999994},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FFC200&quot;},{&quot;saturation&quot;:-61.8},{&quot;lightness&quot;:45.599999999999994},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.arterial&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FF0300&quot;},{&quot;saturation&quot;:-100},{&quot;lightness&quot;:51.19999999999999},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.local&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FF0300&quot;},{&quot;saturation&quot;:-100},{&quot;lightness&quot;:52},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;water&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#0078FF&quot;},{&quot;saturation&quot;:-13.200000000000003},{&quot;lightness&quot;:2.4000000000000057},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#00FF6A&quot;},{&quot;saturation&quot;:-1.0989010989011234},{&quot;lightness&quot;:11.200000000000017},{&quot;gamma&quot;:1}]}]" data-map-zoom="16"></div>
-    </section>
-    <section class="switchable ">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5">
-                    <img alt="Image" class="border--round box-shadow-wide" src="img/contactus.jpg" />
-                </div>
-                <div class="col-sm-6">
-                    <div class="row switchable__text">
-                        <p class="lead">
-                            E:
-                            <a href="#">hello@redpoint.com</a>
-                            <br /> P: +613 4827 2294
-                        </p>
-                        <p class="lead">
-                            대부분의 문의사항은 24시간 이내에 답변을 드립니다. 자주 묻는 질문은 F&Qs란에 정리되어 있습니다.<br>
-                            Give us a call or drop by anytime, we endeavour to answer all enquiries within 24 hours on business days.
-                        </p>
-                        <hr class="short">
-                        <div class="row">
-                            <form class="form-email" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly." data-recaptcha-sitekey="6LewhCIUAAAAACSwFvBDhgtTbw6EnW6e9dip8o2u" data-recaptcha-theme="light" action="http://formspree.io/dlwldbs1026@gmail.com" method="POST">
-                                <div class="col-sm-6">
-                                    <label>Your Name:</label>
-                                    <input id="name" type="text" name="Name" class="validate-required" />
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Email Address:</label>
-                                    <input id="email" type="email" name="_replyto" class="validate-required validate-email" />
-                                </div>
-                                <div class="col-sm-12">
-                                    <label>Message:</label>
-                                    <textarea id="message" rows="4" name="Message" class="validate-required"></textarea>
-                                </div>
-                                <div class="col-sm-5 col-md-4">
-                                    <input id="submit" type="submit" value="SEND" class="btn btn--primary type--uppercase">
-                                </div>
-                            </form>
-                        </div>
+                    <div class="col-xs-9 col-sm-10 text-right">
+                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                            <i class="icon icon--sm stack-interface stack-menu"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+
+        <nav id="menu2" class="bar bar-2 hidden-xs bar--absolute" data-scroll-class='90vh:pos-fixed'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 text-center text-left-sm hidden-xs col-md-push-5">
+                        <div class="bar__module">
+                            <a href="/">
+                                <img class="logo logo-dark" alt="logo" src="img/logo-dark.png" />
+                                <img class="logo logo-light" alt="logo" src="img/logo-light.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-md-pull-2">
+                        <div class="bar__module">
+                            <ul class="menu-horizontal text-left">
+                                <li><span> </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navigation Bar End -->
+
+    <!-- Main Page Start -->
+    <div class="main-container">
+        <section class="unpad height-50">
+            <div class="map-container border--round" data-maps-api-key="AIzaSyCfo_V3gmpPm1WzJEC9p_sRbgvyVbiO83M" data-address="서울특별시 강남구 역삼동 702-10" data-marker-title="Stack" data-map-style="[{&quot;featureType&quot;:&quot;landscape&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FFBB00&quot;},{&quot;saturation&quot;:43.400000000000006},{&quot;lightness&quot;:37.599999999999994},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FFC200&quot;},{&quot;saturation&quot;:-61.8},{&quot;lightness&quot;:45.599999999999994},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.arterial&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FF0300&quot;},{&quot;saturation&quot;:-100},{&quot;lightness&quot;:51.19999999999999},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.local&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FF0300&quot;},{&quot;saturation&quot;:-100},{&quot;lightness&quot;:52},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;water&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#0078FF&quot;},{&quot;saturation&quot;:-13.200000000000003},{&quot;lightness&quot;:2.4000000000000057},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#00FF6A&quot;},{&quot;saturation&quot;:-1.0989010989011234},{&quot;lightness&quot;:11.200000000000017},{&quot;gamma&quot;:1}]}]" data-map-zoom="16"></div>
+        </section>
+        <section class="switchable ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <img alt="Image" class="border--round box-shadow-wide" src="img/contactus.jpg" />
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row switchable__text">
+                            <p class="lead">
+                                E:
+                                <a href="#">hello@redpoint.com</a>
+                                <br /> P: +613 4827 2294
+                            </p>
+                            <p class="lead">
+                                대부분의 문의사항은 24시간 이내에 답변을 드립니다. 자주 묻는 질문은 F&Qs란에 정리되어 있습니다.<br>
+                                Give us a call or drop by anytime, we endeavour to answer all enquiries within 24 hours on business days.
+                            </p>
+                            <hr class="short">
+                            <div class="row">
+                                <form class="form-email" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly." data-recaptcha-sitekey="6LewhCIUAAAAACSwFvBDhgtTbw6EnW6e9dip8o2u" data-recaptcha-theme="light" action="http://formspree.io/dlwldbs1026@gmail.com" method="POST">
+                                    <div class="col-sm-6">
+                                        <label>Your Name:</label>
+                                        <input id="name" type="text" name="Name" class="validate-required" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Email Address:</label>
+                                        <input id="email" type="email" name="_replyto" class="validate-required validate-email" />
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label>Message:</label>
+                                        <textarea id="message" rows="4" name="Message" class="validate-required"></textarea>
+                                    </div>
+                                    <div class="col-sm-5 col-md-4">
+                                        <input id="submit" type="submit" value="SEND" class="btn btn--primary type--uppercase">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
-    <% include footer.ejs %>
-</div>
-<!-- Main Page End -->
+        <% include footer.ejs %>
+    </div>
+    <!-- Main Page End -->
 
 </body>
 </html>
