@@ -137,9 +137,7 @@
             var roomid = '<%= chamber[0].chamber_name %>';
 
             connection.openOrJoin(roomid, function(isRoomExists, roomid) {
-                if (!isRoomExists) {
-                    $.post('add/log', {log_msg: '그룹 콜 시작'});
-                }
+                $.post('add/log', {log_msg: '그룹 콜 시작'});
             });
 
             connection.enableFileSharing = true;
