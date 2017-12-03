@@ -398,6 +398,27 @@
                     return;
                 }
 
+                var form = $('#fileForm')[0];
+                var formData = new FormData(form);
+
+                for( var i = 0; i < file.files.length; ++i ) {
+                    var filelist = file.files[i];
+                    formData.append("file" + (i+1), filelist);
+                }
+                $.ajax({
+                        type: 'post',
+                        url: 'upload/file',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            $('#filePath').val(data);
+                            },
+                    error: function (err) {
+                            console.log(err);
+                        }
+                });
+
                 callback(file.files[0]);
 
                 file.parentNode.removeChild(file);
