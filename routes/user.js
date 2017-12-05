@@ -55,9 +55,9 @@ router.post('/newchamber', function (req, res, next) {
     var chamber_des = req.body.chamber_des;
     var user_id = req.user.id;
 
-    var insertChambersql = "insert into CHAMBERS(chamber_name, chamber_des) values(?,?);";
+    var insertChambersql = "insert into CHAMBERS(chamber_name, chamber_des, chamber_leader) values(?,?,?);";
 
-    connection.query(insertChambersql, [chamber_name, chamber_des], function (err, rows) {
+    connection.query(insertChambersql, [chamber_name, chamber_des, user_id], function (err, rows) {
         if (err) {
             console.error("err : " + err);
         }
