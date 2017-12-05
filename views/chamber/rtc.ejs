@@ -134,6 +134,9 @@
             connection.socketURL = '/';
             connection.socketMessageEvent = 'RTC';
             var roomid = '<%= chamber[0].chamber_name %>';
+            var roomnum = '<%= chamber[0].chamber_id %>';
+
+            console.log("룸넘버 : " + roomnum);
 
             connection.openOrJoin(roomid, function(isRoomExists, roomid) {
                 $.post('add/log', {log_msg: '그룹 콜 시작'});
@@ -230,18 +233,13 @@
 
         <!-- Etherpad & Canvas Javascript Code Start -->
             //var user_id = connection.userid;
-            var chamber_name = roomid;
-            var base64 = window.btoa(encodeURIComponent(chamber_name));
-            if(base64.length > 50){
-                console.log("WARNING!!!!!!!!!!!! TOO LONG!!!!!!!!!!!!!");
-            }
-            //console.log(base64);
+            var chamber_number = roomnum;
 
             //calling canvas
             (function( $ ){
                 $.fn.canvas = function() {
                     var iFrameLink = '<iframe id="canvas"';
-                    iFrameLink = iFrameLink + 'src="https://canvas-redpoint.herokuapp.com/?chamber=' +chamber_name;
+                    iFrameLink = iFrameLink + 'src="https://fathomless-reaches-71083.herokuapp.com/?chamber=' +chamber_number;
                     iFrameLink = iFrameLink + '&userName=default';
                     iFrameLink = iFrameLink +'" width="' + '100%';
                     iFrameLink = iFrameLink +'" height="' + '100%;';
@@ -265,7 +263,7 @@
                         'baseUrl'           : '/p/',
                         'userName'          : 'default',
                         'userColor'         : true,
-                        'padId'             : base64    };
+                        'padId'             : chamber_number    };
 
                     var $self = this;
                     if (!$self.length) return;
