@@ -229,15 +229,20 @@
         <!-- RTC Client JavaScript Code End -->
 
         <!-- Etherpad & Canvas Javascript Code Start -->
-            var user_id = connection.userid;
+            //var user_id = connection.userid;
             var chamber_name = roomid;
+            var base64 = window.btoa(encodeURIComponent(chamber_name));
+            if(base64.length > 50){
+                console.log("WARNING!!!!!!!!!!!! TOO LONG!!!!!!!!!!!!!");
+            }
+            //console.log(base64);
 
             //calling canvas
             (function( $ ){
                 $.fn.canvas = function() {
                     var iFrameLink = '<iframe id="canvas"';
                     iFrameLink = iFrameLink + 'src="https://canvas-redpoint.herokuapp.com/?chamber=' +chamber_name;
-                    iFrameLink = iFrameLink + '&userName=' + user_id;
+                    iFrameLink = iFrameLink + '&userName=default';
                     iFrameLink = iFrameLink +'" width="' + '100%';
                     iFrameLink = iFrameLink +'" height="' + '100%;';
                     iFrameLink = iFrameLink +'"></iframe>';
@@ -258,9 +263,9 @@
                         //'host'              : 'http://beta.etherpad.org',
                         'host'              : 'https://agile-springs-86898.herokuapp.com',
                         'baseUrl'           : '/p/',
-                        'userName'          : user_id,
+                        'userName'          : 'default',
                         'userColor'         : true,
-                        'padId'             : chamber_name    };
+                        'padId'             : base64    };
 
                     var $self = this;
                     if (!$self.length) return;
