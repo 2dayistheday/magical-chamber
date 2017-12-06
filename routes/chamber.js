@@ -206,7 +206,7 @@ router.post('/:chamberID/add/log', function (req, res) {
         if (err) {
             console.error("err : " + err);
         } else {
-            console.log('add log:'+rows);
+            console.log('add log:'+JSON.stringify(rows));
         }
     });
 });

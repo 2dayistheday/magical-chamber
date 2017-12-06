@@ -138,8 +138,12 @@
 
             console.log("룸넘버 : " + roomnum);
 
-            connection.openOrJoin(roomid, function(isRoomExists, roomid) {
+            connection.open(roomid, function () {
                 $.post('add/log', {log_msg: '그룹 콜 시작'});
+            });
+
+            connection.openOrJoin(roomid, function(isRoomExists, roomid) {
+
             });
 
             connection.enableFileSharing = true;
@@ -173,8 +177,8 @@
                 if (!connection.getAllParticipants().length) {
                     document.querySelector('h1').innerHTML = '계속 ' + connection.getAllParticipants().join(' ') + '와 연결되어 있습니다.';
                 } else {
-                    document.querySelector('h1').innerHTML = '나 혼자 남았네요...ㅠ';
                     $.post('add/log', {log_msg: '그룹 콜 종료'});
+//                    document.querySelector('h1').innerHTML = '나 혼자 남았네요...ㅠ';
                 }
             };
 
