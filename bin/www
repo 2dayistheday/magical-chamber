@@ -30,7 +30,10 @@ var server = https.createServer(options, app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
+server = server.listen(port, function () {
+    console.log('Express App on port '+ port);
+    console.log('Go to: https://localhost:3000')
+});
 
 /**
  * Signaling-Server
@@ -47,11 +50,6 @@ require('../public/javascripts/dev/Signaling-Server.js')(server, function (socke
             socket.broadcast.emit(params.socketCustomEvent, message);
         } catch (e) {}
     });
-});
-
-server = server.listen(port, function () {
-    console.log('Express App on port '+ port);
-    console.log('Go to: https://localhost:3000')
 });
 //require('../service/socket')(server);
 server.on('error', onError);
