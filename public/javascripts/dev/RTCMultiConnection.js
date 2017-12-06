@@ -34,6 +34,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
 
         if (connection.socketURL.substr(connection.socketURL.length - 1, 1) != '/') {
             connection.socketURL = 'https://0.0.0.0:3000/demo/index.html';
+            console.log("here here");
             // throw '"socketURL" MUST end with a slash.';
         }
 
