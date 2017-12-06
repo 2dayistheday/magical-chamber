@@ -35,5 +35,33 @@ Team Redpoint
 
 ++ How to make config files
    ```
-   민경 추가바람
+   $ mkdir config
+   $ cd config
+   ```
+   * file list
+   config/db_info.js
+   ```
+   module.exports = (function () {
+     return{
+       rds:{
+         host: '',
+         port: '',
+         user: '',
+         database: '',
+         password: ''
+       }
+     }
+   })();
+   ```
+
+   config/keys.js
+   ```
+   module.exports = {
+     googleClientID: '',
+     googleClientSecret: '',
+     cookieKey: '',
+     facebookClientID: '',
+     facebookClientSecret: '',
+     awsBucketName: '',
+   };
    ```

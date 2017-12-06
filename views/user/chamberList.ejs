@@ -136,16 +136,14 @@
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>from</th>
                             <th>Allow</th>
                         </tr>
                         </thead>
                         <tbody>
                         <% for(var k = 0; k < invitations.length; k++){ %>
                         <tr>
-                            <td><%= invitations[k].chamber_id %></td>
+                            <td><%= invitations[k].chamber_name %></td>
                             <td><%= invitations[k].chamber_des %></td>
-                            <td><%= invitations[k].user_email %></td>
                             <td><form action="/chamber/<%= invitations[k].chamber_id %>/allow" method="post">
                                     <button class="btn btn--primary" type="submit">수락하기</button>
                                 </form>

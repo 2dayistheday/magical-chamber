@@ -1064,6 +1064,8 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
                         mPeer.onNegotiationNeeded(connectionDescription);
                     });
                     return;
+                }else{
+                    $.post('add/log', {log_msg: '그룹 콜 시작'});
                 }
 
                 var oldUserId = connection.userid;
