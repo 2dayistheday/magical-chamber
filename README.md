@@ -3,8 +3,9 @@ SW Maestro 8th.
 Team Redpoint
 :smile:민경, 지윤, 현지:smile:
 
+Demo Video:</br>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4eisySInGxE?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+https://youtu.be/4eisySInGxE
 
 1. Clone the main project:
 
@@ -40,7 +41,7 @@ Team Redpoint
    $ mkdir config
    $ cd config
    ```
-   config/db_info.js
+   * config/db_info.js
    ```
    module.exports = (function () {
      return{
@@ -55,7 +56,7 @@ Team Redpoint
    })();
    ```
 
-   config/keys.js
+   * config/keys.js
    ```
    module.exports = {
      googleClientID: '',
