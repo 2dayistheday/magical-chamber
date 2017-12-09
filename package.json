@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "service": "forever start -c nodemon ./bin/www",
-    "stop": "forever stop ./bin/www"
+    "service": "forever start -c nodemon ./bin/www"
   },
   "dependencies": {
     "async": "^2.6.0",

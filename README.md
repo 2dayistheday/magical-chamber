@@ -4,6 +4,8 @@ Team Redpoint
 :smile:민경, 지윤, 현지:smile:
 
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4eisySInGxE?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+
 1. Clone the main project:
 
    ```
@@ -38,7 +40,6 @@ Team Redpoint
    $ mkdir config
    $ cd config
    ```
-   * file list
    config/db_info.js
    ```
    module.exports = (function () {

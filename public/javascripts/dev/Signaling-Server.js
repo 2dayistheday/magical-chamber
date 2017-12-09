@@ -21,6 +21,8 @@ module.exports = function (app, socketCallback) {
             'xhr-polling',
             'jsonp-polling'
         ]);
+
+        io.sockets.on('connection', onConnection);
     }
 
     // ===== 유저가 방에 들어오면 유저를 추가하는 함수 =====
